@@ -26,49 +26,43 @@ from .kg_environment import KGEnvironment
 from .llm_client import LLMClient
 from .planner import AgentPlanner
 
-# Optional: Wikidata SPARQL support
-try:
-    import requests
-    HAS_REQUESTS = True
-except ImportError:
-    HAS_REQUESTS = False
-
 logger = logging.getLogger(__name__)
 
 # Default few-shot example from Figure 7 of the paper (Viggo Mortensen case study)
 DEFAULT_FEW_SHOT_EXAMPLE = """Question: who did viggo mortensen play in lord of the rings?
-Thought 1: To answer this question, I need to know the surrounding relational patterns of the entity Viggo Mortensen.
-Action 1: getReasoningPath(Viggo Mortensen, played in).
+Thought 1: To answer this question, I need to find potential relational reasoning paths by analyzing similar questions in the knowledge graph. This will help me discover the relational patterns that connect the entity to the answer.
+Action 1: getReasoningPath(who did viggo mortensen play in lord of the rings?)
 Observation 1: Surrounding relational reasoning paths are:
 [film.film.starring, film.performance.character]
 [film.film.music, film.film_song.film]
 [fictional_universe.work_of_fiction.part_of_these_fictional_universes, fictional_universe.fictional_universe.works_set_here]
-Thought 2: From the reasoning paths, the most potential one to answer the question is [film.film.starring, film.performance.character] since it directly relates to the birthplace of the artist who recorded the song. I will search the neighbors of the entity Viggo Mortensen with the relation path.
+[film.actor.film, film.performance.character]
+There are multiple paths, maybe you should select one most potential path.
+Thought 2: From the reasoning paths, the most potential one to answer the question is [film.film.starring, film.performance.character] since it directly relates to the actor playing a character in which he starred in. I will search the neighbors of the entity Viggo Mortensen with the relation path.
 Action 2: searchNeighbor(Viggo Mortensen, film.film.starring).
 Observation 2: No entity found under this relation in the knowledge graph. You can keep searching on graph or go to invoke wikiSearch to retrieve relevant documents. You can also just answer if you think you can based on the information available and your knowledge.
-Thought 3: Since there are no results under the relation 'film.film.starring' in the KG, I will search for the entity Viggo Mortensen in Wikipedia to find out who recorded the song and where they were born.
+Thought 3: Since there are no results under the relation 'film.film.starring' in the KG, I will search for the entity Viggo Mortensen in Wikipedia to find out the role he played in the Lord of the Rings series.
 Action 3: wikiSearch(Viggo Mortensen, film.film.starring).
 Observation 3: By searching, Viggo Mortensen's relevant documents are Known for; The Lord of the Rings: The Return of the King. 9.0. Aragorn; Captain Fantastic. 7.8. Ben; The Lord of the Rings: The Two Towers. 8.8. Aragorn. He went on to play supporting roles in several notable films during the 1990s. You should extract relevant factual triples about Viggo Mortensen to answer the question.
 Thought 4: Based on the information from Wikipedia, I can get relevant information in the triples of (Viggo Mortensen, film.film.starring, The Lord of the Rings: The Return of the King), (Viggo Mortensen, film.film.starring, The Lord of the Rings: The Two Towers), and (Viggo Mortensen, film.film.starring, Captain Fantastic). According to the collected information, the next step is to get the role he played in the Lord of the Rings series according to the reasoning path film.performance.character to get the role.
 Action 4: searchNeighbor(The Lord of the Rings: The Return of the King, film.performance.character).
-Observation 4: Aragorn.
-Thought 5: According to the reasoning path, I have found the character Viggo Mortensen played in the Lord of the Rings series. I can conclude the conversation.
-Action 5: finish(Aragorn)."""
+Observation 4: m.019tyn.
+Thought 5: According to the reasoning path, I have found the character Viggo Mortensen played in the Lord of the Rings series. The searchNeighbor returned the MID m.019tyn, so I will pass this MID directly to finish.
+Action 5: finish(m.019tyn)."""
 
 # Prompt template from Figure 5 of the paper
 EXECUTOR_PROMPT_TEMPLATE = """You are a knowledge graph (KG) question-answering agent that interacts with a KG storing factual knowledge. When a user asks a question, solve it using interleaving Thought, Action, and Observation steps. Follow this strict format: "Thought: your thoughts.\\nAction: your next action."
 Available actions:
-1. getReasoningPath(entity, relation) or getReasoningPath(sub_question): Retrieve relational reasoning paths to answer the question. Use this first as a high-level planning step. The sub_question form uses BM25 entity linking to find the entity automatically.
+1. getReasoningPath(question): Retrieve relational reasoning paths by finding similar questions and inducing symbolic rules from the knowledge graph. Use this first as a high-level planning step to discover potential relational patterns for answering the question.
 2. searchNeighbor(entity, relation): Search the neighbors of the entity with the specified relation in the KG.
-3. searchWikidata(entity, relation): Search Wikidata for the entity with the specified relation via SPARQL query. Use this when KG and Wikipedia do not provide sufficient information.
-4. wikiSearch(entity, relation): Search Wikipedia for the entity with respect to the relation if the KG returns no relevant results. Extract relevant triples (entity, relation, entity) from the Wikipedia page.
-5. finish(entity1, entity2, ..., entityN): Conclude the conversation with the final answer(s).
+3. wikiSearch(entity, relation): Search Wikipedia for the entity with respect to the relation if the KG returns no relevant results. Extract relevant triples (entity, relation, entity) from the Wikipedia page.
+4. finish(entity1, entity2, ..., entityN): Conclude the conversation with the final answer(s). Pass entities exactly as they appear in the observation — if searchNeighbor returned MIDs (e.g. m.019tyn), use MIDs; if wikiSearch returned names, use names. Do NOT convert between formats.
 Steps to follow:
-Start with getReasoningPath to obtain potential relational reasoning paths.
+Start with getReasoningPath to obtain potential relational reasoning paths by analyzing similar questions in the knowledge graph. Your first thought should focus on finding potential reasoning relations from similar problems.
 Follow the most plausible path step-by-step using searchNeighbor for each relation in the path (e.g., for path r1 -> r2, first use searchNeighbor(e1, r1), then use searchNeighbor(e2, r2)).
 If searchNeighbor returns no valid information, use wikiSearch and extract relevant triples. You can also use searchWikidata to query Wikidata for additional structured data.
 Continue following the relational reasoning path until enough information is gathered to answer the question.
-Use finish to provide the final answer(s).
+Use finish to provide the final answer(s). IMPORTANT: pass the exact entities returned by searchNeighbor or wikiSearch — preserve MIDs if searchNeighbor returned MIDs, preserve names if wikiSearch returned names. Never convert between formats.
 Use the following response format:
 Thought: <your thoughts>
 Action: <your next action>
@@ -240,9 +234,6 @@ class AgentExecutor:
         reasoning_max_depth: int = 4,
         reasoning_max_paths: int = 10,
         wiki_max_summary_length: int = 2000,
-        wikidata_endpoint: Optional[str] = None,
-        wikidata_max_retries: int = 3,
-        wikidata_timeout: int = 30,
     ):
         self.kg = kg
         self.llm = llm
@@ -251,9 +242,6 @@ class AgentExecutor:
         self.reasoning_max_depth = reasoning_max_depth
         self.reasoning_max_paths = reasoning_max_paths
         self.wiki_max_summary_length = wiki_max_summary_length
-        self.wikidata_endpoint = wikidata_endpoint
-        self.wikidata_max_retries = wikidata_max_retries
-        self.wikidata_timeout = wikidata_timeout
 
         # Auto-detect system proxy (Windows registry / macOS / Linux env vars)，比如到能直连 Wikipedia 的网络环境），可以把 executor.py:258-262 注释掉
         system_proxies = urllib.request.getproxies()
@@ -465,8 +453,6 @@ class AgentExecutor:
             )
         elif action_name == "searchNeighbor":
             return self._action_search_neighbor(args)
-        elif action_name == "searchWikidata":
-            return self._action_wikidata_search(args)
         elif action_name == "wikiSearch":
             return self._action_wiki_search(args, question)
         elif action_name == "finish":
@@ -475,7 +461,7 @@ class AgentExecutor:
             return (
                 f"Invalid action: {action_name}. "
                 f"Available actions: getReasoningPath, searchNeighbor, "
-                f"searchWikidata, wikiSearch, finish.",
+                f"wikiSearch, finish.",
                 False,
             )
 
@@ -519,47 +505,49 @@ class AgentExecutor:
     ) -> tuple[str, bool]:
         """Execute getReasoningPath action.
 
-        Supports two forms per the paper:
-        - 1-arg: getReasoningPath(sub_question) - uses BM25 entity linking
-          + KG path exploration (Section 4.2.1)
-        - 2-arg: getReasoningPath(entity, relation) - uses entity directly
-          (Figure 5 prompt format)
+        As per Section 4.1 of the paper: uses the Planner to find similar
+        questions via BM25, sample closed paths via BFS, generalize to
+        symbolic rules, and use LLM for rule induction.
+
+        Args:
+            args: Action arguments (question string, or empty to use original question).
+            question: The original question.
+            question_entity: The linked entity from the question.
+            planned_paths: Pre-computed symbolic rules from the planner.
+
+        Returns:
+            Tuple of (observation_string, is_finished).
         """
-        if len(args) == 2:
-            # 2-arg form: getReasoningPath(entity, relation)
-            entity = self._resolve_entity_for_kg(args[0])
-            paths = self.kg.get_reasoning_paths(entity, max_depth=self.reasoning_max_depth, max_paths=self.reasoning_max_paths)
-            formatted = self.planner.format_rules_for_prompt(paths)
+        # Use the question from args if provided, otherwise use original question
+        target_question = args[0] if args else question
+
+        # Priority 1: Use pre-computed planned paths (from execute() call)
+        if planned_paths:
+            formatted = self.planner.format_rules_for_prompt(planned_paths)
             return formatted, False
-        elif len(args) == 1:
-            # 1-arg form: getReasoningPath(sub_question)
-            # Use BM25 entity linking to find entity, then explore KG paths
-            sub_question = args[0]
-            entity = question_entity
-            if not entity:
-                # Try BM25 entity linking
-                bm25_results = self.kg.bm25_retrieve_entities(sub_question, top_k=1)
-                if bm25_results:
-                    entity = bm25_results[0][0]
 
-            if entity:
-                paths = self.kg.get_reasoning_paths(entity, max_depth=self.reasoning_max_depth, max_paths=self.reasoning_max_paths)
-                formatted = self.planner.format_rules_for_prompt(paths)
-                return formatted, False
-            return "No reasoning paths found: could not link entity from question.", False
-        else:
-            # No args - use pre-computed planned paths or fallback
-            if planned_paths:
-                formatted = self.planner.format_rules_for_prompt(planned_paths)
-                return formatted, False
+        # Priority 2: Call Planner for full rule induction pipeline
+        # Planner internally does: BM25 seed retrieval → BFS path sampling →
+        # rule generalization → LLM rule induction
+        paths = self.planner.plan(target_question, question_entity=question_entity)
 
-            entity = question_entity
-            if entity:
-                paths = self.kg.get_reasoning_paths(entity, max_depth=self.reasoning_max_depth, max_paths=self.reasoning_max_paths)
-                formatted = self.planner.format_rules_for_prompt(paths)
-                return formatted, False
+        # Priority 3: Fallback to direct KG BFS if Planner returns nothing
+        if not paths and question_entity:
+            logger.info(
+                f"Planner returned no paths, falling back to direct KG BFS "
+                f"for entity: {question_entity}"
+            )
+            paths = self.kg.get_reasoning_paths(
+                question_entity,
+                max_depth=self.reasoning_max_depth,
+                max_paths=self.reasoning_max_paths,
+            )
 
+        if not paths:
             return "No reasoning paths found.", False
+
+        formatted = self.planner.format_rules_for_prompt(paths)
+        return formatted, False
 
     def _action_search_neighbor(
         self, args: list[str]
@@ -586,107 +574,6 @@ class AgentExecutor:
                 f"to retrieve relevant documents.",
                 False,
             )
-
-    def _action_wikidata_search(
-        self, args: list[str]
-    ) -> tuple[str, bool]:
-        """Execute searchWikidata(entity, relation) action.
-
-        Queries Wikidata via SPARQL for structured data about the entity
-        under the given relation. Used when KG and Wikipedia provide
-        insufficient information (Section 4.2.1, Figure 1(c)).
-
-        Args:
-            args: [entity, relation]
-
-        Returns:
-            Tuple of (observation_string, is_finished).
-        """
-        if len(args) < 2:
-            return "Error: searchWikidata requires entity and relation arguments.", False
-
-        if not HAS_REQUESTS:
-            return (
-                "Error: searchWikidata requires the 'requests' library. "
-                "Install it with: pip install requests",
-                False,
-            )
-
-        entity = args[0]
-        relation = args[1]
-
-        # Sanitize inputs: LLM may emit multi-line or polluted arguments
-        entity = entity.split("\n")[0].strip().replace('"', '\\"')[:100]
-        relation = relation.split("\n")[0].strip().replace('"', '\\"')[:100]
-
-        if not self.wikidata_endpoint:
-            return (
-                "Error: Wikidata endpoint not configured. "
-                "Set kg.wikidata.endpoint in config.yaml.",
-                False,
-            )
-
-        # Build SPARQL query to find entities related via the given relation
-        # Wikidata uses P-IDs for properties; try matching by label
-        sparql_query = f"""
-        SELECT ?item ?itemLabel WHERE {{
-          ?item rdfs:label "{entity}"@en .
-          ?item ?prop ?value .
-          ?property rdfs:label "{relation}"@en .
-          ?property wikibase:directClaim ?prop .
-          SERVICE wikibase:label {{ bd:serviceParam wikibase:language "en" . }}
-        }} LIMIT 20
-        """
-
-        for attempt in range(self.wikidata_max_retries):
-            try:
-                req_proxies = (
-                    {"http": self._proxy_url, "https": self._proxy_url}
-                    if self._proxy_url else None
-                )
-                resp = requests.get(
-                    self.wikidata_endpoint,
-                    params={
-                        "query": sparql_query,
-                        "format": "json",
-                    },
-                    timeout=self.wikidata_timeout,
-                    headers={
-                        "Accept": "application/sparql-results+json",
-                        "User-Agent": "SymAgent/1.0 (https://github.com/symagent)",
-                    },
-                    proxies=req_proxies,
-                )
-                resp.raise_for_status()
-                data = resp.json()
-
-                results = data.get("results", {}).get("bindings", [])
-                if results:
-                    values = []
-                    for r in results:
-                        label = r.get("itemLabel", {}).get("value", "")
-                        if label:
-                            values.append(label)
-                    if values:
-                        obs = ", ".join(values[:20])
-                        return (
-                            f"By searching Wikidata, found related entities: {obs}",
-                            False,
-                        )
-                return (
-                    f"No results found on Wikidata for entity '{entity}' "
-                    f"with relation '{relation}'.",
-                    False,
-                )
-            except Exception as e:
-                if attempt < self.wikidata_max_retries - 1:
-                    import time
-                    time.sleep(1)
-                    continue
-                logger.warning(f"Wikidata search failed for {entity}: {e}")
-                return f"Error searching Wikidata: {e}", False
-
-        return "Wikidata search failed after all retries.", False
 
     def _action_wiki_search(
         self, args: list[str], question: str
