@@ -1,0 +1,2704 @@
+[
+  {
+    "question": "who is louisiana state senator",
+    "question_entity": "m.04ly1",
+    "question_entity_name": "Louisiana",
+    "answer_entities": [
+      "m.01_nrx",
+      "m.019tyn",
+      "m.01bxb3",
+      "m.01fptq",
+      "m.01gqtx",
+      "m.01xctw",
+      "m.025jr2",
+      "m.02s1w9",
+      "m.0337h3",
+      "m.04jm72",
+      "m.04r1w2",
+      "m.05mmtq",
+      "m.05tvn8",
+      "m.095vrl",
+      "m.0b079s",
+      "m.0cvwfs",
+      "m.0d04_1",
+      "m.0d21y8",
+      "m.0d2rbw",
+      "m.0d2s6n",
+      "m.0d3287",
+      "m.0d32rg",
+      "m.0d32vk",
+      "m.0d3g7j",
+      "m.0d3g9m",
+      "m.0py1g"
+    ],
+    "answer_entity_names": [
+      "John Slidell",
+      "Mary Landrieu",
+      "Edward Livingston",
+      "Judah P. Benjamin",
+      "Russell B. Long",
+      "John Breaux",
+      "David Vitter",
+      "William C. C. Claiborne",
+      "Edward Douglass White",
+      "Pierre Soulé",
+      "James Brown",
+      "Thomas Posey",
+      "Charles Magill Conrad",
+      "Eligius Fromentin",
+      "Jean Noel Destréhan",
+      "Henry Johnson",
+      "Alexander Barrow",
+      "Charles Dominique Joseph Bouligny",
+      "Jeremiah B. Howell",
+      "George A. Waggaman",
+      "Robert C. Nicholas",
+      "Allan B. Magruder",
+      "Josiah S. Johnston",
+      "Alexander Porter",
+      "Alexandre Mouton",
+      "Huey Long"
+    ],
+    "hop": 2,
+    "qid": "WebQTest-575",
+    "sparql": "PREFIX ns: <http://rdf.freebase.com/ns/>\nSELECT DISTINCT ?x\nWHERE {\nFILTER (?x != ns:m.04ly1)\nFILTER (!isLiteral(?x) OR lang(?x) = '' OR langMatches(lang(?x), 'en'))\nns:m.04ly1 ns:government.political_district.representatives ?y .\n?y ns:government.government_position_held.office_holder ?x .\n?y ns:government.government_position_held.office_position_or_title ns:m.02_7l8y .\n}\n",
+    "dataset": "webqsp",
+    "inferential_chain": [
+      "government.political_district.representatives",
+      "government.government_position_held.office_holder"
+    ]
+  },
+  {
+    "question": "who was richard nixon married to",
+    "question_entity": "m.06c97",
+    "question_entity_name": "Richard Nixon",
+    "answer_entities": [
+      "m.023v03"
+    ],
+    "answer_entity_names": [
+      "Pat Nixon"
+    ],
+    "hop": 2,
+    "qid": "WebQTest-9",
+    "sparql": "PREFIX ns: <http://rdf.freebase.com/ns/>\nSELECT DISTINCT ?x\nWHERE {\nFILTER (?x != ns:m.06c97)\nFILTER (!isLiteral(?x) OR lang(?x) = '' OR langMatches(lang(?x), 'en'))\nns:m.06c97 ns:people.person.spouse_s ?y .\n?y ns:people.marriage.spouse ?x .\n?y ns:people.marriage.type_of_union ns:m.04ztj .\n}\n",
+    "dataset": "webqsp",
+    "inferential_chain": [
+      "people.person.spouse_s",
+      "people.marriage.spouse"
+    ]
+  },
+  {
+    "question": "who is princess leia in star wars",
+    "question_entity": "m.0ddqw",
+    "question_entity_name": "Leia Organa",
+    "answer_entities": [
+      "m.01tnbn"
+    ],
+    "answer_entity_names": [
+      "Carrie Fisher"
+    ],
+    "hop": 2,
+    "qid": "WebQTest-463",
+    "sparql": "PREFIX ns: <http://rdf.freebase.com/ns/>\nSELECT DISTINCT ?x\nWHERE {\nFILTER (?x != ns:m.0ddqw)\nFILTER (!isLiteral(?x) OR lang(?x) = '' OR langMatches(lang(?x), 'en'))\nns:m.0ddqw ns:film.film_character.portrayed_in_films ?y .\n?y ns:film.performance.actor ?x .\n?y ns:film.performance.film ns:m.0dtfn .\n}\n",
+    "dataset": "webqsp",
+    "inferential_chain": [
+      "film.film_character.portrayed_in_films",
+      "film.performance.actor"
+    ]
+  },
+  {
+    "question": "where does chef ina garten live",
+    "question_entity": "m.0315fl",
+    "question_entity_name": "Ina Garten",
+    "answer_entities": [
+      "m.0cr3d"
+    ],
+    "answer_entity_names": [
+      "Brooklyn"
+    ],
+    "hop": 2,
+    "qid": "WebQTest-685",
+    "sparql": "PREFIX ns: <http://rdf.freebase.com/ns/>\nSELECT DISTINCT ?x\nWHERE {\nFILTER (?x != ns:m.0315fl)\nFILTER (!isLiteral(?x) OR lang(?x) = '' OR langMatches(lang(?x), 'en'))\nns:m.0315fl ns:people.person.places_lived ?y .\n?y ns:people.place_lived.location ?x .\nFILTER(NOT EXISTS {?y ns:people.place_lived.end_date ?sk0} || \nEXISTS {?y ns:people.place_lived.end_date ?sk1 . \nFILTER(xsd:datetime(?sk1) >= \"2015-08-10\"^^xsd:dateTime) })\nFILTER(NOT EXISTS {?y ns:people.place_lived.start_date ?sk2} || \nEXISTS {?y ns:people.place_lived.start_date ?sk3 . \nFILTER(xsd:datetime(?sk3) <= \"2015-08-10\"^^xsd:dateTime) })\n}\n",
+    "dataset": "webqsp",
+    "inferential_chain": [
+      "people.person.places_lived",
+      "people.place_lived.location"
+    ]
+  },
+  {
+    "question": "who does darth vaders voice",
+    "question_entity": "m.0f2y0",
+    "question_entity_name": "Darth Vader",
+    "answer_entities": [
+      "m.0113l6zy",
+      "m.06wm0z",
+      "m.0945y8",
+      "m.0b2l8f",
+      "m.0f6_x"
+    ],
+    "answer_entity_names": [
+      "Dr. Smoov",
+      "Zac Efron",
+      "Abraham Benrubi",
+      "Matt Lanter",
+      "James Earl Jones"
+    ],
+    "hop": 2,
+    "qid": "WebQTest-1065",
+    "sparql": "PREFIX ns: <http://rdf.freebase.com/ns/>\nSELECT DISTINCT ?x\nWHERE {\nFILTER (?x != ns:m.0f2y0)\nFILTER (!isLiteral(?x) OR lang(?x) = '' OR langMatches(lang(?x), 'en'))\nns:m.0f2y0 ns:film.film_character.portrayed_in_films ?y .\n?y ns:film.performance.actor ?x .\n?y ns:film.performance.special_performance_type ns:m.02nsjvf .\n}\n",
+    "dataset": "webqsp",
+    "inferential_chain": [
+      "film.film_character.portrayed_in_films",
+      "film.performance.actor"
+    ]
+  },
+  {
+    "question": "who is the prime minister of spain 2011",
+    "question_entity": "m.06mkj",
+    "question_entity_name": "Spain",
+    "answer_entities": [
+      "m.01p2pb",
+      "m.02k6pd"
+    ],
+    "answer_entity_names": [
+      "José Luis Rodríguez Zapatero",
+      "Mariano Rajoy"
+    ],
+    "hop": 2,
+    "qid": "WebQTest-1772",
+    "sparql": "PREFIX ns: <http://rdf.freebase.com/ns/>\nSELECT DISTINCT ?x\nWHERE {\nFILTER (?x != ns:m.06mkj)\nFILTER (!isLiteral(?x) OR lang(?x) = '' OR langMatches(lang(?x), 'en'))\nns:m.06mkj ns:government.governmental_jurisdiction.governing_officials ?y .\n?y ns:government.government_position_held.office_holder ?x .\n?y ns:government.government_position_held.basic_title ns:m.060bp .\nFILTER(NOT EXISTS {?y ns:government.government_position_held.from ?sk0} || \nEXISTS {?y ns:government.government_position_held.from ?sk1 . \nFILTER(xsd:datetime(?sk1) <= \"2011-12-31\"^^xsd:dateTime) })\nFILTER(NOT EXISTS {?y ns:government.government_position_held.to ?sk2} || \nEXISTS {?y ns:government.government_position_held.to ?sk3 . \nFILTER(xsd:datetime(?sk3) >= \"2011-01-01\"^^xsd:dateTime) })\n}\n",
+    "dataset": "webqsp",
+    "inferential_chain": [
+      "government.governmental_jurisdiction.governing_officials",
+      "government.government_position_held.office_holder"
+    ]
+  },
+  {
+    "question": "who is the leader of libya 2011",
+    "question_entity": "m.04gqr",
+    "question_entity_name": "Libya",
+    "answer_entities": [],
+    "answer_entity_names": [],
+    "hop": 2,
+    "qid": "WebQTest-1391",
+    "sparql": "PREFIX ns: <http://rdf.freebase.com/ns/>\nSELECT DISTINCT ?x\nWHERE {\nFILTER (?x != ns:m.04gqr)\nFILTER (!isLiteral(?x) OR lang(?x) = '' OR langMatches(lang(?x), 'en'))\nns:m.04gqr ns:government.governmental_jurisdiction.governing_officials ?y .\n?y ns:government.government_position_held.office_holder ?x .\n?y ns:government.government_position_held.basic_title ns:m.09d6p2 .\nFILTER(NOT EXISTS {?y ns:government.government_position_held.from ?sk0} || \nEXISTS {?y ns:government.government_position_held.from ?sk1 . \nFILTER(xsd:datetime(?sk1) <= \"2011-12-31\"^^xsd:dateTime) })\nFILTER(NOT EXISTS {?y ns:government.government_position_held.to ?sk2} || \nEXISTS {?y ns:government.government_position_held.to ?sk3 . \nFILTER(xsd:datetime(?sk3) >= \"2011-01-01\"^^xsd:dateTime) })\n}\n",
+    "dataset": "webqsp",
+    "inferential_chain": [
+      "government.governmental_jurisdiction.governing_officials",
+      "government.government_position_held.office_holder"
+    ]
+  },
+  {
+    "question": "what awards did marilyn monroe won",
+    "question_entity": "m.04wqr",
+    "question_entity_name": "Marilyn Monroe",
+    "answer_entities": [
+      "m.019f6s",
+      "m.02kgb7",
+      "m.0c1fs8r",
+      "m.0l_d69j"
+    ],
+    "answer_entity_names": [
+      "Golden Globe Award for Best Actress – Motion Picture – Musical or Comedy",
+      "Playboy Playmate",
+      "David di Donatello Golden Plate Award",
+      "Golden Globe Henrietta Award for World Film Favorites"
+    ],
+    "hop": 2,
+    "qid": "WebQTest-1305",
+    "sparql": "PREFIX ns: <http://rdf.freebase.com/ns/>\nSELECT DISTINCT ?x\nWHERE {\nFILTER (?x != ns:m.04wqr)\nFILTER (!isLiteral(?x) OR lang(?x) = '' OR langMatches(lang(?x), 'en'))\nns:m.04wqr ns:award.award_winner.awards_won ?y .\n?y ns:award.award_honor.award ?x .\n}\n",
+    "dataset": "webqsp",
+    "inferential_chain": [
+      "award.award_winner.awards_won",
+      "award.award_honor.award"
+    ]
+  },
+  {
+    "question": "who plays london tipton in suite life on deck",
+    "question_entity": "m.03mj4jm",
+    "question_entity_name": "The Suite Life on Deck",
+    "answer_entities": [
+      "m.05pmzb"
+    ],
+    "answer_entity_names": [
+      "Brenda Song"
+    ],
+    "hop": 2,
+    "qid": "WebQTest-119",
+    "sparql": "PREFIX ns: <http://rdf.freebase.com/ns/>\nSELECT DISTINCT ?x\nWHERE {\nFILTER (?x != ns:m.03mj4jm)\nFILTER (!isLiteral(?x) OR lang(?x) = '' OR langMatches(lang(?x), 'en'))\nns:m.03mj4jm ns:tv.tv_program.regular_cast ?y .\n?y ns:tv.regular_tv_appearance.actor ?x .\n?y ns:tv.regular_tv_appearance.character ns:m.07g8r3 .\n}\n",
+    "dataset": "webqsp",
+    "inferential_chain": [
+      "tv.tv_program.regular_cast",
+      "tv.regular_tv_appearance.actor"
+    ]
+  },
+  {
+    "question": "who was president in 1988 in the united states",
+    "question_entity": "m.060d2",
+    "question_entity_name": "President of the United States",
+    "answer_entities": [
+      "m.06c0j"
+    ],
+    "answer_entity_names": [
+      "Ronald Reagan"
+    ],
+    "hop": 2,
+    "qid": "WebQTest-749",
+    "sparql": "PREFIX ns: <http://rdf.freebase.com/ns/>\nSELECT DISTINCT ?x\nWHERE {\nFILTER (?x != ns:m.060d2)\nFILTER (!isLiteral(?x) OR lang(?x) = '' OR langMatches(lang(?x), 'en'))\nns:m.060d2 ns:government.government_office_or_title.office_holders ?y .\n?y ns:government.government_position_held.office_holder ?x .\nFILTER(NOT EXISTS {?y ns:government.government_position_held.from ?sk0} || \nEXISTS {?y ns:government.government_position_held.from ?sk1 . \nFILTER(xsd:datetime(?sk1) <= \"1988-12-31\"^^xsd:dateTime) })\nFILTER(NOT EXISTS {?y ns:government.government_position_held.to ?sk2} || \nEXISTS {?y ns:government.government_position_held.to ?sk3 . \nFILTER(xsd:datetime(?sk3) >= \"1988-01-01\"^^xsd:dateTime) })\n}\n",
+    "dataset": "webqsp",
+    "inferential_chain": [
+      "government.government_office_or_title.office_holders",
+      "government.government_position_held.office_holder"
+    ]
+  },
+  {
+    "question": "what new movies is robert pattinson in",
+    "question_entity": "m.062dn7",
+    "question_entity_name": "Robert Pattinson",
+    "answer_entities": [
+      "m.0_s30t6",
+      "m.012sdm5f",
+      "m.031786",
+      "m.031hcx",
+      "m.03nm_fh",
+      "m.047fhg8",
+      "m.04m_qkz",
+      "m.04qk12",
+      "m.05pdh86",
+      "m.065_t2_",
+      "m.06w67tn",
+      "m.075wx7_",
+      "m.075wx89",
+      "m.09v9mks",
+      "m.0bpkq4",
+      "m.0c1sgd3",
+      "m.0crwqwj",
+      "m.0djz0rc",
+      "m.0fsmw2",
+      "m.0g57n3s",
+      "m.0gtvrv3",
+      "m.0gx3vhy",
+      "m.0j310_v",
+      "m.0k24hpb",
+      "m.0ngns90",
+      "m.0ngxkxx",
+      "m.0w1yhhx"
+    ],
+    "answer_entity_names": [
+      "Life",
+      "The Childhood of a Leader",
+      "Harry Potter and the Goblet of Fire",
+      "Harry Potter and the Order of the Phoenix",
+      "Twilight",
+      "How to Be",
+      "Little Ashes",
+      "Vanity Fair",
+      "The Twilight Saga: New Moon",
+      "Unbound Captives",
+      "Remember Me",
+      "Eclipse",
+      "The Twilight Saga: Breaking Dawn - Part 1",
+      "Bel Ami",
+      "Dark Kingdom: The Dragon King",
+      "Water for Elephants",
+      "The Bad Mother's Handbook",
+      "The Twilight Saga: Breaking Dawn - Part 2",
+      "Maps to the Stars",
+      "Love & Distrust",
+      "Cosmopolis",
+      "The Summer House",
+      "The Haunted Airman",
+      "Mission: Blacklist",
+      "Queen of the Desert",
+      "The Rover",
+      "Hold on to Me"
+    ],
+    "hop": 2,
+    "qid": "WebQTest-1595",
+    "sparql": "PREFIX ns: <http://rdf.freebase.com/ns/>\nSELECT DISTINCT ?x\nWHERE {\nFILTER (?x != ns:m.062dn7)\nFILTER (!isLiteral(?x) OR lang(?x) = '' OR langMatches(lang(?x), 'en'))\nns:m.062dn7 ns:film.actor.film ?y .\n?y ns:film.performance.film ?x .\n}\n",
+    "dataset": "webqsp",
+    "inferential_chain": [
+      "film.actor.film",
+      "film.performance.film"
+    ]
+  },
+  {
+    "question": "who plays the voice of brian on family guy",
+    "question_entity": "m.019nnl",
+    "question_entity_name": "Family Guy",
+    "answer_entities": [
+      "m.021yw7"
+    ],
+    "answer_entity_names": [
+      "Seth MacFarlane"
+    ],
+    "hop": 2,
+    "qid": "WebQTest-241",
+    "sparql": "PREFIX ns: <http://rdf.freebase.com/ns/>\nSELECT DISTINCT ?x\nWHERE {\nFILTER (?x != ns:m.019nnl)\nFILTER (!isLiteral(?x) OR lang(?x) = '' OR langMatches(lang(?x), 'en'))\nns:m.019nnl ns:tv.tv_program.regular_cast ?y .\n?y ns:tv.regular_tv_appearance.actor ?x .\n?y ns:tv.regular_tv_appearance.character ns:m.03pcvr .\n}\n",
+    "dataset": "webqsp",
+    "inferential_chain": [
+      "tv.tv_program.regular_cast",
+      "tv.regular_tv_appearance.actor"
+    ]
+  },
+  {
+    "question": "who is the texas state senator",
+    "question_entity": "m.07b_l",
+    "question_entity_name": "Texas",
+    "answer_entities": [
+      "m.016l53",
+      "m.01rpmr",
+      "m.01xcqs",
+      "m.02050j",
+      "m.021nlp",
+      "m.028356y",
+      "m.02dcc4",
+      "m.02pv3w",
+      "m.02wv_6",
+      "m.037_c0",
+      "m.037f5r",
+      "m.03r6tl",
+      "m.03w4ln",
+      "m.03x_db",
+      "m.03yvp9",
+      "m.0452c9",
+      "m.04l_mk",
+      "m.053fln",
+      "m.053zcg",
+      "m.06j9dp",
+      "m.06yjdd",
+      "m.06yjq_",
+      "m.06ym7b",
+      "m.07j6ty",
+      "m.07jjx6",
+      "m.07k6x2",
+      "m.07p913",
+      "m.084vl0",
+      "m.089hd7",
+      "m.08fbq9",
+      "m.0f7fy",
+      "m.0gbjz"
+    ],
+    "answer_entity_names": [
+      "Phil Gramm",
+      "Lloyd Bentsen",
+      "John Cornyn",
+      "Kay Bailey Hutchison",
+      "Ralph Yarborough",
+      "John Hemphill",
+      "John Tower",
+      "James Pinckney Henderson",
+      "W. Lee O'Daniel",
+      "Thomas Jefferson Rusk",
+      "Charles Allen Culberson",
+      "John Henninger Reagan",
+      "Roger Q. Mills",
+      "Richard Coke",
+      "Price Daniel",
+      "Bob Krueger",
+      "Louis Wigfall",
+      "William A. Blakley",
+      "Joseph Weldon Bailey",
+      "Andrew Jackson Houston",
+      "Horace Chilton",
+      "Morris Sheppard",
+      "Matthias Ward",
+      "Ted Cruz",
+      "James W. Flanagan",
+      "Samuel B. Maxey",
+      "Morgan C. Hamilton",
+      "Earle Bradford Mayfield",
+      "Tom Connally",
+      "Rienzi Melville Johnston",
+      "Lyndon B. Johnson",
+      "Sam Houston"
+    ],
+    "hop": 2,
+    "qid": "WebQTest-1631",
+    "sparql": "PREFIX ns: <http://rdf.freebase.com/ns/>\nSELECT DISTINCT ?x\nWHERE {\nFILTER (?x != ns:m.07b_l)\nFILTER (!isLiteral(?x) OR lang(?x) = '' OR langMatches(lang(?x), 'en'))\nns:m.07b_l ns:government.political_district.representatives ?y .\n?y ns:government.government_position_held.office_holder ?x .\n?y ns:government.government_position_held.office_position_or_title ns:m.02_7l8y .\n}\n",
+    "dataset": "webqsp",
+    "inferential_chain": [
+      "government.political_district.representatives",
+      "government.government_position_held.office_holder"
+    ]
+  },
+  {
+    "question": "what is the national flower of hawaii",
+    "question_entity": "m.03gh4",
+    "question_entity_name": "Hawaii",
+    "answer_entities": [
+      "m.03dkj_"
+    ],
+    "answer_entity_names": [
+      "Hawaiian hibiscus"
+    ],
+    "hop": 2,
+    "qid": "WebQTest-450",
+    "sparql": "PREFIX ns: <http://rdf.freebase.com/ns/>\nSELECT DISTINCT ?x\nWHERE {\nFILTER (?x != ns:m.03gh4)\nFILTER (!isLiteral(?x) OR lang(?x) = '' OR langMatches(lang(?x), 'en'))\nns:m.03gh4 ns:government.governmental_jurisdiction.official_symbols ?y .\n?y ns:location.location_symbol_relationship.symbol ?x .\n?y ns:location.location_symbol_relationship.Kind_of_symbol ns:m.04627gn .\n}\n",
+    "dataset": "webqsp",
+    "inferential_chain": [
+      "government.governmental_jurisdiction.official_symbols",
+      "location.location_symbol_relationship.symbol"
+    ]
+  },
+  {
+    "question": "where did paula deen go to school",
+    "question_entity": "m.05dpch",
+    "question_entity_name": "Paula Deen",
+    "answer_entities": [
+      "m.0610np"
+    ],
+    "answer_entity_names": [
+      "Albany High School"
+    ],
+    "hop": 2,
+    "qid": "WebQTest-529",
+    "sparql": "PREFIX ns: <http://rdf.freebase.com/ns/>\nSELECT DISTINCT ?x\nWHERE {\nFILTER (?x != ns:m.05dpch)\nFILTER (!isLiteral(?x) OR lang(?x) = '' OR langMatches(lang(?x), 'en'))\nns:m.05dpch ns:people.person.education ?y .\n?y ns:education.education.institution ?x .\n}\n",
+    "dataset": "webqsp",
+    "inferential_chain": [
+      "people.person.education",
+      "education.education.institution"
+    ]
+  },
+  {
+    "question": "what wars did robert e lee served in",
+    "question_entity": "m.06f5j",
+    "question_entity_name": "Robert E. Lee",
+    "answer_entities": [
+      "m.012lb3ht",
+      "m.01jnm",
+      "m.01mwc1",
+      "m.027r0yc",
+      "m.02n29c",
+      "m.03xzs_",
+      "m.047g1bq",
+      "m.04jnfr",
+      "m.04lf234",
+      "m.04q33ft",
+      "m.04vqf8",
+      "m.04vqhq",
+      "m.04vqpt",
+      "m.04vqyp",
+      "m.04vt26",
+      "m.04wbkc",
+      "m.04xsb_",
+      "m.0541vp",
+      "m.054pn2",
+      "m.05740w",
+      "m.05jzx8",
+      "m.05k0fs",
+      "m.05k4d6",
+      "m.05kxs5",
+      "m.05lhjt",
+      "m.05lv52",
+      "m.05lxjz",
+      "m.05zhyqj",
+      "m.097_v4",
+      "m.09q9fk",
+      "m.0c00cv3",
+      "m.0c16t",
+      "m.0d0mw",
+      "m.0d0y7",
+      "m.0d0yp",
+      "m.0d20b",
+      "m.0d220",
+      "m.0dgkk",
+      "m.0f777",
+      "m.0fgkhp",
+      "m.0h1hwvh",
+      "m.0kbcg",
+      "m.0kbq",
+      "m.0lkxb"
+    ],
+    "answer_entity_names": [
+      "Battle of Malvern Hill",
+      "Battle of Gettysburg",
+      "Battle of Fort Stedman",
+      "Battle of Darbytown and New Market Roads",
+      "Battle of South Mountain",
+      "Seven Days Battles",
+      "Battle of Franklin's Crossing",
+      "Second Battle of Rappahannock Station",
+      "Battle of Frederick",
+      "John Brown's raid on Harpers Ferry",
+      "Battle of Oak Grove",
+      "Battle of Beaver Dam Creek",
+      "Battle of Gaines's Mill",
+      "Battle of Glendale",
+      "Battle of Cheat Mountain",
+      "Battle of Williamsport",
+      "Overland Campaign",
+      "Battle of Chaffin's Farm",
+      "Battle of Appomattox Court House",
+      "Gettysburg Campaign",
+      "Second Battle of Petersburg",
+      "Third Battle of Petersburg",
+      "Battle of White Oak Road",
+      "Battle of Mine Run",
+      "Battle of Totopotomoy Creek",
+      "Northern Virginia Campaign",
+      "Maryland Campaign",
+      "Stoneman's 1863 Raid",
+      "Siege of Fort Pulaski",
+      "Battle of Cumberland Church",
+      "Richmond in the American Civil War",
+      "Mexican–American War",
+      "Battle of Chancellorsville",
+      "Battle of Fredericksburg",
+      "Battle of the Wilderness",
+      "Battle of Spotsylvania Court House",
+      "Battle of Cold Harbor",
+      "Battle of the Crater",
+      "Second Battle of Bull Run",
+      "Second Battle of Deep Bottom",
+      "Western Virginia Campaign",
+      "Siege of Petersburg",
+      "American Civil War",
+      "Battle of Antietam"
+    ],
+    "hop": 2,
+    "qid": "WebQTest-588",
+    "sparql": "PREFIX ns: <http://rdf.freebase.com/ns/>\nSELECT DISTINCT ?x\nWHERE {\nFILTER (?x != ns:m.06f5j)\nFILTER (!isLiteral(?x) OR lang(?x) = '' OR langMatches(lang(?x), 'en'))\nns:m.06f5j ns:military.military_commander.military_commands ?y .\n?y ns:military.military_command.military_conflict ?x .\n}\n",
+    "dataset": "webqsp",
+    "inferential_chain": [
+      "military.military_commander.military_commands",
+      "military.military_command.military_conflict"
+    ]
+  },
+  {
+    "question": "who is the king of cambodia now",
+    "question_entity": "m.01xbgx",
+    "question_entity_name": "Cambodia",
+    "answer_entities": [
+      "m.0418zp"
+    ],
+    "answer_entity_names": [
+      "Norodom Sihamoni"
+    ],
+    "hop": 2,
+    "qid": "WebQTest-918",
+    "sparql": "PREFIX ns: <http://rdf.freebase.com/ns/>\nSELECT DISTINCT ?x\nWHERE {\nFILTER (?x != ns:m.01xbgx)\nFILTER (!isLiteral(?x) OR lang(?x) = '' OR langMatches(lang(?x), 'en'))\nns:m.01xbgx ns:government.governmental_jurisdiction.governing_officials ?y .\n?y ns:government.government_position_held.office_holder ?x .\n?y ns:government.government_position_held.basic_title ns:m.03w9bnr .\nFILTER(NOT EXISTS {?y ns:government.government_position_held.from ?sk0} || \nEXISTS {?y ns:government.government_position_held.from ?sk1 . \nFILTER(xsd:datetime(?sk1) <= \"2015-08-10\"^^xsd:dateTime) })\nFILTER(NOT EXISTS {?y ns:government.government_position_held.to ?sk2} || \nEXISTS {?y ns:government.government_position_held.to ?sk3 . \nFILTER(xsd:datetime(?sk3) >= \"2015-08-10\"^^xsd:dateTime) })\n}\n",
+    "dataset": "webqsp",
+    "inferential_chain": [
+      "government.governmental_jurisdiction.governing_officials",
+      "government.government_position_held.office_holder"
+    ]
+  },
+  {
+    "question": "who plays king julian madagascar",
+    "question_entity": "m.01sbv9",
+    "question_entity_name": "Madagascar",
+    "answer_entities": [
+      "m.0c9c0"
+    ],
+    "answer_entity_names": [
+      "Sacha Baron Cohen"
+    ],
+    "hop": 2,
+    "qid": "WebQTest-1919",
+    "sparql": "PREFIX ns: <http://rdf.freebase.com/ns/>\nSELECT DISTINCT ?x\nWHERE {\nFILTER (?x != ns:m.01sbv9)\nFILTER (!isLiteral(?x) OR lang(?x) = '' OR langMatches(lang(?x), 'en'))\nns:m.01sbv9 ns:film.film.starring ?y .\n?y ns:film.performance.actor ?x .\n?y ns:film.performance.character ns:m.0cj5p22 .\n}\n",
+    "dataset": "webqsp",
+    "inferential_chain": [
+      "film.film.starring",
+      "film.performance.actor"
+    ]
+  },
+  {
+    "question": "what does joey jordison play in slipknot",
+    "question_entity": "m.01wt4wc",
+    "question_entity_name": "Joey Jordison",
+    "answer_entities": [
+      "m.02hnl"
+    ],
+    "answer_entity_names": [
+      "Drums"
+    ],
+    "hop": 2,
+    "qid": "WebQTest-402",
+    "sparql": "PREFIX ns: <http://rdf.freebase.com/ns/>\nSELECT DISTINCT ?x\nWHERE {\nFILTER (?x != ns:m.01wt4wc)\nFILTER (!isLiteral(?x) OR lang(?x) = '' OR langMatches(lang(?x), 'en'))\nns:m.01wt4wc ns:music.group_member.membership ?y .\n?y ns:music.group_membership.role ?x .\n?y ns:music.group_membership.group ns:m.0ntq7 .\n}\n",
+    "dataset": "webqsp",
+    "inferential_chain": [
+      "music.group_member.membership",
+      "music.group_membership.role"
+    ]
+  },
+  {
+    "question": "what drugs lindsay lohan abuse",
+    "question_entity": "m.01pgzn_",
+    "question_entity_name": "Lindsay Lohan",
+    "answer_entities": [
+      "m.012mj",
+      "m.0256b"
+    ],
+    "answer_entity_names": [
+      "Alcoholic beverage",
+      "Cocaine"
+    ],
+    "hop": 2,
+    "qid": "WebQTest-1270",
+    "sparql": "PREFIX ns: <http://rdf.freebase.com/ns/>\nSELECT DISTINCT ?x\nWHERE {\nFILTER (?x != ns:m.01pgzn_)\nFILTER (!isLiteral(?x) OR lang(?x) = '' OR langMatches(lang(?x), 'en'))\nns:m.01pgzn_ ns:base.popstra.celebrity.substance_abuse ?y .\n?y ns:base.popstra.substance_abuse.substance ?x .\n}\n",
+    "dataset": "webqsp",
+    "inferential_chain": [
+      "base.popstra.celebrity.substance_abuse",
+      "base.popstra.substance_abuse.substance"
+    ]
+  },
+  {
+    "question": "what instruments does justin bieber use",
+    "question_entity": "m.06w2sn5",
+    "question_entity_name": "Justin Bieber",
+    "answer_entities": [
+      "m.0290ngj"
+    ],
+    "answer_entity_names": [
+      "Vocals"
+    ],
+    "hop": 2,
+    "qid": "WebQTest-430",
+    "sparql": "PREFIX ns: <http://rdf.freebase.com/ns/>\nSELECT DISTINCT ?x\nWHERE {\nFILTER (?x != ns:m.06w2sn5)\nFILTER (!isLiteral(?x) OR lang(?x) = '' OR langMatches(lang(?x), 'en'))\nns:m.06w2sn5 ns:music.group_member.membership ?y .\n?y ns:music.group_membership.role ?x .\n}\n",
+    "dataset": "webqsp",
+    "inferential_chain": [
+      "music.group_member.membership",
+      "music.group_membership.role"
+    ]
+  },
+  {
+    "question": "what party was abe lincoln part of",
+    "question_entity": "m.0gzh",
+    "question_entity_name": "Abraham Lincoln",
+    "answer_entities": [
+      "m.07wbk",
+      "m.07wdw",
+      "m.0d9fdp",
+      "m.0g7ly4"
+    ],
+    "answer_entity_names": [
+      "Republican Party",
+      "Whig Party",
+      "National Union Party",
+      "Illinois Republican Party"
+    ],
+    "hop": 2,
+    "qid": "WebQTest-2017",
+    "sparql": "PREFIX ns: <http://rdf.freebase.com/ns/>\nSELECT DISTINCT ?x\nWHERE {\nFILTER (?x != ns:m.0gzh)\nFILTER (!isLiteral(?x) OR lang(?x) = '' OR langMatches(lang(?x), 'en'))\nns:m.0gzh ns:government.politician.party ?y .\n?y ns:government.political_party_tenure.party ?x .\n}\n",
+    "dataset": "webqsp",
+    "inferential_chain": [
+      "government.politician.party",
+      "government.political_party_tenure.party"
+    ]
+  },
+  {
+    "question": "where laura ingalls wilder lived",
+    "question_entity": "m.01bt87",
+    "question_entity_name": "Laura Ingalls Wilder",
+    "answer_entities": [
+      "m.0_r0n",
+      "m.01mmj7",
+      "m.0488g",
+      "m.0dz6k_",
+      "m.0wg6f",
+      "m.0x14p"
+    ],
+    "answer_entity_names": [
+      "De Smet",
+      "Pepin",
+      "Kansas",
+      "Burr Oak",
+      "Walnut Grove",
+      "Mansfield"
+    ],
+    "hop": 2,
+    "qid": "WebQTest-1836",
+    "sparql": "PREFIX ns: <http://rdf.freebase.com/ns/>\nSELECT DISTINCT ?x\nWHERE {\nFILTER (?x != ns:m.01bt87)\nFILTER (!isLiteral(?x) OR lang(?x) = '' OR langMatches(lang(?x), 'en'))\nns:m.01bt87 ns:people.person.places_lived ?y .\n?y ns:people.place_lived.location ?x .\n}\n",
+    "dataset": "webqsp",
+    "inferential_chain": [
+      "people.person.places_lived",
+      "people.place_lived.location"
+    ]
+  },
+  {
+    "question": "where did vince scully go to college",
+    "question_entity": "m.038gnr",
+    "question_entity_name": "Vin Scully",
+    "answer_entities": [
+      "m.027kp3"
+    ],
+    "answer_entity_names": [
+      "Fordham University"
+    ],
+    "hop": 2,
+    "qid": "WebQTest-642",
+    "sparql": "PREFIX ns: <http://rdf.freebase.com/ns/>\nSELECT DISTINCT ?x\nWHERE {\nFILTER (?x != ns:m.038gnr)\nFILTER (!isLiteral(?x) OR lang(?x) = '' OR langMatches(lang(?x), 'en'))\nns:m.038gnr ns:people.person.education ?y .\n?y ns:education.education.institution ?x .\n?x ns:common.topic.notable_types ns:m.01y2hnl .\n}\n",
+    "dataset": "webqsp",
+    "inferential_chain": [
+      "people.person.education",
+      "education.education.institution"
+    ]
+  },
+  {
+    "question": "who was selena gomez in barney and friends",
+    "question_entity": "m.0gs6vr",
+    "question_entity_name": "Selena Gomez",
+    "answer_entities": [
+      "m.0gx3b6x"
+    ],
+    "answer_entity_names": [
+      "Gianna"
+    ],
+    "hop": 2,
+    "qid": "WebQTest-740",
+    "sparql": "PREFIX ns: <http://rdf.freebase.com/ns/>\nSELECT DISTINCT ?x\nWHERE {\nFILTER (?x != ns:m.0gs6vr)\nFILTER (!isLiteral(?x) OR lang(?x) = '' OR langMatches(lang(?x), 'en'))\nns:m.0gs6vr ns:tv.tv_actor.starring_roles ?y .\n?y ns:tv.regular_tv_appearance.character ?x .\n?y ns:tv.regular_tv_appearance.seasons ns:m.06xv1n1 .\n}\n",
+    "dataset": "webqsp",
+    "inferential_chain": [
+      "tv.tv_actor.starring_roles",
+      "tv.regular_tv_appearance.character"
+    ]
+  },
+  {
+    "question": "what country did toussaint l'ouverture help free",
+    "question_entity": "m.011wgw",
+    "question_entity_name": "Toussaint Louverture",
+    "answer_entities": [
+      "m.02wf01",
+      "m.0410mhq",
+      "m.09b63n"
+    ],
+    "answer_entity_names": [
+      "French Army",
+      "Haitian Rebellion of 1891",
+      "French Revolutionary Army"
+    ],
+    "hop": 2,
+    "qid": "WebQTest-1388",
+    "sparql": "PREFIX ns: <http://rdf.freebase.com/ns/>\nSELECT DISTINCT ?x\nWHERE {\nFILTER (?x != ns:m.011wgw)\nFILTER (!isLiteral(?x) OR lang(?x) = '' OR langMatches(lang(?x), 'en'))\nns:m.011wgw ns:military.military_person.service ?y .\n?y ns:military.military_service.military_force ?x .\n}\n",
+    "dataset": "webqsp",
+    "inferential_chain": [
+      "military.military_person.service",
+      "military.military_service.military_force"
+    ]
+  },
+  {
+    "question": "who is the coach of the sf giants",
+    "question_entity": "m.0713r",
+    "question_entity_name": "San Francisco Giants",
+    "answer_entities": [
+      "m.02680w9",
+      "m.02plhsr",
+      "m.02yf3x",
+      "m.057jcc",
+      "m.079w94",
+      "m.07w9kn",
+      "m.085wxv"
+    ],
+    "answer_entity_names": [
+      "Bill Hayes",
+      "Tim Flannery",
+      "Dave Righetti",
+      "Carney Lansford",
+      "Roberto Kelly",
+      "Ron Wotus",
+      "Mark Gardner"
+    ],
+    "hop": 2,
+    "qid": "WebQTest-406",
+    "sparql": "PREFIX ns: <http://rdf.freebase.com/ns/>\nSELECT DISTINCT ?x\nWHERE {\nFILTER (?x != ns:m.0713r)\nFILTER (!isLiteral(?x) OR lang(?x) = '' OR langMatches(lang(?x), 'en'))\nns:m.0713r ns:baseball.baseball_team.current_coaches ?y .\n?y ns:baseball.current_coaching_tenure.baseball_coach ?x .\n}\n",
+    "dataset": "webqsp",
+    "inferential_chain": [
+      "baseball.baseball_team.current_coaches",
+      "baseball.current_coaching_tenure.baseball_coach"
+    ]
+  },
+  {
+    "question": "where is the sony ericsson company",
+    "question_entity": "m.01spxd",
+    "question_entity_name": "Sony Mobile Communications",
+    "answer_entities": [
+      "m.024bqj"
+    ],
+    "answer_entity_names": [
+      "Minato"
+    ],
+    "hop": 2,
+    "qid": "WebQTest-773",
+    "sparql": "PREFIX ns: <http://rdf.freebase.com/ns/>\nSELECT DISTINCT ?x\nWHERE {\nFILTER (?x != ns:m.01spxd)\nFILTER (!isLiteral(?x) OR lang(?x) = '' OR langMatches(lang(?x), 'en'))\nns:m.01spxd ns:organization.organization.headquarters ?y .\n?y ns:location.mailing_address.citytown ?x .\n}\n",
+    "dataset": "webqsp",
+    "inferential_chain": [
+      "organization.organization.headquarters",
+      "location.mailing_address.citytown"
+    ]
+  },
+  {
+    "question": "what was scottie pippen good at",
+    "question_entity": "m.01vpgl",
+    "question_entity_name": "Scottie Pippen",
+    "answer_entities": [
+      "m.018w8"
+    ],
+    "answer_entity_names": [
+      "Basketball"
+    ],
+    "hop": 2,
+    "qid": "WebQTest-990",
+    "sparql": "PREFIX ns: <http://rdf.freebase.com/ns/>\nSELECT DISTINCT ?x\nWHERE {\nFILTER (?x != ns:m.01vpgl)\nFILTER (!isLiteral(?x) OR lang(?x) = '' OR langMatches(lang(?x), 'en'))\nns:m.01vpgl ns:sports.pro_athlete.sports_played_professionally ?y .\n?y ns:sports.pro_sports_played.sport ?x .\n}\n",
+    "dataset": "webqsp",
+    "inferential_chain": [
+      "sports.pro_athlete.sports_played_professionally",
+      "sports.pro_sports_played.sport"
+    ]
+  },
+  {
+    "question": "where did hugo chavez go to school",
+    "question_entity": "m.0d1b_",
+    "question_entity_name": "Hugo Chávez",
+    "answer_entities": [
+      "m.0467r_n",
+      "m.0467s09",
+      "m.04fc47",
+      "m.08fk_z"
+    ],
+    "answer_entity_names": [
+      "Julian Pino School",
+      "Daniel Florencio O'Leary School",
+      "Simón Bolívar University",
+      "Bolivarian Military University of Venezuela"
+    ],
+    "hop": 2,
+    "qid": "WebQTest-875",
+    "sparql": "PREFIX ns: <http://rdf.freebase.com/ns/>\nSELECT DISTINCT ?x\nWHERE {\nFILTER (?x != ns:m.0d1b_)\nFILTER (!isLiteral(?x) OR lang(?x) = '' OR langMatches(lang(?x), 'en'))\nns:m.0d1b_ ns:people.person.education ?y .\n?y ns:education.education.institution ?x .\n}\n",
+    "dataset": "webqsp",
+    "inferential_chain": [
+      "people.person.education",
+      "education.education.institution"
+    ]
+  },
+  {
+    "question": "who played victoria barkley",
+    "question_entity": "m.030k44",
+    "question_entity_name": "The Big Valley",
+    "answer_entities": [
+      "m.0bw6y"
+    ],
+    "answer_entity_names": [
+      "Barbara Stanwyck"
+    ],
+    "hop": 2,
+    "qid": "WebQTest-619",
+    "sparql": "PREFIX ns: <http://rdf.freebase.com/ns/>\nSELECT DISTINCT ?x\nWHERE {\nFILTER (?x != ns:m.030k44)\nFILTER (!isLiteral(?x) OR lang(?x) = '' OR langMatches(lang(?x), 'en'))\nns:m.030k44 ns:tv.tv_program.regular_cast ?y .\n?y ns:tv.regular_tv_appearance.actor ?x .\n?y ns:tv.regular_tv_appearance.character ns:m.09cyx23 .\n}\n",
+    "dataset": "webqsp",
+    "inferential_chain": [
+      "tv.tv_program.regular_cast",
+      "tv.regular_tv_appearance.actor"
+    ]
+  },
+  {
+    "question": "where did rick santorum attend high school",
+    "question_entity": "m.01fgd3",
+    "question_entity_name": "Rick Santorum",
+    "answer_entities": [
+      "m.06skgp"
+    ],
+    "answer_entity_names": [
+      "Carmel High School"
+    ],
+    "hop": 2,
+    "qid": "WebQTest-1546",
+    "sparql": "PREFIX ns: <http://rdf.freebase.com/ns/>\nSELECT DISTINCT ?x\nWHERE {\nFILTER (?x != ns:m.01fgd3)\nFILTER (!isLiteral(?x) OR lang(?x) = '' OR langMatches(lang(?x), 'en'))\nns:m.01fgd3 ns:people.person.education ?y .\n?y ns:education.education.institution ?x .\n?x ns:common.topic.notable_types ns:m.01y2hn6 .\n}\n",
+    "dataset": "webqsp",
+    "inferential_chain": [
+      "people.person.education",
+      "education.education.institution"
+    ]
+  },
+  {
+    "question": "where is the un based",
+    "question_entity": "m.07t65",
+    "question_entity_name": "United Nations",
+    "answer_entities": [
+      "m.02_286"
+    ],
+    "answer_entity_names": [
+      "New York City"
+    ],
+    "hop": 2,
+    "qid": "WebQTest-1501",
+    "sparql": "PREFIX ns: <http://rdf.freebase.com/ns/>\nSELECT DISTINCT ?x\nWHERE {\nFILTER (?x != ns:m.07t65)\nFILTER (!isLiteral(?x) OR lang(?x) = '' OR langMatches(lang(?x), 'en'))\nns:m.07t65 ns:organization.organization.headquarters ?y .\n?y ns:location.mailing_address.citytown ?x .\n}\n",
+    "dataset": "webqsp",
+    "inferential_chain": [
+      "organization.organization.headquarters",
+      "location.mailing_address.citytown"
+    ]
+  },
+  {
+    "question": "who does albert pujols play for 2012",
+    "question_entity": "m.035gcb",
+    "question_entity_name": "Albert Pujols",
+    "answer_entities": [
+      "m.04wmvz",
+      "m.0f3wm2"
+    ],
+    "answer_entity_names": [
+      "Los Angeles Angels of Anaheim",
+      "Scottsdale Scorpions"
+    ],
+    "hop": 2,
+    "qid": "WebQTest-313",
+    "sparql": "PREFIX ns: <http://rdf.freebase.com/ns/>\nSELECT DISTINCT ?x\nWHERE {\nFILTER (?x != ns:m.035gcb)\nFILTER (!isLiteral(?x) OR lang(?x) = '' OR langMatches(lang(?x), 'en'))\nns:m.035gcb ns:sports.pro_athlete.teams ?y .\n?y ns:sports.sports_team_roster.team ?x .\nFILTER(NOT EXISTS {?y ns:sports.sports_team_roster.from ?sk0} || \nEXISTS {?y ns:sports.sports_team_roster.from ?sk1 . \nFILTER(xsd:datetime(?sk1) <= \"2012-12-31\"^^xsd:dateTime) })\nFILTER(NOT EXISTS {?y ns:sports.sports_team_roster.to ?sk2} || \nEXISTS {?y ns:sports.sports_team_roster.to ?sk3 . \nFILTER(xsd:datetime(?sk3) >= \"2012-01-01\"^^xsd:dateTime) })\n}\n",
+    "dataset": "webqsp",
+    "inferential_chain": [
+      "sports.pro_athlete.teams",
+      "sports.sports_team_roster.team"
+    ]
+  },
+  {
+    "question": "what was shakespeare 's wife called",
+    "question_entity": "m.081k8",
+    "question_entity_name": "William Shakespeare",
+    "answer_entities": [
+      "m.03mzbg"
+    ],
+    "answer_entity_names": [
+      "Anne Hathaway"
+    ],
+    "hop": 2,
+    "qid": "WebQTest-1694",
+    "sparql": "PREFIX ns: <http://rdf.freebase.com/ns/>\nSELECT DISTINCT ?x\nWHERE {\nFILTER (?x != ns:m.081k8)\nFILTER (!isLiteral(?x) OR lang(?x) = '' OR langMatches(lang(?x), 'en'))\nns:m.081k8 ns:people.person.spouse_s ?y .\n?y ns:people.marriage.spouse ?x .\n?y ns:people.marriage.type_of_union ns:m.04ztj .\n}\n",
+    "dataset": "webqsp",
+    "inferential_chain": [
+      "people.person.spouse_s",
+      "people.marriage.spouse"
+    ]
+  },
+  {
+    "question": "who did sandra bullock marry",
+    "question_entity": "m.0794g",
+    "question_entity_name": "Sandra Bullock",
+    "answer_entities": [
+      "m.02khjc"
+    ],
+    "answer_entity_names": [
+      "Jesse James"
+    ],
+    "hop": 2,
+    "qid": "WebQTest-1499",
+    "sparql": "PREFIX ns: <http://rdf.freebase.com/ns/>\nSELECT DISTINCT ?x\nWHERE {\nFILTER (?x != ns:m.0794g)\nFILTER (!isLiteral(?x) OR lang(?x) = '' OR langMatches(lang(?x), 'en'))\nns:m.0794g ns:people.person.spouse_s ?y .\n?y ns:people.marriage.spouse ?x .\n?y ns:people.marriage.type_of_union ns:m.04ztj .\n}\n",
+    "dataset": "webqsp",
+    "inferential_chain": [
+      "people.person.spouse_s",
+      "people.marriage.spouse"
+    ]
+  },
+  {
+    "question": "what team is hank baskett on 2010",
+    "question_entity": "m.0d81yf",
+    "question_entity_name": "Hank Baskett",
+    "answer_entities": [
+      "m.03wnh",
+      "m.051q5",
+      "m.05tg3"
+    ],
+    "answer_entity_names": [
+      "Indianapolis Colts",
+      "Minnesota Vikings",
+      "Philadelphia Eagles"
+    ],
+    "hop": 2,
+    "qid": "WebQTest-392",
+    "sparql": "PREFIX ns: <http://rdf.freebase.com/ns/>\nSELECT DISTINCT ?x\nWHERE {\nFILTER (?x != ns:m.0d81yf)\nFILTER (!isLiteral(?x) OR lang(?x) = '' OR langMatches(lang(?x), 'en'))\nns:m.0d81yf ns:sports.pro_athlete.teams ?y .\n?y ns:sports.sports_team_roster.team ?x .\nFILTER(NOT EXISTS {?y ns:sports.sports_team_roster.from ?sk0} || \nEXISTS {?y ns:sports.sports_team_roster.from ?sk1 . \nFILTER(xsd:datetime(?sk1) <= \"2010-12-31\"^^xsd:dateTime) })\nFILTER(NOT EXISTS {?y ns:sports.sports_team_roster.to ?sk2} || \nEXISTS {?y ns:sports.sports_team_roster.to ?sk3 . \nFILTER(xsd:datetime(?sk3) >= \"2010-01-01\"^^xsd:dateTime) })\n}\n",
+    "dataset": "webqsp",
+    "inferential_chain": [
+      "sports.pro_athlete.teams",
+      "sports.sports_team_roster.team"
+    ]
+  },
+  {
+    "question": "what colleges did harper lee attend",
+    "question_entity": "m.01bq7x",
+    "question_entity_name": "Harper Lee",
+    "answer_entities": [
+      "m.01wdl3",
+      "m.069vxk",
+      "m.06fv_v",
+      "m.07tgn"
+    ],
+    "answer_entity_names": [
+      "University of Alabama",
+      "Huntingdon College",
+      "University of Alabama School of Law",
+      "University of Oxford"
+    ],
+    "hop": 2,
+    "qid": "WebQTest-928",
+    "sparql": "PREFIX ns: <http://rdf.freebase.com/ns/>\nSELECT DISTINCT ?x\nWHERE {\nFILTER (?x != ns:m.01bq7x)\nFILTER (!isLiteral(?x) OR lang(?x) = '' OR langMatches(lang(?x), 'en'))\nns:m.01bq7x ns:people.person.education ?y .\n?y ns:education.education.institution ?x .\n?x ns:common.topic.notable_types ns:m.01y2hnl .\n}\n",
+    "dataset": "webqsp",
+    "inferential_chain": [
+      "people.person.education",
+      "education.education.institution"
+    ]
+  },
+  {
+    "question": "who is the governor of pennsylvania state now",
+    "question_entity": "m.05tbn",
+    "question_entity_name": "Pennsylvania",
+    "answer_entities": [
+      "m.0gx9n2"
+    ],
+    "answer_entity_names": [
+      "Tom Corbett"
+    ],
+    "hop": 2,
+    "qid": "WebQTest-868",
+    "sparql": "PREFIX ns: <http://rdf.freebase.com/ns/>\nSELECT DISTINCT ?x\nWHERE {\nFILTER (?x != ns:m.05tbn)\nFILTER (!isLiteral(?x) OR lang(?x) = '' OR langMatches(lang(?x), 'en'))\nns:m.05tbn ns:government.governmental_jurisdiction.governing_officials ?y .\n?y ns:government.government_position_held.office_holder ?x .\n?y ns:government.government_position_held.basic_title ns:m.0fkvn .\nFILTER(NOT EXISTS {?y ns:government.government_position_held.from ?sk0} || \nEXISTS {?y ns:government.government_position_held.from ?sk1 . \nFILTER(xsd:datetime(?sk1) <= \"2015-08-10\"^^xsd:dateTime) })\nFILTER(NOT EXISTS {?y ns:government.government_position_held.to ?sk2} || \nEXISTS {?y ns:government.government_position_held.to ?sk3 . \nFILTER(xsd:datetime(?sk3) >= \"2015-08-10\"^^xsd:dateTime) })\n}\n",
+    "dataset": "webqsp",
+    "inferential_chain": [
+      "government.governmental_jurisdiction.governing_officials",
+      "government.government_position_held.office_holder"
+    ]
+  },
+  {
+    "question": "who did carlos boozer play for",
+    "question_entity": "m.03l2cs",
+    "question_entity_name": "Carlos Boozer",
+    "answer_entities": [
+      "m.0jm7n",
+      "m.0jmhr"
+    ],
+    "answer_entity_names": [
+      "Cleveland Cavaliers",
+      "Utah Jazz"
+    ],
+    "hop": 2,
+    "qid": "WebQTest-349",
+    "sparql": "PREFIX ns: <http://rdf.freebase.com/ns/>\nSELECT DISTINCT ?x\nWHERE {\nFILTER (?x != ns:m.03l2cs)\nFILTER (!isLiteral(?x) OR lang(?x) = '' OR langMatches(lang(?x), 'en'))\nns:m.03l2cs ns:basketball.basketball_player.player_statistics ?y .\n?y ns:basketball.basketball_player_stats.team ?x .\n}\n",
+    "dataset": "webqsp",
+    "inferential_chain": [
+      "basketball.basketball_player.player_statistics",
+      "basketball.basketball_player_stats.team"
+    ]
+  },
+  {
+    "question": "who did terrell owens play for in 2010",
+    "question_entity": "m.027ddp",
+    "question_entity_name": "Terrell Owens",
+    "answer_entities": [
+      "m.01c_d",
+      "m.01y49",
+      "m.068tx8"
+    ],
+    "answer_entity_names": [
+      "Buffalo Bills",
+      "Cincinnati Bengals",
+      "Texas Revolution"
+    ],
+    "hop": 2,
+    "qid": "WebQTest-1256",
+    "sparql": "PREFIX ns: <http://rdf.freebase.com/ns/>\nSELECT DISTINCT ?x\nWHERE {\nFILTER (?x != ns:m.027ddp)\nFILTER (!isLiteral(?x) OR lang(?x) = '' OR langMatches(lang(?x), 'en'))\nns:m.027ddp ns:sports.pro_athlete.teams ?y .\n?y ns:sports.sports_team_roster.team ?x .\nFILTER(NOT EXISTS {?y ns:sports.sports_team_roster.from ?sk0} || \nEXISTS {?y ns:sports.sports_team_roster.from ?sk1 . \nFILTER(xsd:datetime(?sk1) <= \"2010-12-31\"^^xsd:dateTime) })\nFILTER(NOT EXISTS {?y ns:sports.sports_team_roster.to ?sk2} || \nEXISTS {?y ns:sports.sports_team_roster.to ?sk3 . \nFILTER(xsd:datetime(?sk3) >= \"2010-01-01\"^^xsd:dateTime) })\n}\n",
+    "dataset": "webqsp",
+    "inferential_chain": [
+      "sports.pro_athlete.teams",
+      "sports.sports_team_roster.team"
+    ]
+  },
+  {
+    "question": "who did jennifer lawrence play in x men",
+    "question_entity": "m.02x0dzw",
+    "question_entity_name": "Jennifer Lawrence",
+    "answer_entities": [
+      "m.01jf3m"
+    ],
+    "answer_entity_names": [
+      "Raven / Mystique"
+    ],
+    "hop": 2,
+    "qid": "WebQTest-1169",
+    "sparql": "PREFIX ns: <http://rdf.freebase.com/ns/>\nSELECT DISTINCT ?x\nWHERE {\nFILTER (?x != ns:m.02x0dzw)\nFILTER (!isLiteral(?x) OR lang(?x) = '' OR langMatches(lang(?x), 'en'))\nns:m.02x0dzw ns:film.actor.film ?y .\n?y ns:film.performance.character ?x .\n?y ns:film.performance.film ns:m.0r3r5jz .\n}\n",
+    "dataset": "webqsp",
+    "inferential_chain": [
+      "film.actor.film",
+      "film.performance.character"
+    ]
+  },
+  {
+    "question": "who plays knox overstreet",
+    "question_entity": "m.0h5qcr7",
+    "question_entity_name": "Knox Overstreet",
+    "answer_entities": [
+      "m.05gnf9"
+    ],
+    "answer_entity_names": [
+      "Josh Charles"
+    ],
+    "hop": 2,
+    "qid": "WebQTest-1868",
+    "sparql": "PREFIX ns: <http://rdf.freebase.com/ns/>\nSELECT DISTINCT ?x\nWHERE {\nFILTER (?x != ns:m.0h5qcr7)\nFILTER (!isLiteral(?x) OR lang(?x) = '' OR langMatches(lang(?x), 'en'))\nns:m.0h5qcr7 ns:film.film_character.portrayed_in_films ?y .\n?y ns:film.performance.actor ?x .\n}\n",
+    "dataset": "webqsp",
+    "inferential_chain": [
+      "film.film_character.portrayed_in_films",
+      "film.performance.actor"
+    ]
+  },
+  {
+    "question": "who does david beckham play for",
+    "question_entity": "m.02d9k",
+    "question_entity_name": "David Beckham",
+    "answer_entities": [],
+    "answer_entity_names": [],
+    "hop": 2,
+    "qid": "WebQTest-1703",
+    "sparql": "PREFIX ns: <http://rdf.freebase.com/ns/>\nSELECT DISTINCT ?x\nWHERE {\nFILTER (?x != ns:m.02d9k)\nFILTER (!isLiteral(?x) OR lang(?x) = '' OR langMatches(lang(?x), 'en'))\nns:m.02d9k ns:sports.pro_athlete.teams ?y .\n?y ns:sports.sports_team_roster.team ?x .\nFILTER(NOT EXISTS {?y ns:sports.sports_team_roster.from ?sk0} || \nEXISTS {?y ns:sports.sports_team_roster.from ?sk1 . \nFILTER(xsd:datetime(?sk1) <= \"2015-08-10\"^^xsd:dateTime) })\nFILTER(NOT EXISTS {?y ns:sports.sports_team_roster.to ?sk2} || \nEXISTS {?y ns:sports.sports_team_roster.to ?sk3 . \nFILTER(xsd:datetime(?sk3) >= \"2015-08-10\"^^xsd:dateTime) })\n}\n",
+    "dataset": "webqsp",
+    "inferential_chain": [
+      "sports.pro_athlete.teams",
+      "sports.sports_team_roster.team"
+    ]
+  },
+  {
+    "question": "what college did martin luther king jr go to",
+    "question_entity": "m.051cc",
+    "question_entity_name": "Martin Luther King, Jr.",
+    "answer_entities": [
+      "m.01_r9k",
+      "m.06yr21",
+      "m.0gl5_"
+    ],
+    "answer_entity_names": [
+      "Morehouse College",
+      "Crozer Theological Seminary",
+      "Boston University"
+    ],
+    "hop": 2,
+    "qid": "WebQTest-543",
+    "sparql": "PREFIX ns: <http://rdf.freebase.com/ns/>\nSELECT DISTINCT ?x\nWHERE {\nFILTER (?x != ns:m.051cc)\nFILTER (!isLiteral(?x) OR lang(?x) = '' OR langMatches(lang(?x), 'en'))\nns:m.051cc ns:people.person.education ?y .\n?y ns:education.education.institution ?x .\n?x ns:common.topic.notable_types ns:m.01y2hnl .\n}\n",
+    "dataset": "webqsp",
+    "inferential_chain": [
+      "people.person.education",
+      "education.education.institution"
+    ]
+  },
+  {
+    "question": "what team does heskey play for",
+    "question_entity": "m.01yj16",
+    "question_entity_name": "Emile Heskey",
+    "answer_entities": [
+      "m.03d4g8",
+      "m.0bl8l"
+    ],
+    "answer_entity_names": [
+      "Newcastle Jets FC",
+      "Aston Villa F.C."
+    ],
+    "hop": 2,
+    "qid": "WebQTest-359",
+    "sparql": "PREFIX ns: <http://rdf.freebase.com/ns/>\nSELECT DISTINCT ?x\nWHERE {\nFILTER (?x != ns:m.01yj16)\nFILTER (!isLiteral(?x) OR lang(?x) = '' OR langMatches(lang(?x), 'en'))\nns:m.01yj16 ns:base.schemastaging.athlete_extra.salary ?y .\n?y ns:base.schemastaging.athlete_salary.team ?x .\n}\n",
+    "dataset": "webqsp",
+    "inferential_chain": [
+      "base.schemastaging.athlete_extra.salary",
+      "base.schemastaging.athlete_salary.team"
+    ]
+  },
+  {
+    "question": "what movies does matt dallas play in",
+    "question_entity": "m.0dfyw6",
+    "question_entity_name": "Matt Dallas",
+    "answer_entities": [
+      "m.026jldh",
+      "m.02phpqn",
+      "m.04j1y3y",
+      "m.04yy0f",
+      "m.051x5f2",
+      "m.05p309z",
+      "m.07kjjgx",
+      "m.0b3w04n",
+      "m.0crsyk2",
+      "m.0gx0043",
+      "m.0h2ky9j",
+      "m.0h2kycm",
+      "m.0h2kydx",
+      "m.0h2r0x7",
+      "m.0n_5c2p"
+    ],
+    "answer_entity_names": [
+      "Babysitter Wanted",
+      "Camp Slaughter",
+      "Way of the Vampire",
+      "Wannabe",
+      "Living the Dream",
+      "The Story of Bonnie and Clyde",
+      "Beauty & the Briefcase",
+      "As Good as Dead",
+      "The Indian",
+      "Wyatt Earp's Revenge",
+      "Hot Dudes with Kittens",
+      "You, Me & The Circus",
+      "The Ghost of Goodnight Lane",
+      "In Between Days",
+      "Naughty or Nice"
+    ],
+    "hop": 2,
+    "qid": "WebQTest-812",
+    "sparql": "PREFIX ns: <http://rdf.freebase.com/ns/>\nSELECT DISTINCT ?x\nWHERE {\nFILTER (?x != ns:m.0dfyw6)\nFILTER (!isLiteral(?x) OR lang(?x) = '' OR langMatches(lang(?x), 'en'))\nns:m.0dfyw6 ns:film.actor.film ?y .\n?y ns:film.performance.film ?x .\n}\n",
+    "dataset": "webqsp",
+    "inferential_chain": [
+      "film.actor.film",
+      "film.performance.film"
+    ]
+  },
+  {
+    "question": "who plays timon 's voice in the lion king",
+    "question_entity": "m.0m63c",
+    "question_entity_name": "The Lion King",
+    "answer_entities": [
+      "m.01nxzv"
+    ],
+    "answer_entity_names": [
+      "Nathan Lane"
+    ],
+    "hop": 2,
+    "qid": "WebQTest-1990",
+    "sparql": "PREFIX ns: <http://rdf.freebase.com/ns/>\nSELECT DISTINCT ?x\nWHERE {\nFILTER (?x != ns:m.0m63c)\nFILTER (!isLiteral(?x) OR lang(?x) = '' OR langMatches(lang(?x), 'en'))\nns:m.0m63c ns:film.film.starring ?y .\n?y ns:film.performance.actor ?x .\n?y ns:film.performance.character ns:m.0c31r0 .\n}\n",
+    "dataset": "webqsp",
+    "inferential_chain": [
+      "film.film.starring",
+      "film.performance.actor"
+    ]
+  },
+  {
+    "question": "what movies gerard butler has been in",
+    "question_entity": "m.038rzr",
+    "question_entity_name": "Gerard Butler",
+    "answer_entities": [
+      "m.010vzxsl",
+      "m.01242_",
+      "m.0124x_l1",
+      "m.015yl2",
+      "m.01sxdy",
+      "m.01v1ln",
+      "m.0292qb",
+      "m.02p1fl7",
+      "m.02pjkz7",
+      "m.02qk3fk",
+      "m.02r3rry",
+      "m.02vvwqg",
+      "m.03c6w7q",
+      "m.03g_sj5",
+      "m.047qxs",
+      "m.047rkcm",
+      "m.04f10b5",
+      "m.04f52jw",
+      "m.04j04w7",
+      "m.04jdgq",
+      "m.04yb52q",
+      "m.05dj6d",
+      "m.05h4_qt",
+      "m.05lm43",
+      "m.05p2gz3",
+      "m.06w9zfg",
+      "m.07f_t4",
+      "m.09210y",
+      "m.0bh8x1y",
+      "m.0bwhkkw",
+      "m.0c1p6zg",
+      "m.0c1z3g",
+      "m.0crvp0c",
+      "m.0crz6lg",
+      "m.0dlk_qn",
+      "m.0f0w6n",
+      "m.0gmglbv",
+      "m.0gwp_k3",
+      "m.0hhggp1",
+      "m.0hnd78z",
+      "m.0hz7mx7",
+      "m.0m_cnk_",
+      "m.0n43ym4",
+      "m.0v3yjg1",
+      "m.0w0l3pk",
+      "m.0w17vsj"
+    ],
+    "answer_entity_names": [
+      "London Has Fallen",
+      "Mrs Brown",
+      "Geostorm",
+      "Reign of Fire",
+      "The Phantom of the Opera",
+      "Tomorrow Never Dies",
+      "Lara Croft Tomb Raider: The Cradle of Life",
+      "Shooters",
+      "Gamer",
+      "P.S. I Love You",
+      "Wrath of Gods",
+      "RocknRolla",
+      "Harrison's Flowers",
+      "Nim's Island",
+      "Timeline",
+      "The Ugly Truth",
+      "One More Kiss",
+      "How to Train Your Dragon",
+      "Fast Food",
+      "Dracula 2000",
+      "Jewel of the Sahara",
+      "Dear Frankie",
+      "Law Abiding Citizen",
+      "The Game of Their Lives",
+      "Tales of the Black Freighter",
+      "The Bounty Hunter",
+      "300",
+      "Beowulf & Grendel",
+      "Coriolanus",
+      "Machine Gun Preacher",
+      "Trailer for a Remake of Gore Vidal's Caligula",
+      "Butterfly on a Wheel",
+      "How to Train Your Dragon: Legend of the Boneknapper Dragon",
+      "The Cherry Orchard",
+      "Movie 43",
+      "Attila",
+      "Playing for Keeps",
+      "How to Train Your Dragon 2",
+      "Chasing Mavericks",
+      "How to Train Your Dragon: Gift of the Night Fury",
+      "Thunder Run",
+      "How to Train Your Dragon 3",
+      "Olympus Has Fallen",
+      "Justin and the Knights of Valour",
+      "Gods of Egypt",
+      "Dynamo"
+    ],
+    "hop": 2,
+    "qid": "WebQTest-1971",
+    "sparql": "PREFIX ns: <http://rdf.freebase.com/ns/>\nSELECT DISTINCT ?x\nWHERE {\nFILTER (?x != ns:m.038rzr)\nFILTER (!isLiteral(?x) OR lang(?x) = '' OR langMatches(lang(?x), 'en'))\nns:m.038rzr ns:film.actor.film ?y .\n?y ns:film.performance.film ?x .\n}\n",
+    "dataset": "webqsp",
+    "inferential_chain": [
+      "film.actor.film",
+      "film.performance.film"
+    ]
+  },
+  {
+    "question": "who did viggo mortensen play in lord of the rings",
+    "question_entity": "m.01ps2h8",
+    "question_entity_name": "Viggo Mortensen",
+    "answer_entities": [
+      "m.0gwlg"
+    ],
+    "answer_entity_names": [
+      "Aragorn"
+    ],
+    "hop": 2,
+    "qid": "WebQTest-1092",
+    "sparql": "PREFIX ns: <http://rdf.freebase.com/ns/>\nSELECT DISTINCT ?x\nWHERE {\nFILTER (?x != ns:m.01ps2h8)\nFILTER (!isLiteral(?x) OR lang(?x) = '' OR langMatches(lang(?x), 'en'))\nns:m.01ps2h8 ns:film.actor.film ?y .\n?y ns:film.performance.character ?x .\n?y ns:film.performance.film ns:m.017gl1 .\n}\n",
+    "dataset": "webqsp",
+    "inferential_chain": [
+      "film.actor.film",
+      "film.performance.character"
+    ]
+  },
+  {
+    "question": "who is nicolas cage married too",
+    "question_entity": "m.01vvb4m",
+    "question_entity_name": "Nicolas Cage",
+    "answer_entities": [
+      "m.025dscf"
+    ],
+    "answer_entity_names": [
+      "Alice Kim"
+    ],
+    "hop": 2,
+    "qid": "WebQTest-1641",
+    "sparql": "PREFIX ns: <http://rdf.freebase.com/ns/>\nSELECT DISTINCT ?x\nWHERE {\nFILTER (?x != ns:m.01vvb4m)\nFILTER (!isLiteral(?x) OR lang(?x) = '' OR langMatches(lang(?x), 'en'))\nns:m.01vvb4m ns:people.person.spouse_s ?y .\n?y ns:people.marriage.spouse ?x .\n?y ns:people.marriage.type_of_union ns:m.04ztj .\nFILTER(NOT EXISTS {?y ns:people.marriage.from ?sk0} || \nEXISTS {?y ns:people.marriage.from ?sk1 . \nFILTER(xsd:datetime(?sk1) <= \"2015-08-10\"^^xsd:dateTime) })\nFILTER(NOT EXISTS {?y ns:people.marriage.to ?sk2} || \nEXISTS {?y ns:people.marriage.to ?sk3 . \nFILTER(xsd:datetime(?sk3) >= \"2015-08-10\"^^xsd:dateTime) })\n}\n",
+    "dataset": "webqsp",
+    "inferential_chain": [
+      "people.person.spouse_s",
+      "people.marriage.spouse"
+    ]
+  },
+  {
+    "question": "where did george herbert walker bush go to college",
+    "question_entity": "m.034ls",
+    "question_entity_name": "George H. W. Bush",
+    "answer_entities": [
+      "m.08815"
+    ],
+    "answer_entity_names": [
+      "University Yale"
+    ],
+    "hop": 2,
+    "qid": "WebQTest-1009",
+    "sparql": "PREFIX ns: <http://rdf.freebase.com/ns/>\nSELECT DISTINCT ?x\nWHERE {\nFILTER (?x != ns:m.034ls)\nFILTER (!isLiteral(?x) OR lang(?x) = '' OR langMatches(lang(?x), 'en'))\nns:m.034ls ns:people.person.education ?y .\n?y ns:education.education.institution ?x .\n?x ns:common.topic.notable_types ns:m.01y2hnl .\n}\n",
+    "dataset": "webqsp",
+    "inferential_chain": [
+      "people.person.education",
+      "education.education.institution"
+    ]
+  },
+  {
+    "question": "what year was george w bush elected",
+    "question_entity": "m.09b6zr",
+    "question_entity_name": "George W. Bush",
+    "answer_entities": [
+      "2000-11-07",
+      "2004-11-02"
+    ],
+    "answer_entity_names": [],
+    "hop": 2,
+    "qid": "WebQTest-155",
+    "sparql": "#MANUAL SPARQL\nPREFIX ns: <http://rdf.freebase.com/ns/>\nSELECT DISTINCT ?dt\nWHERE {\n  ?e ns:government.election.winner  ns:m.09b6zr ; # George W. Bush\n     ns:government.election.office  ns:m.060d2 ; # President of the United States\n     ns:government.election.election_year ?dt  .\n}",
+    "dataset": "webqsp",
+    "inferential_chain": [
+      "government.politician.government_positions_held",
+      "government.government_position_held.from"
+    ]
+  },
+  {
+    "question": "where did tennessee williams go to college",
+    "question_entity": "m.0c4y8",
+    "question_entity_name": "Tennessee Williams",
+    "answer_entities": [
+      "m.0187nd",
+      "m.01j_9c",
+      "m.06thjt",
+      "m.0g2jl"
+    ],
+    "answer_entity_names": [
+      "University of Missouri",
+      "University of Iowa",
+      "The New School",
+      "Washington University in St. Louis"
+    ],
+    "hop": 2,
+    "qid": "WebQTest-983",
+    "sparql": "PREFIX ns: <http://rdf.freebase.com/ns/>\nSELECT DISTINCT ?x\nWHERE {\nFILTER (?x != ns:m.0c4y8)\nFILTER (!isLiteral(?x) OR lang(?x) = '' OR langMatches(lang(?x), 'en'))\nns:m.0c4y8 ns:people.person.education ?y .\n?y ns:education.education.institution ?x .\n?x ns:common.topic.notable_types ns:m.01y2hnl .\n}\n",
+    "dataset": "webqsp",
+    "inferential_chain": [
+      "people.person.education",
+      "education.education.institution"
+    ]
+  },
+  {
+    "question": "what was the name of benjamin franklin wife",
+    "question_entity": "m.019fz",
+    "question_entity_name": "Benjamin Franklin",
+    "answer_entities": [
+      "m.0b15_0"
+    ],
+    "answer_entity_names": [
+      "Deborah Read"
+    ],
+    "hop": 2,
+    "qid": "WebQTest-1316",
+    "sparql": "PREFIX ns: <http://rdf.freebase.com/ns/>\nSELECT DISTINCT ?x\nWHERE {\nFILTER (?x != ns:m.019fz)\nFILTER (!isLiteral(?x) OR lang(?x) = '' OR langMatches(lang(?x), 'en'))\nns:m.019fz ns:people.person.spouse_s ?y .\n?y ns:people.marriage.spouse ?x .\n?y ns:people.marriage.type_of_union ns:m.01bl8s .\n}\n",
+    "dataset": "webqsp",
+    "inferential_chain": [
+      "people.person.spouse_s",
+      "people.marriage.spouse"
+    ]
+  },
+  {
+    "question": "what team does messi play for 2011",
+    "question_entity": "m.06qjgc",
+    "question_entity_name": "Lionel Messi",
+    "answer_entities": [
+      "m.02bh_v",
+      "m.0hvgt"
+    ],
+    "answer_entity_names": [
+      "Argentina national football team",
+      "FC Barcelona"
+    ],
+    "hop": 2,
+    "qid": "WebQTest-1813",
+    "sparql": "PREFIX ns: <http://rdf.freebase.com/ns/>\nSELECT DISTINCT ?x\nWHERE {\nFILTER (?x != ns:m.06qjgc)\nFILTER (!isLiteral(?x) OR lang(?x) = '' OR langMatches(lang(?x), 'en'))\nns:m.06qjgc ns:sports.pro_athlete.teams ?y .\n?y ns:sports.sports_team_roster.team ?x .\nFILTER(NOT EXISTS {?y ns:sports.sports_team_roster.from ?sk0} || \nEXISTS {?y ns:sports.sports_team_roster.from ?sk1 . \nFILTER(xsd:datetime(?sk1) <= \"2011-12-31\"^^xsd:dateTime) })\nFILTER(NOT EXISTS {?y ns:sports.sports_team_roster.to ?sk2} || \nEXISTS {?y ns:sports.sports_team_roster.to ?sk3 . \nFILTER(xsd:datetime(?sk3) >= \"2011-01-01\"^^xsd:dateTime) })\n}\n",
+    "dataset": "webqsp",
+    "inferential_chain": [
+      "sports.pro_athlete.teams",
+      "sports.sports_team_roster.team"
+    ]
+  },
+  {
+    "question": "who plays spike spiegel",
+    "question_entity": "m.025tj1w",
+    "question_entity_name": "Spike Spiegel",
+    "answer_entities": [
+      "m.039tg4",
+      "m.044_7j"
+    ],
+    "answer_entity_names": [
+      "Kōichi Yamadera",
+      "Steven Blum"
+    ],
+    "hop": 2,
+    "qid": "WebQTest-1585",
+    "sparql": "PREFIX ns: <http://rdf.freebase.com/ns/>\nSELECT DISTINCT ?x\nWHERE {\nFILTER (?x != ns:m.025tj1w)\nFILTER (!isLiteral(?x) OR lang(?x) = '' OR langMatches(lang(?x), 'en'))\nns:m.025tj1w ns:film.film_character.portrayed_in_films ?y .\n?y ns:film.performance.actor ?x .\n}\n",
+    "dataset": "webqsp",
+    "inferential_chain": [
+      "film.film_character.portrayed_in_films",
+      "film.performance.actor"
+    ]
+  },
+  {
+    "question": "what country borders slovakia",
+    "question_entity": "m.06npd",
+    "question_entity_name": "Slovakia",
+    "answer_entities": [
+      "m.01mjq",
+      "m.03gj2",
+      "m.05qhw",
+      "m.07t21",
+      "m.0h7x"
+    ],
+    "answer_entity_names": [
+      "Czech Republic",
+      "Hungary",
+      "Poland",
+      "Ukraine",
+      "Austria"
+    ],
+    "hop": 2,
+    "qid": "WebQTest-527",
+    "sparql": "PREFIX ns: <http://rdf.freebase.com/ns/>\nSELECT DISTINCT ?x\nWHERE {\nFILTER (?x != ns:m.06npd)\nFILTER (!isLiteral(?x) OR lang(?x) = '' OR langMatches(lang(?x), 'en'))\nns:m.06npd ns:location.location.adjoin_s ?y .\n?y ns:location.adjoining_relationship.adjoins ?x .\n?x ns:common.topic.notable_types ns:m.01mp .\n}\n",
+    "dataset": "webqsp",
+    "inferential_chain": [
+      "location.location.adjoin_s",
+      "location.adjoining_relationship.adjoins"
+    ]
+  },
+  {
+    "question": "who does jordan palmer play for",
+    "question_entity": "m.0d9wsx",
+    "question_entity_name": "Jordan Palmer",
+    "answer_entities": [],
+    "answer_entity_names": [],
+    "hop": 2,
+    "qid": "WebQTest-353",
+    "sparql": "PREFIX ns: <http://rdf.freebase.com/ns/>\nSELECT DISTINCT ?x\nWHERE {\nFILTER (?x != ns:m.0d9wsx)\nFILTER (!isLiteral(?x) OR lang(?x) = '' OR langMatches(lang(?x), 'en'))\nns:m.0d9wsx ns:sports.pro_athlete.teams ?y .\n?y ns:sports.sports_team_roster.team ?x .\nFILTER(NOT EXISTS {?y ns:sports.sports_team_roster.from ?sk0} || \nEXISTS {?y ns:sports.sports_team_roster.from ?sk1 . \nFILTER(xsd:datetime(?sk1) <= \"2015-08-10\"^^xsd:dateTime) })\nFILTER(NOT EXISTS {?y ns:sports.sports_team_roster.to ?sk2} || \nEXISTS {?y ns:sports.sports_team_roster.to ?sk3 . \nFILTER(xsd:datetime(?sk3) >= \"2015-08-10\"^^xsd:dateTime) })\n}\n",
+    "dataset": "webqsp",
+    "inferential_chain": [
+      "sports.pro_athlete.teams",
+      "sports.sports_team_roster.team"
+    ]
+  },
+  {
+    "question": "who plays roxanne in ghost rider",
+    "question_entity": "m.06yykb",
+    "question_entity_name": "Ghost Rider",
+    "answer_entities": [
+      "m.026ths5",
+      "m.03_x5t"
+    ],
+    "answer_entity_names": [
+      "Raquel Alessi",
+      "Eva Mendes"
+    ],
+    "hop": 2,
+    "qid": "WebQTest-772",
+    "sparql": "PREFIX ns: <http://rdf.freebase.com/ns/>\nSELECT DISTINCT ?x\nWHERE {\nFILTER (?x != ns:m.06yykb)\nFILTER (!isLiteral(?x) OR lang(?x) = '' OR langMatches(lang(?x), 'en'))\nns:m.06yykb ns:film.film.starring ?y .\n?y ns:film.performance.actor ?x .\n?y ns:film.performance.character ns:m.02ph41w .\n}\n",
+    "dataset": "webqsp",
+    "inferential_chain": [
+      "film.film.starring",
+      "film.performance.actor"
+    ]
+  },
+  {
+    "question": "where does carlos santana live",
+    "question_entity": "m.01304j",
+    "question_entity_name": "Carlos Santana",
+    "answer_entities": [
+      "m.01btyw",
+      "m.0d6lp",
+      "m.0pswc"
+    ],
+    "answer_entity_names": [
+      "Jalisco",
+      "San Francisco",
+      "Tijuana"
+    ],
+    "hop": 2,
+    "qid": "WebQTest-779",
+    "sparql": "PREFIX ns: <http://rdf.freebase.com/ns/>\nSELECT DISTINCT ?x\nWHERE {\nFILTER (?x != ns:m.01304j)\nFILTER (!isLiteral(?x) OR lang(?x) = '' OR langMatches(lang(?x), 'en'))\nns:m.01304j ns:people.person.places_lived ?y .\n?y ns:people.place_lived.location ?x .\n}\n",
+    "dataset": "webqsp",
+    "inferential_chain": [
+      "people.person.places_lived",
+      "people.place_lived.location"
+    ]
+  },
+  {
+    "question": "what religions are popular in france",
+    "question_entity": "m.0f8l9c",
+    "question_entity_name": "France",
+    "answer_entities": [
+      "m.0c8wxp"
+    ],
+    "answer_entity_names": [
+      "Catholicism"
+    ],
+    "hop": 2,
+    "qid": "WebQTest-1999",
+    "sparql": "PREFIX ns: <http://rdf.freebase.com/ns/>\nSELECT DISTINCT ?x\nWHERE {\nFILTER (?x != ns:m.0f8l9c)\nFILTER (!isLiteral(?x) OR lang(?x) = '' OR langMatches(lang(?x), 'en'))\nns:m.0f8l9c ns:location.statistical_region.religions ?y .\n?y ns:location.religion_percentage.religion ?x .\n}\n",
+    "dataset": "webqsp",
+    "inferential_chain": [
+      "location.statistical_region.religions",
+      "location.religion_percentage.religion"
+    ]
+  },
+  {
+    "question": "where did harper lee attend high school",
+    "question_entity": "m.01bq7x",
+    "question_entity_name": "Harper Lee",
+    "answer_entities": [
+      "m.0crdc8g"
+    ],
+    "answer_entity_names": [
+      "Monroe County High School"
+    ],
+    "hop": 2,
+    "qid": "WebQTest-1307",
+    "sparql": "PREFIX ns: <http://rdf.freebase.com/ns/>\nSELECT DISTINCT ?x\nWHERE {\nFILTER (?x != ns:m.01bq7x)\nFILTER (!isLiteral(?x) OR lang(?x) = '' OR langMatches(lang(?x), 'en'))\nns:m.01bq7x ns:people.person.education ?y .\n?y ns:education.education.institution ?x .\n?x ns:common.topic.notable_types ns:m.01y2hn6 .\n}\n",
+    "dataset": "webqsp",
+    "inferential_chain": [
+      "people.person.education",
+      "education.education.institution"
+    ]
+  },
+  {
+    "question": "when does ziva start on ncis",
+    "question_entity": "m.03m8sg",
+    "question_entity_name": "NCIS",
+    "answer_entities": [
+      "m.05df6zw"
+    ],
+    "answer_entity_names": [
+      "NCIS - Season 3"
+    ],
+    "hop": 2,
+    "qid": "WebQTest-1209",
+    "sparql": "PREFIX ns: <http://rdf.freebase.com/ns/>\nSELECT DISTINCT ?x\nWHERE {\nFILTER (?x != ns:m.03m8sg)\nFILTER (!isLiteral(?x) OR lang(?x) = '' OR langMatches(lang(?x), 'en'))\nns:m.03m8sg ns:tv.tv_program.regular_cast ?y .\n?y ns:tv.regular_tv_appearance.seasons ?x .\n?y ns:tv.regular_tv_appearance.character ns:m.093xn8 .\n?x ns:tv.tv_series_season.from ?sk0 .\n}\nORDER BY xsd:datetime(?sk0)\nLIMIT 1\n",
+    "dataset": "webqsp",
+    "inferential_chain": [
+      "tv.tv_program.regular_cast",
+      "tv.regular_tv_appearance.seasons"
+    ]
+  },
+  {
+    "question": "who was the soviet leader during world war ii",
+    "question_entity": "m.05vz3zq",
+    "question_entity_name": "Soviet Union",
+    "answer_entities": [
+      "m.0bphp",
+      "m.0d8xy"
+    ],
+    "answer_entity_names": [
+      "Nikita Khrushchev",
+      "Leonid Brezhnev"
+    ],
+    "hop": 2,
+    "qid": "WebQTest-257",
+    "sparql": "PREFIX ns: <http://rdf.freebase.com/ns/>\nSELECT DISTINCT ?x\nWHERE {\nFILTER (?x != ns:m.05vz3zq)\nFILTER (!isLiteral(?x) OR lang(?x) = '' OR langMatches(lang(?x), 'en'))\nns:m.05vz3zq ns:government.governmental_jurisdiction.governing_officials ?y .\n?y ns:government.government_position_held.office_holder ?x .\n?x ns:military.military_person.participated_in_conflicts ns:m.081pw .\n}\n",
+    "dataset": "webqsp",
+    "inferential_chain": [
+      "government.governmental_jurisdiction.governing_officials",
+      "government.government_position_held.office_holder"
+    ]
+  },
+  {
+    "question": "what college did albert einstein go to",
+    "question_entity": "m.0jcx",
+    "question_entity_name": "Albert Einstein",
+    "answer_entities": [
+      "m.01dyk8",
+      "m.01tpvt"
+    ],
+    "answer_entity_names": [
+      "ETH Zurich",
+      "University of Zurich"
+    ],
+    "hop": 2,
+    "qid": "WebQTest-145",
+    "sparql": "PREFIX ns: <http://rdf.freebase.com/ns/>\nSELECT DISTINCT ?x\nWHERE {\nFILTER (?x != ns:m.0jcx)\nFILTER (!isLiteral(?x) OR lang(?x) = '' OR langMatches(lang(?x), 'en'))\nns:m.0jcx ns:people.person.education ?y .\n?y ns:education.education.institution ?x .\n?x ns:common.topic.notable_types ns:m.01y2hnl .\n}\n",
+    "dataset": "webqsp",
+    "inferential_chain": [
+      "people.person.education",
+      "education.education.institution"
+    ]
+  },
+  {
+    "question": "what basketball teams has shaq played for",
+    "question_entity": "m.012xdf",
+    "question_entity_name": "Shaquille O'Neal",
+    "answer_entities": [
+      "m.026dqjm",
+      "m.0bwjj",
+      "m.0jm2v",
+      "m.0jm4b",
+      "m.0jm7n",
+      "m.0jmk7",
+      "m.0jml5"
+    ],
+    "answer_entity_names": [
+      "LSU Tigers men's basketball",
+      "Boston Celtics",
+      "Miami Heat",
+      "Orlando Magic",
+      "Cleveland Cavaliers",
+      "Los Angeles Lakers",
+      "Phoenix Suns"
+    ],
+    "hop": 2,
+    "qid": "WebQTest-103",
+    "sparql": "PREFIX ns: <http://rdf.freebase.com/ns/>\nSELECT DISTINCT ?x\nWHERE {\nFILTER (?x != ns:m.012xdf)\nFILTER (!isLiteral(?x) OR lang(?x) = '' OR langMatches(lang(?x), 'en'))\nns:m.012xdf ns:sports.pro_athlete.teams ?y .\n?y ns:sports.sports_team_roster.team ?x .\n?x ns:sports.sports_team.sport ns:m.018w8 .\n}\n",
+    "dataset": "webqsp",
+    "inferential_chain": [
+      "sports.pro_athlete.teams",
+      "sports.sports_team_roster.team"
+    ]
+  },
+  {
+    "question": "where was benjamin franklin educated",
+    "question_entity": "m.019fz",
+    "question_entity_name": "Benjamin Franklin",
+    "answer_entities": [
+      "m.02kj7g"
+    ],
+    "answer_entity_names": [
+      "Boston Latin School"
+    ],
+    "hop": 2,
+    "qid": "WebQTest-252",
+    "sparql": "PREFIX ns: <http://rdf.freebase.com/ns/>\nSELECT DISTINCT ?x\nWHERE {\nFILTER (?x != ns:m.019fz)\nFILTER (!isLiteral(?x) OR lang(?x) = '' OR langMatches(lang(?x), 'en'))\nns:m.019fz ns:people.person.education ?y .\n?y ns:education.education.institution ?x .\n}\n",
+    "dataset": "webqsp",
+    "inferential_chain": [
+      "people.person.education",
+      "education.education.institution"
+    ]
+  },
+  {
+    "question": "where did troy aikman play football",
+    "question_entity": "m.0dr5g9",
+    "question_entity_name": "Troy Aikman",
+    "answer_entities": [
+      "m.02896"
+    ],
+    "answer_entity_names": [
+      "Dallas Cowboys"
+    ],
+    "hop": 2,
+    "qid": "WebQTest-706",
+    "sparql": "PREFIX ns: <http://rdf.freebase.com/ns/>\nSELECT DISTINCT ?x\nWHERE {\nFILTER (?x != ns:m.0dr5g9)\nFILTER (!isLiteral(?x) OR lang(?x) = '' OR langMatches(lang(?x), 'en'))\nns:m.0dr5g9 ns:sports.pro_athlete.teams ?y .\n?y ns:sports.sports_team_roster.team ?x .\n}\n",
+    "dataset": "webqsp",
+    "inferential_chain": [
+      "sports.pro_athlete.teams",
+      "sports.sports_team_roster.team"
+    ]
+  },
+  {
+    "question": "who played bilbo in the fellowship of the ring",
+    "question_entity": "m.017gl1",
+    "question_entity_name": "The Lord of the Rings: The Fellowship of the Ring",
+    "answer_entities": [
+      "m.016zp5"
+    ],
+    "answer_entity_names": [
+      "Ian Holm"
+    ],
+    "hop": 2,
+    "qid": "WebQTest-1329",
+    "sparql": "PREFIX ns: <http://rdf.freebase.com/ns/>\nSELECT DISTINCT ?x\nWHERE {\nFILTER (?x != ns:m.017gl1)\nFILTER (!isLiteral(?x) OR lang(?x) = '' OR langMatches(lang(?x), 'en'))\nns:m.017gl1 ns:film.film.starring ?y .\n?y ns:film.performance.actor ?x .\n?y ns:film.performance.character ns:m.0g6z1 .\n}\n",
+    "dataset": "webqsp",
+    "inferential_chain": [
+      "film.film.starring",
+      "film.performance.actor"
+    ]
+  },
+  {
+    "question": "what did stephen hawking study",
+    "question_entity": "m.01tdnyh",
+    "question_entity_name": "Stephen Hawking",
+    "answer_entities": [
+      "m.05qjt"
+    ],
+    "answer_entity_names": [
+      "Physics"
+    ],
+    "hop": 2,
+    "qid": "WebQTest-187",
+    "sparql": "PREFIX ns: <http://rdf.freebase.com/ns/>\nSELECT DISTINCT ?x\nWHERE {\nFILTER (?x != ns:m.01tdnyh)\nFILTER (!isLiteral(?x) OR lang(?x) = '' OR langMatches(lang(?x), 'en'))\nns:m.01tdnyh ns:people.person.education ?y .\n?y ns:education.education.major_field_of_study ?x .\n}\n",
+    "dataset": "webqsp",
+    "inferential_chain": [
+      "people.person.education",
+      "education.education.major_field_of_study"
+    ]
+  },
+  {
+    "question": "who is michael j fox 's wife",
+    "question_entity": "m.0hz_1",
+    "question_entity_name": "Michael J. Fox",
+    "answer_entities": [
+      "m.03gpck"
+    ],
+    "answer_entity_names": [
+      "Tracy Pollan"
+    ],
+    "hop": 2,
+    "qid": "WebQTest-546",
+    "sparql": "PREFIX ns: <http://rdf.freebase.com/ns/>\nSELECT DISTINCT ?x\nWHERE {\nFILTER (?x != ns:m.0hz_1)\nFILTER (!isLiteral(?x) OR lang(?x) = '' OR langMatches(lang(?x), 'en'))\nns:m.0hz_1 ns:people.person.spouse_s ?y .\n?y ns:people.marriage.spouse ?x .\n?y ns:people.marriage.type_of_union ns:m.04ztj .\nFILTER(NOT EXISTS {?y ns:people.marriage.from ?sk0} || \nEXISTS {?y ns:people.marriage.from ?sk1 . \nFILTER(xsd:datetime(?sk1) <= \"2015-08-10\"^^xsd:dateTime) })\nFILTER(NOT EXISTS {?y ns:people.marriage.to ?sk2} || \nEXISTS {?y ns:people.marriage.to ?sk3 . \nFILTER(xsd:datetime(?sk3) >= \"2015-08-10\"^^xsd:dateTime) })\n}\n",
+    "dataset": "webqsp",
+    "inferential_chain": [
+      "people.person.spouse_s",
+      "people.marriage.spouse"
+    ]
+  },
+  {
+    "question": "who did cristiano ronaldo play for in 2010",
+    "question_entity": "m.02xt6q",
+    "question_entity_name": "Cristiano Ronaldo",
+    "answer_entities": [
+      "m.02rqxc",
+      "m.06l22"
+    ],
+    "answer_entity_names": [
+      "Portugal national football team",
+      "Real Madrid C.F."
+    ],
+    "hop": 2,
+    "qid": "WebQTest-1044",
+    "sparql": "PREFIX ns: <http://rdf.freebase.com/ns/>\nSELECT DISTINCT ?x\nWHERE {\nFILTER (?x != ns:m.02xt6q)\nFILTER (!isLiteral(?x) OR lang(?x) = '' OR langMatches(lang(?x), 'en'))\nns:m.02xt6q ns:sports.pro_athlete.teams ?y .\n?y ns:sports.sports_team_roster.team ?x .\nFILTER(NOT EXISTS {?y ns:sports.sports_team_roster.from ?sk0} || \nEXISTS {?y ns:sports.sports_team_roster.from ?sk1 . \nFILTER(xsd:datetime(?sk1) <= \"2010-12-31\"^^xsd:dateTime) })\nFILTER(NOT EXISTS {?y ns:sports.sports_team_roster.to ?sk2} || \nEXISTS {?y ns:sports.sports_team_roster.to ?sk3 . \nFILTER(xsd:datetime(?sk3) >= \"2010-01-01\"^^xsd:dateTime) })\n}\n",
+    "dataset": "webqsp",
+    "inferential_chain": [
+      "sports.pro_athlete.teams",
+      "sports.sports_team_roster.team"
+    ]
+  },
+  {
+    "question": "who did kim richards marry",
+    "question_entity": "m.08l257",
+    "question_entity_name": "Kim Richards",
+    "answer_entities": [
+      "m.0bjbnly",
+      "m.0mtnbfr"
+    ],
+    "answer_entity_names": [
+      "G. Monty Brinson",
+      "Gregg Davis"
+    ],
+    "hop": 2,
+    "qid": "WebQTest-421",
+    "sparql": "PREFIX ns: <http://rdf.freebase.com/ns/>\nSELECT DISTINCT ?x\nWHERE {\nFILTER (?x != ns:m.08l257)\nFILTER (!isLiteral(?x) OR lang(?x) = '' OR langMatches(lang(?x), 'en'))\nns:m.08l257 ns:people.person.spouse_s ?y .\n?y ns:people.marriage.spouse ?x .\n?y ns:people.marriage.type_of_union ns:m.04ztj .\n?x ns:people.person.gender ns:m.05zppz .\n}\n",
+    "dataset": "webqsp",
+    "inferential_chain": [
+      "people.person.spouse_s",
+      "people.marriage.spouse"
+    ]
+  },
+  {
+    "question": "where did melba beals live",
+    "question_entity": "m.08s1bb",
+    "question_entity_name": "Melba Pattillo Beals",
+    "answer_entities": [
+      "m.0vbk"
+    ],
+    "answer_entity_names": [
+      "Arkansas"
+    ],
+    "hop": 2,
+    "qid": "WebQTest-573",
+    "sparql": "PREFIX ns: <http://rdf.freebase.com/ns/>\nSELECT DISTINCT ?x\nWHERE {\nFILTER (?x != ns:m.08s1bb)\nFILTER (!isLiteral(?x) OR lang(?x) = '' OR langMatches(lang(?x), 'en'))\nns:m.08s1bb ns:people.person.places_lived ?y .\n?y ns:people.place_lived.location ?x .\n}\n",
+    "dataset": "webqsp",
+    "inferential_chain": [
+      "people.person.places_lived",
+      "people.place_lived.location"
+    ]
+  },
+  {
+    "question": "what does david beckham play",
+    "question_entity": "m.02d9k",
+    "question_entity_name": "David Beckham",
+    "answer_entities": [
+      "m.02vx4"
+    ],
+    "answer_entity_names": [
+      "Football"
+    ],
+    "hop": 2,
+    "qid": "WebQTest-532",
+    "sparql": "PREFIX ns: <http://rdf.freebase.com/ns/>\nSELECT DISTINCT ?x\nWHERE {\nFILTER (?x != ns:m.02d9k)\nFILTER (!isLiteral(?x) OR lang(?x) = '' OR langMatches(lang(?x), 'en'))\nns:m.02d9k ns:sports.pro_athlete.sports_played_professionally ?y .\n?y ns:sports.pro_sports_played.sport ?x .\n}\n",
+    "dataset": "webqsp",
+    "inferential_chain": [
+      "sports.pro_athlete.sports_played_professionally",
+      "sports.pro_sports_played.sport"
+    ]
+  },
+  {
+    "question": "who did annie oakley married",
+    "question_entity": "m.0237np",
+    "question_entity_name": "Annie Oakley",
+    "answer_entities": [
+      "m.06zqpqq"
+    ],
+    "answer_entity_names": [
+      "Frank E. Butler"
+    ],
+    "hop": 2,
+    "qid": "WebQTest-432",
+    "sparql": "PREFIX ns: <http://rdf.freebase.com/ns/>\nSELECT DISTINCT ?x\nWHERE {\nFILTER (?x != ns:m.0237np)\nFILTER (!isLiteral(?x) OR lang(?x) = '' OR langMatches(lang(?x), 'en'))\nns:m.0237np ns:people.person.spouse_s ?y .\n?y ns:people.marriage.spouse ?x .\n?y ns:people.marriage.type_of_union ns:m.04ztj .\n}\n",
+    "dataset": "webqsp",
+    "inferential_chain": [
+      "people.person.spouse_s",
+      "people.marriage.spouse"
+    ]
+  },
+  {
+    "question": "what was dr seuss education",
+    "question_entity": "m.02g3w",
+    "question_entity_name": "Theodore Lesieg",
+    "answer_entities": [
+      "m.02bqy",
+      "m.07tgn",
+      "m.0ym1n"
+    ],
+    "answer_entity_names": [
+      "Dartmouth College",
+      "University of Oxford",
+      "Lincoln College, Oxford"
+    ],
+    "hop": 2,
+    "qid": "WebQTest-166",
+    "sparql": "PREFIX ns: <http://rdf.freebase.com/ns/>\nSELECT DISTINCT ?x\nWHERE {\nFILTER (?x != ns:m.02g3w)\nFILTER (!isLiteral(?x) OR lang(?x) = '' OR langMatches(lang(?x), 'en'))\nns:m.02g3w ns:people.person.education ?y .\n?y ns:education.education.institution ?x .\n}\n",
+    "dataset": "webqsp",
+    "inferential_chain": [
+      "people.person.education",
+      "education.education.institution"
+    ]
+  },
+  {
+    "question": "who did tom hanks play in apollo 13",
+    "question_entity": "m.0bxtg",
+    "question_entity_name": "Tom Hanks",
+    "answer_entities": [
+      "m.02nw821"
+    ],
+    "answer_entity_names": [
+      "Jim Lovell"
+    ],
+    "hop": 2,
+    "qid": "WebQTest-1334",
+    "sparql": "PREFIX ns: <http://rdf.freebase.com/ns/>\nSELECT DISTINCT ?x\nWHERE {\nFILTER (?x != ns:m.0bxtg)\nFILTER (!isLiteral(?x) OR lang(?x) = '' OR langMatches(lang(?x), 'en'))\nns:m.0bxtg ns:film.actor.film ?y .\n?y ns:film.performance.character ?x .\n?y ns:film.performance.film ns:m.011yd2 .\n}\n",
+    "dataset": "webqsp",
+    "inferential_chain": [
+      "film.actor.film",
+      "film.performance.character"
+    ]
+  },
+  {
+    "question": "who did woody harrelson play on cheers",
+    "question_entity": "m.0170s4",
+    "question_entity_name": "Woody Harrelson",
+    "answer_entities": [
+      "m.065xmv"
+    ],
+    "answer_entity_names": [
+      "Woody Boyd"
+    ],
+    "hop": 2,
+    "qid": "WebQTest-1421",
+    "sparql": "PREFIX ns: <http://rdf.freebase.com/ns/>\nSELECT DISTINCT ?x\nWHERE {\nFILTER (?x != ns:m.0170s4)\nFILTER (!isLiteral(?x) OR lang(?x) = '' OR langMatches(lang(?x), 'en'))\nns:m.0170s4 ns:tv.tv_actor.starring_roles ?y .\n?y ns:tv.regular_tv_appearance.character ?x .\n?y ns:tv.regular_tv_appearance.series ns:m.01s81 .\n}\n",
+    "dataset": "webqsp",
+    "inferential_chain": [
+      "tv.tv_actor.starring_roles",
+      "tv.regular_tv_appearance.character"
+    ]
+  },
+  {
+    "question": "who is the current leader of france 2010",
+    "question_entity": "m.0f8l9c",
+    "question_entity_name": "France",
+    "answer_entities": [
+      "m.02ps9k"
+    ],
+    "answer_entity_names": [
+      "Nicolas Sarkozy"
+    ],
+    "hop": 2,
+    "qid": "WebQTest-2028",
+    "sparql": "PREFIX ns: <http://rdf.freebase.com/ns/>\nSELECT DISTINCT ?x\nWHERE {\nFILTER (?x != ns:m.0f8l9c)\nFILTER (!isLiteral(?x) OR lang(?x) = '' OR langMatches(lang(?x), 'en'))\nns:m.0f8l9c ns:government.governmental_jurisdiction.governing_officials ?y .\n?y ns:government.government_position_held.office_holder ?x .\n?y ns:government.government_position_held.basic_title ns:m.060c4 .\nFILTER(NOT EXISTS {?y ns:government.government_position_held.from ?sk0} || \nEXISTS {?y ns:government.government_position_held.from ?sk1 . \nFILTER(xsd:datetime(?sk1) <= \"2010-12-31\"^^xsd:dateTime) })\nFILTER(NOT EXISTS {?y ns:government.government_position_held.to ?sk2} || \nEXISTS {?y ns:government.government_position_held.to ?sk3 . \nFILTER(xsd:datetime(?sk3) >= \"2010-01-01\"^^xsd:dateTime) })\n}\n",
+    "dataset": "webqsp",
+    "inferential_chain": [
+      "government.governmental_jurisdiction.governing_officials",
+      "government.government_position_held.office_holder"
+    ]
+  },
+  {
+    "question": "who did morgan freeman marry",
+    "question_entity": "m.055c8",
+    "question_entity_name": "Morgan Freeman",
+    "answer_entities": [
+      "m.0hj6dmn"
+    ],
+    "answer_entity_names": [
+      "Myrna Colley-Lee"
+    ],
+    "hop": 2,
+    "qid": "WebQTest-2019",
+    "sparql": "PREFIX ns: <http://rdf.freebase.com/ns/>\nSELECT DISTINCT ?x\nWHERE {\nFILTER (?x != ns:m.055c8)\nFILTER (!isLiteral(?x) OR lang(?x) = '' OR langMatches(lang(?x), 'en'))\nns:m.055c8 ns:people.person.spouse_s ?y .\n?y ns:people.marriage.spouse ?x .\n?y ns:people.marriage.type_of_union ns:m.04ztj .\n?y ns:people.marriage.to ?sk0 .\n}\nORDER BY DESC(xsd:datetime(?sk0))\nLIMIT 1\n",
+    "dataset": "webqsp",
+    "inferential_chain": [
+      "people.person.spouse_s",
+      "people.marriage.spouse"
+    ]
+  },
+  {
+    "question": "what college did sir isaac newton go to",
+    "question_entity": "m.03s9v",
+    "question_entity_name": "Isaac Newton",
+    "answer_entities": [
+      "m.07tk7"
+    ],
+    "answer_entity_names": [
+      "Trinity College, Cambridge"
+    ],
+    "hop": 2,
+    "qid": "WebQTest-396",
+    "sparql": "PREFIX ns: <http://rdf.freebase.com/ns/>\nSELECT DISTINCT ?x\nWHERE {\nFILTER (?x != ns:m.03s9v)\nFILTER (!isLiteral(?x) OR lang(?x) = '' OR langMatches(lang(?x), 'en'))\nns:m.03s9v ns:people.person.education ?y .\n?y ns:education.education.institution ?x .\n?x ns:common.topic.notable_types ns:m.01y2hnl .\n}\n",
+    "dataset": "webqsp",
+    "inferential_chain": [
+      "people.person.education",
+      "education.education.institution"
+    ]
+  },
+  {
+    "question": "what basketball player is married to monica",
+    "question_entity": "m.01fs85",
+    "question_entity_name": "Monica",
+    "answer_entities": [
+      "m.0f2zfl"
+    ],
+    "answer_entity_names": [
+      "Shannon Brown"
+    ],
+    "hop": 2,
+    "qid": "WebQTest-966",
+    "sparql": "PREFIX ns: <http://rdf.freebase.com/ns/>\nSELECT DISTINCT ?x\nWHERE {\nFILTER (?x != ns:m.01fs85)\nFILTER (!isLiteral(?x) OR lang(?x) = '' OR langMatches(lang(?x), 'en'))\nns:m.01fs85 ns:people.person.spouse_s ?y .\n?y ns:people.marriage.spouse ?x .\n?y ns:people.marriage.type_of_union ns:m.04ztj .\n?x ns:people.person.profession ns:m.02h664x .\nFILTER(NOT EXISTS {?y ns:people.marriage.from ?sk0} || \nEXISTS {?y ns:people.marriage.from ?sk1 . \nFILTER(xsd:datetime(?sk1) <= \"2015-08-10\"^^xsd:dateTime) })\nFILTER(NOT EXISTS {?y ns:people.marriage.to ?sk2} || \nEXISTS {?y ns:people.marriage.to ?sk3 . \nFILTER(xsd:datetime(?sk3) >= \"2015-08-10\"^^xsd:dateTime) })\n}\n",
+    "dataset": "webqsp",
+    "inferential_chain": [
+      "people.person.spouse_s",
+      "people.marriage.spouse"
+    ]
+  },
+  {
+    "question": "what country does david luiz play for",
+    "question_entity": "m.02822jq",
+    "question_entity_name": "David Luiz",
+    "answer_entities": [
+      "m.01352_"
+    ],
+    "answer_entity_names": [
+      "Brazil national football team"
+    ],
+    "hop": 2,
+    "qid": "WebQTest-1099",
+    "sparql": "PREFIX ns: <http://rdf.freebase.com/ns/>\nSELECT DISTINCT ?x\nWHERE {\nFILTER (?x != ns:m.02822jq)\nFILTER (!isLiteral(?x) OR lang(?x) = '' OR langMatches(lang(?x), 'en'))\nns:m.02822jq ns:sports.pro_athlete.teams ?y .\n?y ns:sports.sports_team_roster.team ?x .\n?x ns:sports.sports_team.championships ns:m.0gk7g .\n}\n",
+    "dataset": "webqsp",
+    "inferential_chain": [
+      "sports.pro_athlete.teams",
+      "sports.sports_team_roster.team"
+    ]
+  },
+  {
+    "question": "who was kobe bryant drafted by",
+    "question_entity": "m.01kmd4",
+    "question_entity_name": "Kobe Bryant",
+    "answer_entities": [
+      "m.02z8z6"
+    ],
+    "answer_entity_names": [
+      "Charlotte Hornets"
+    ],
+    "hop": 2,
+    "qid": "WebQTest-578",
+    "sparql": "PREFIX ns: <http://rdf.freebase.com/ns/>\nSELECT DISTINCT ?x\nWHERE {\nFILTER (?x != ns:m.01kmd4)\nFILTER (!isLiteral(?x) OR lang(?x) = '' OR langMatches(lang(?x), 'en'))\nns:m.01kmd4 ns:sports.drafted_athlete.drafted ?y .\n?y ns:sports.sports_league_draft_pick.team ?x .\n}\n",
+    "dataset": "webqsp",
+    "inferential_chain": [
+      "sports.drafted_athlete.drafted",
+      "sports.sports_league_draft_pick.team"
+    ]
+  },
+  {
+    "question": "what electorate does anna bligh represent",
+    "question_entity": "m.072_m3",
+    "question_entity_name": "Anna Bligh",
+    "answer_entities": [
+      "m.026q11g"
+    ],
+    "answer_entity_names": [
+      "Electoral district of South Brisbane"
+    ],
+    "hop": 2,
+    "qid": "WebQTest-28",
+    "sparql": "PREFIX ns: <http://rdf.freebase.com/ns/>\nSELECT DISTINCT ?x\nWHERE {\nFILTER (?x != ns:m.072_m3)\nFILTER (!isLiteral(?x) OR lang(?x) = '' OR langMatches(lang(?x), 'en'))\nns:m.072_m3 ns:government.politician.government_positions_held ?y .\n?y ns:government.government_position_held.district_represented ?x .\n}\n",
+    "dataset": "webqsp",
+    "inferential_chain": [
+      "government.politician.government_positions_held",
+      "government.government_position_held.district_represented"
+    ]
+  },
+  {
+    "question": "what town did justin bieber grew up in",
+    "question_entity": "m.06w2sn5",
+    "question_entity_name": "Justin Bieber",
+    "answer_entities": [
+      "m.01gc9t",
+      "m.0d060g"
+    ],
+    "answer_entity_names": [
+      "Stratford",
+      "Canada"
+    ],
+    "hop": 2,
+    "qid": "WebQTest-1015",
+    "sparql": "PREFIX ns: <http://rdf.freebase.com/ns/>\nSELECT DISTINCT ?x\nWHERE {\nFILTER (?x != ns:m.06w2sn5)\nFILTER (!isLiteral(?x) OR lang(?x) = '' OR langMatches(lang(?x), 'en'))\nns:m.06w2sn5 ns:people.person.places_lived ?y .\n?y ns:people.place_lived.location ?x .\n}\n",
+    "dataset": "webqsp",
+    "inferential_chain": [
+      "people.person.places_lived",
+      "people.place_lived.location"
+    ]
+  },
+  {
+    "question": "what country was stalin in charge of",
+    "question_entity": "m.03_lf",
+    "question_entity_name": "Joseph Stalin",
+    "answer_entities": [
+      "m.05vz3zq"
+    ],
+    "answer_entity_names": [
+      "Soviet Union"
+    ],
+    "hop": 2,
+    "qid": "WebQTest-1216",
+    "sparql": "PREFIX ns: <http://rdf.freebase.com/ns/>\nSELECT DISTINCT ?x\nWHERE {\nFILTER (?x != ns:m.03_lf)\nFILTER (!isLiteral(?x) OR lang(?x) = '' OR langMatches(lang(?x), 'en'))\nns:m.03_lf ns:government.politician.government_positions_held ?y .\n?y ns:government.government_position_held.jurisdiction_of_office ?x .\n}\n",
+    "dataset": "webqsp",
+    "inferential_chain": [
+      "government.politician.government_positions_held",
+      "government.government_position_held.jurisdiction_of_office"
+    ]
+  },
+  {
+    "question": "where does airtran airways fly",
+    "question_entity": "m.01vk4t",
+    "question_entity_name": "AirTran Airways",
+    "answer_entities": [
+      "m.01f07x",
+      "m.01kyln",
+      "m.01mz5z",
+      "m.01n2vy",
+      "m.01nhvq",
+      "m.0cy71"
+    ],
+    "answer_entity_names": [
+      "Logan International Airport",
+      "LaGuardia Airport",
+      "Philadelphia International Airport",
+      "Denver International Airport",
+      "Raleigh–Durham International Airport",
+      "Baltimore–Washington International Airport"
+    ],
+    "hop": 2,
+    "qid": "WebQTest-1495",
+    "sparql": "PREFIX ns: <http://rdf.freebase.com/ns/>\nSELECT DISTINCT ?x\nWHERE {\nFILTER (?x != ns:m.01vk4t)\nFILTER (!isLiteral(?x) OR lang(?x) = '' OR langMatches(lang(?x), 'en'))\nns:m.01vk4t ns:aviation.airline.airports_served ?y .\n?y ns:aviation.airline_airport_presence.airport ?x .\n}\n",
+    "dataset": "webqsp",
+    "inferential_chain": [
+      "aviation.airline.airports_served",
+      "aviation.airline_airport_presence.airport"
+    ]
+  },
+  {
+    "question": "what airport do you fly into in paris",
+    "question_entity": "m.05qtj",
+    "question_entity_name": "Paris",
+    "answer_entities": [
+      "m.01l525",
+      "m.0qk79"
+    ],
+    "answer_entity_names": [
+      "Paris Orly Airport",
+      "Charles de Gaulle Airport"
+    ],
+    "hop": 2,
+    "qid": "WebQTest-1855",
+    "sparql": "PREFIX ns: <http://rdf.freebase.com/ns/>\nSELECT DISTINCT ?x\nWHERE {\nFILTER (?x != ns:m.05qtj)\nFILTER (!isLiteral(?x) OR lang(?x) = '' OR langMatches(lang(?x), 'en'))\nns:m.05qtj ns:travel.travel_destination.how_to_get_here ?y .\n?y ns:travel.transportation.transport_terminus ?x .\n?x ns:common.topic.notable_types ns:m.01xpjyz .\n}\n",
+    "dataset": "webqsp",
+    "inferential_chain": [
+      "travel.travel_destination.how_to_get_here",
+      "travel.transportation.transport_terminus"
+    ]
+  },
+  {
+    "question": "who played dana scully in x files",
+    "question_entity": "m.022jb6",
+    "question_entity_name": "Dana Scully",
+    "answer_entities": [
+      "m.03d_w3h"
+    ],
+    "answer_entity_names": [
+      "Gillian Anderson"
+    ],
+    "hop": 2,
+    "qid": "WebQTest-1033",
+    "sparql": "PREFIX ns: <http://rdf.freebase.com/ns/>\nSELECT DISTINCT ?x\nWHERE {\nFILTER (?x != ns:m.022jb6)\nFILTER (!isLiteral(?x) OR lang(?x) = '' OR langMatches(lang(?x), 'en'))\nns:m.022jb6 ns:film.film_character.portrayed_in_films ?y .\n?y ns:film.performance.actor ?x .\n?y ns:film.performance.film ns:m.0443v1 .\n}\n",
+    "dataset": "webqsp",
+    "inferential_chain": [
+      "film.film_character.portrayed_in_films",
+      "film.performance.actor"
+    ]
+  },
+  {
+    "question": "who played cletus hogg",
+    "question_entity": "m.0bxcc6",
+    "question_entity_name": "Cletus Hogg",
+    "answer_entities": [
+      "m.04cyn66"
+    ],
+    "answer_entity_names": [
+      "Jack Polick"
+    ],
+    "hop": 2,
+    "qid": "WebQTest-707",
+    "sparql": "PREFIX ns: <http://rdf.freebase.com/ns/>\nSELECT DISTINCT ?x\nWHERE {\nFILTER (?x != ns:m.0bxcc6)\nFILTER (!isLiteral(?x) OR lang(?x) = '' OR langMatches(lang(?x), 'en'))\nns:m.0bxcc6 ns:film.film_character.portrayed_in_films ?y .\n?y ns:film.performance.actor ?x .\n}\n",
+    "dataset": "webqsp",
+    "inferential_chain": [
+      "film.film_character.portrayed_in_films",
+      "film.performance.actor"
+    ]
+  },
+  {
+    "question": "where was teddy roosevelt 's house",
+    "question_entity": "m.07hyk",
+    "question_entity_name": "Theodore Roosevelt",
+    "answer_entities": [
+      "m.02_286",
+      "m.0rh6k"
+    ],
+    "answer_entity_names": [
+      "New York City",
+      "Washington, D.C."
+    ],
+    "hop": 2,
+    "qid": "WebQTest-515",
+    "sparql": "PREFIX ns: <http://rdf.freebase.com/ns/>\nSELECT DISTINCT ?x\nWHERE {\nFILTER (?x != ns:m.07hyk)\nFILTER (!isLiteral(?x) OR lang(?x) = '' OR langMatches(lang(?x), 'en'))\nns:m.07hyk ns:people.person.places_lived ?y .\n?y ns:people.place_lived.location ?x .\n}\n",
+    "dataset": "webqsp",
+    "inferential_chain": [
+      "people.person.places_lived",
+      "people.place_lived.location"
+    ]
+  },
+  {
+    "question": "who plays nicholas newman on the young and the restless",
+    "question_entity": "m.01b64v",
+    "question_entity_name": "The Young and the Restless",
+    "answer_entities": [
+      "m.07sklj"
+    ],
+    "answer_entity_names": [
+      "Joshua Morrow"
+    ],
+    "hop": 2,
+    "qid": "WebQTest-1738",
+    "sparql": "PREFIX ns: <http://rdf.freebase.com/ns/>\nSELECT DISTINCT ?x\nWHERE {\nFILTER (?x != ns:m.01b64v)\nFILTER (!isLiteral(?x) OR lang(?x) = '' OR langMatches(lang(?x), 'en'))\nns:m.01b64v ns:tv.tv_program.regular_cast ?y .\n?y ns:tv.regular_tv_appearance.actor ?x .\n?y ns:tv.regular_tv_appearance.character ns:m.0f22p8 .\n}\n",
+    "dataset": "webqsp",
+    "inferential_chain": [
+      "tv.tv_program.regular_cast",
+      "tv.regular_tv_appearance.actor"
+    ]
+  },
+  {
+    "question": "who is the current ohio state senator",
+    "question_entity": "m.07t58",
+    "question_entity_name": "United States Senate",
+    "answer_entities": [
+      "m.0343xg",
+      "m.034s80"
+    ],
+    "answer_entity_names": [
+      "Rob Portman",
+      "Sherrod Brown"
+    ],
+    "hop": 2,
+    "qid": "WebQTest-1408",
+    "sparql": "PREFIX ns: <http://rdf.freebase.com/ns/>\nSELECT DISTINCT ?x\nWHERE {\nFILTER (?x != ns:m.07t58)\nFILTER (!isLiteral(?x) OR lang(?x) = '' OR langMatches(lang(?x), 'en'))\nns:m.07t58 ns:government.governmental_body.members ?y .\n?y ns:government.government_position_held.office_holder ?x .\n?y ns:government.government_position_held.district_represented ns:m.05kkh .\nFILTER(NOT EXISTS {?y ns:government.government_position_held.from ?sk0} || \nEXISTS {?y ns:government.government_position_held.from ?sk1 . \nFILTER(xsd:datetime(?sk1) <= \"2015-08-10\"^^xsd:dateTime) })\nFILTER(NOT EXISTS {?y ns:government.government_position_held.to ?sk2} || \nEXISTS {?y ns:government.government_position_held.to ?sk3 . \nFILTER(xsd:datetime(?sk3) >= \"2015-08-10\"^^xsd:dateTime) })\n}\n",
+    "dataset": "webqsp",
+    "inferential_chain": [
+      "government.governmental_body.members",
+      "government.government_position_held.office_holder"
+    ]
+  },
+  {
+    "question": "who is the voice of kitt",
+    "question_entity": "m.05_bhx",
+    "question_entity_name": "KITT",
+    "answer_entities": [
+      "m.0309r1"
+    ],
+    "answer_entity_names": [
+      "William Daniels"
+    ],
+    "hop": 2,
+    "qid": "WebQTest-1152",
+    "sparql": "PREFIX ns: <http://rdf.freebase.com/ns/>\nSELECT DISTINCT ?x\nWHERE {\nFILTER (?x != ns:m.05_bhx)\nFILTER (!isLiteral(?x) OR lang(?x) = '' OR langMatches(lang(?x), 'en'))\nns:m.05_bhx ns:film.film_character.portrayed_in_films ?y .\n?y ns:film.performance.actor ?x .\n?y ns:film.performance.special_performance_type ns:m.02nsjvf .\n}\n",
+    "dataset": "webqsp",
+    "inferential_chain": [
+      "film.film_character.portrayed_in_films",
+      "film.performance.actor"
+    ]
+  },
+  {
+    "question": "when did president theodore roosevelt take office",
+    "question_entity": "m.07hyk",
+    "question_entity_name": "Theodore Roosevelt",
+    "answer_entities": [
+      "1901-09-14"
+    ],
+    "answer_entity_names": [],
+    "hop": 2,
+    "qid": "WebQTest-1779",
+    "sparql": "PREFIX ns: <http://rdf.freebase.com/ns/>\nSELECT DISTINCT ?x\nWHERE {\nFILTER (?x != ns:m.07hyk)\nFILTER (!isLiteral(?x) OR lang(?x) = '' OR langMatches(lang(?x), 'en'))\nns:m.07hyk ns:government.politician.government_positions_held ?y .\n?y ns:government.government_position_held.from ?x .\n?y ns:government.government_position_held.office_position_or_title ns:m.060d2 .\n}\n",
+    "dataset": "webqsp",
+    "inferential_chain": [
+      "government.politician.government_positions_held",
+      "government.government_position_held.from"
+    ]
+  },
+  {
+    "question": "what has ian somerhalder acted in",
+    "question_entity": "m.044mvs",
+    "question_entity_name": "Ian Somerhalder",
+    "answer_entities": [
+      "m.026_ghc",
+      "m.02vn93f",
+      "m.03m8y5",
+      "m.04f20d",
+      "m.04j16_m",
+      "m.04j2fyc",
+      "m.04zyhx",
+      "m.05q8gln",
+      "m.06zpsmp",
+      "m.0892jh",
+      "m.08bgt3",
+      "m.0bd5mrx",
+      "m.0cnbrgy",
+      "m.0crts8b",
+      "m.0cs0g8b",
+      "m.0dqpx9",
+      "m.0glymk",
+      "m.0vsjfsp",
+      "m.0w2rqf7",
+      "m.0w2rr0c",
+      "m.0w2rr84",
+      "m.0w2rrp1"
+    ],
+    "answer_entity_names": [
+      "National Lampoon's TV: The Movie",
+      "The Tournament",
+      "Celebrity",
+      "Life as a House",
+      "Anatomy of a Hate Crime",
+      "Changing Hearts",
+      "The Rules of Attraction",
+      "Marco Polo",
+      "How to Make Love to a Woman",
+      "In Enemy Hands",
+      "Pulse",
+      "Lost City Raiders",
+      "Wake",
+      "The Lost Samaritan",
+      "Fireball",
+      "Fearless",
+      "The Sensation of Sight",
+      "The Anomaly",
+      "Time Framed",
+      "Caught on Tape",
+      "Recess",
+      "The Old Man and the Studio"
+    ],
+    "hop": 2,
+    "qid": "WebQTest-322",
+    "sparql": "PREFIX ns: <http://rdf.freebase.com/ns/>\nSELECT DISTINCT ?x\nWHERE {\nFILTER (?x != ns:m.044mvs)\nFILTER (!isLiteral(?x) OR lang(?x) = '' OR langMatches(lang(?x), 'en'))\nns:m.044mvs ns:film.actor.film ?y .\n?y ns:film.performance.film ?x .\n}\n",
+    "dataset": "webqsp",
+    "inferential_chain": [
+      "film.actor.film",
+      "film.performance.film"
+    ]
+  },
+  {
+    "question": "who owns google 2012",
+    "question_entity": "m.045c7b",
+    "question_entity_name": "Google",
+    "answer_entities": [
+      "m.025v9nm",
+      "m.04q1q10",
+      "m.05687l1",
+      "m.09v3lbs",
+      "m.0gjpq"
+    ],
+    "answer_entity_names": [
+      "Vic Gundotra",
+      "Patrick Pichette",
+      "Nikesh Arora",
+      "David Drummond",
+      "Larry Page"
+    ],
+    "hop": 2,
+    "qid": "WebQTest-751",
+    "sparql": "PREFIX ns: <http://rdf.freebase.com/ns/>\nSELECT DISTINCT ?x\nWHERE {\nFILTER (?x != ns:m.045c7b)\nFILTER (!isLiteral(?x) OR lang(?x) = '' OR langMatches(lang(?x), 'en'))\nns:m.045c7b ns:organization.organization.leadership ?y .\n?y ns:organization.leadership.person ?x .\nFILTER(NOT EXISTS {?y ns:organization.leadership.from ?sk0} || \nEXISTS {?y ns:organization.leadership.from ?sk1 . \nFILTER(xsd:datetime(?sk1) <= \"2012-12-31\"^^xsd:dateTime) })\nFILTER(NOT EXISTS {?y ns:organization.leadership.to ?sk2} || \nEXISTS {?y ns:organization.leadership.to ?sk3 . \nFILTER(xsd:datetime(?sk3) >= \"2012-01-01\"^^xsd:dateTime) })\n}\n",
+    "dataset": "webqsp",
+    "inferential_chain": [
+      "organization.organization.leadership",
+      "organization.leadership.person"
+    ]
+  },
+  {
+    "question": "what team is raul ibanez on",
+    "question_entity": "m.06xvwt",
+    "question_entity_name": "Raúl Ibañez",
+    "answer_entities": [
+      "m.049n7"
+    ],
+    "answer_entity_names": [
+      "Kansas City Royals"
+    ],
+    "hop": 2,
+    "qid": "WebQTest-1443",
+    "sparql": "PREFIX ns: <http://rdf.freebase.com/ns/>\nSELECT DISTINCT ?x\nWHERE {\nFILTER (?x != ns:m.06xvwt)\nFILTER (!isLiteral(?x) OR lang(?x) = '' OR langMatches(lang(?x), 'en'))\nns:m.06xvwt ns:sports.pro_athlete.teams ?y .\n?y ns:sports.sports_team_roster.team ?x .\nFILTER(NOT EXISTS {?y ns:sports.sports_team_roster.from ?sk0} || \nEXISTS {?y ns:sports.sports_team_roster.from ?sk1 . \nFILTER(xsd:datetime(?sk1) <= \"2015-08-10\"^^xsd:dateTime) })\nFILTER(NOT EXISTS {?y ns:sports.sports_team_roster.to ?sk2} || \nEXISTS {?y ns:sports.sports_team_roster.to ?sk3 . \nFILTER(xsd:datetime(?sk3) >= \"2015-08-10\"^^xsd:dateTime) })\n}\n",
+    "dataset": "webqsp",
+    "inferential_chain": [
+      "sports.pro_athlete.teams",
+      "sports.sports_team_roster.team"
+    ]
+  },
+  {
+    "question": "what radio station is npr on in nyc",
+    "question_entity": "m.0c0sl",
+    "question_entity_name": "NPR",
+    "answer_entities": [
+      "m.01_3by"
+    ],
+    "answer_entity_names": [
+      "WNYC"
+    ],
+    "hop": 2,
+    "qid": "WebQTest-1108",
+    "sparql": "PREFIX ns: <http://rdf.freebase.com/ns/>\nSELECT DISTINCT ?x\nWHERE {\nFILTER (?x != ns:m.0c0sl)\nFILTER (!isLiteral(?x) OR lang(?x) = '' OR langMatches(lang(?x), 'en'))\nns:m.0c0sl ns:broadcast.radio_network.affiliates ?y .\n?y ns:broadcast.radio_affiliation_duration.station ?x .\n?x ns:broadcast.broadcast.area_served ns:m.02_286 .\n}\n",
+    "dataset": "webqsp",
+    "inferential_chain": [
+      "broadcast.radio_network.affiliates",
+      "broadcast.radio_affiliation_duration.station"
+    ]
+  },
+  {
+    "question": "who is khloe kardashian 's husband",
+    "question_entity": "m.043p2f2",
+    "question_entity_name": "Khloé Kardashian",
+    "answer_entities": [
+      "m.02_nkp"
+    ],
+    "answer_entity_names": [
+      "Lamar Odom"
+    ],
+    "hop": 2,
+    "qid": "WebQTest-182",
+    "sparql": "PREFIX ns: <http://rdf.freebase.com/ns/>\nSELECT DISTINCT ?x\nWHERE {\nFILTER (?x != ns:m.043p2f2)\nFILTER (!isLiteral(?x) OR lang(?x) = '' OR langMatches(lang(?x), 'en'))\nns:m.043p2f2 ns:people.person.spouse_s ?y .\n?y ns:people.marriage.spouse ?x .\n?y ns:people.marriage.type_of_union ns:m.04ztj .\n}\n",
+    "dataset": "webqsp",
+    "inferential_chain": [
+      "people.person.spouse_s",
+      "people.marriage.spouse"
+    ]
+  },
+  {
+    "question": "what countries does england border",
+    "question_entity": "m.02jx1",
+    "question_entity_name": "England",
+    "answer_entities": [
+      "m.06q1r",
+      "m.0j5g9"
+    ],
+    "answer_entity_names": [
+      "Scotland",
+      "Wales"
+    ],
+    "hop": 2,
+    "qid": "WebQTest-923",
+    "sparql": "PREFIX ns: <http://rdf.freebase.com/ns/>\nSELECT DISTINCT ?x\nWHERE {\nFILTER (?x != ns:m.02jx1)\nFILTER (!isLiteral(?x) OR lang(?x) = '' OR langMatches(lang(?x), 'en'))\nns:m.02jx1 ns:location.location.adjoin_s ?y .\n?y ns:location.adjoining_relationship.adjoins ?x .\n?x ns:base.biblioness.bibs_location.loc_type ?sk0 .\nFILTER (str(?sk0) = \"Country\")\n}\n",
+    "dataset": "webqsp",
+    "inferential_chain": [
+      "location.location.adjoin_s",
+      "location.adjoining_relationship.adjoins"
+    ]
+  },
+  {
+    "question": "who played darth vader at the end of return of the jedi",
+    "question_entity": "m.0f2y0",
+    "question_entity_name": "Darth Vader",
+    "answer_entities": [
+      "m.023jmy",
+      "m.03xblf",
+      "m.0f6_x"
+    ],
+    "answer_entity_names": [
+      "Sebastian Shaw",
+      "David Prowse",
+      "James Earl Jones"
+    ],
+    "hop": 2,
+    "qid": "WebQTest-1396",
+    "sparql": "PREFIX ns: <http://rdf.freebase.com/ns/>\nSELECT DISTINCT ?x\nWHERE {\nFILTER (?x != ns:m.0f2y0)\nFILTER (!isLiteral(?x) OR lang(?x) = '' OR langMatches(lang(?x), 'en'))\nns:m.0f2y0 ns:film.film_character.portrayed_in_films ?y .\n?y ns:film.performance.actor ?x .\n?y ns:film.performance.film ns:m.0ddjy .\n}\n",
+    "dataset": "webqsp",
+    "inferential_chain": [
+      "film.film_character.portrayed_in_films",
+      "film.performance.actor"
+    ]
+  },
+  {
+    "question": "who plays caesar flickerman in the hunger games",
+    "question_entity": "m.0gkz15s",
+    "question_entity_name": "The Hunger Games",
+    "answer_entities": [
+      "m.02bj6k"
+    ],
+    "answer_entity_names": [
+      "Stanley Tucci"
+    ],
+    "hop": 2,
+    "qid": "WebQTest-741",
+    "sparql": "PREFIX ns: <http://rdf.freebase.com/ns/>\nSELECT DISTINCT ?x\nWHERE {\nFILTER (?x != ns:m.0gkz15s)\nFILTER (!isLiteral(?x) OR lang(?x) = '' OR langMatches(lang(?x), 'en'))\nns:m.0gkz15s ns:film.film.starring ?y .\n?y ns:film.performance.actor ?x .\n?y ns:film.performance.character ns:m.0gwc3bn .\n}\n",
+    "dataset": "webqsp",
+    "inferential_chain": [
+      "film.film.starring",
+      "film.performance.actor"
+    ]
+  },
+  {
+    "question": "what club does cristiano ronaldo play for in 2010",
+    "question_entity": "m.02xt6q",
+    "question_entity_name": "Cristiano Ronaldo",
+    "answer_entities": [
+      "m.02rqxc",
+      "m.06l22"
+    ],
+    "answer_entity_names": [
+      "Portugal national football team",
+      "Real Madrid C.F."
+    ],
+    "hop": 2,
+    "qid": "WebQTest-1194",
+    "sparql": "PREFIX ns: <http://rdf.freebase.com/ns/>\nSELECT DISTINCT ?x\nWHERE {\nFILTER (?x != ns:m.02xt6q)\nFILTER (!isLiteral(?x) OR lang(?x) = '' OR langMatches(lang(?x), 'en'))\nns:m.02xt6q ns:sports.pro_athlete.teams ?y .\n?y ns:sports.sports_team_roster.team ?x .\nFILTER(NOT EXISTS {?y ns:sports.sports_team_roster.from ?sk0} || \nEXISTS {?y ns:sports.sports_team_roster.from ?sk1 . \nFILTER(xsd:datetime(?sk1) <= \"2010-12-31\"^^xsd:dateTime) })\nFILTER(NOT EXISTS {?y ns:sports.sports_team_roster.to ?sk2} || \nEXISTS {?y ns:sports.sports_team_roster.to ?sk3 . \nFILTER(xsd:datetime(?sk3) >= \"2010-01-01\"^^xsd:dateTime) })\n}\n",
+    "dataset": "webqsp",
+    "inferential_chain": [
+      "sports.pro_athlete.teams",
+      "sports.sports_team_roster.team"
+    ]
+  },
+  {
+    "question": "who is the leader of north korea today",
+    "question_entity": "m.05b7q",
+    "question_entity_name": "North Korea",
+    "answer_entities": [
+      "m.0fgw19"
+    ],
+    "answer_entity_names": [
+      "Kim Jong-un"
+    ],
+    "hop": 2,
+    "qid": "WebQTest-1674",
+    "sparql": "PREFIX ns: <http://rdf.freebase.com/ns/>\nSELECT DISTINCT ?x\nWHERE {\nFILTER (?x != ns:m.05b7q)\nFILTER (!isLiteral(?x) OR lang(?x) = '' OR langMatches(lang(?x), 'en'))\nns:m.05b7q ns:government.governmental_jurisdiction.governing_officials ?y .\n?y ns:government.government_position_held.office_holder ?x .\n?y ns:government.government_position_held.basic_title ns:m.0h7p97k .\nFILTER(NOT EXISTS {?y ns:government.government_position_held.from ?sk0} || \nEXISTS {?y ns:government.government_position_held.from ?sk1 . \nFILTER(xsd:datetime(?sk1) <= \"2015-08-10\"^^xsd:dateTime) })\nFILTER(NOT EXISTS {?y ns:government.government_position_held.to ?sk2} || \nEXISTS {?y ns:government.government_position_held.to ?sk3 . \nFILTER(xsd:datetime(?sk3) >= \"2015-08-10\"^^xsd:dateTime) })\n}\n",
+    "dataset": "webqsp",
+    "inferential_chain": [
+      "government.governmental_jurisdiction.governing_officials",
+      "government.government_position_held.office_holder"
+    ]
+  },
+  {
+    "question": "what party was thomas jefferson affiliated with",
+    "question_entity": "m.07cbs",
+    "question_entity_name": "Thomas Jefferson",
+    "answer_entities": [
+      "m.07wf9"
+    ],
+    "answer_entity_names": [
+      "Democratic-Republican Party"
+    ],
+    "hop": 2,
+    "qid": "WebQTest-1998",
+    "sparql": "PREFIX ns: <http://rdf.freebase.com/ns/>\nSELECT DISTINCT ?x\nWHERE {\nFILTER (?x != ns:m.07cbs)\nFILTER (!isLiteral(?x) OR lang(?x) = '' OR langMatches(lang(?x), 'en'))\nns:m.07cbs ns:government.politician.party ?y .\n?y ns:government.political_party_tenure.party ?x .\n}\n",
+    "dataset": "webqsp",
+    "inferential_chain": [
+      "government.politician.party",
+      "government.political_party_tenure.party"
+    ]
+  },
+  {
+    "question": "what is the state flower of new mexico",
+    "question_entity": "m.05fjy",
+    "question_entity_name": "New Mexico",
+    "answer_entities": [
+      "m.0hzbf1c"
+    ],
+    "answer_entity_names": [
+      "Yucca flower"
+    ],
+    "hop": 2,
+    "qid": "WebQTest-1249",
+    "sparql": "PREFIX ns: <http://rdf.freebase.com/ns/>\nSELECT DISTINCT ?x\nWHERE {\nFILTER (?x != ns:m.05fjy)\nFILTER (!isLiteral(?x) OR lang(?x) = '' OR langMatches(lang(?x), 'en'))\nns:m.05fjy ns:government.governmental_jurisdiction.official_symbols ?y .\n?y ns:location.location_symbol_relationship.symbol ?x .\n?y ns:location.location_symbol_relationship.Kind_of_symbol ns:m.04627gn .\n}\n",
+    "dataset": "webqsp",
+    "inferential_chain": [
+      "government.governmental_jurisdiction.official_symbols",
+      "location.location_symbol_relationship.symbol"
+    ]
+  },
+  {
+    "question": "who is the governor of virginia 2011",
+    "question_entity": "m.07z1m",
+    "question_entity_name": "Virginia",
+    "answer_entities": [
+      "m.09dvvy"
+    ],
+    "answer_entity_names": [
+      "Bob McDonnell"
+    ],
+    "hop": 2,
+    "qid": "WebQTest-1170",
+    "sparql": "PREFIX ns: <http://rdf.freebase.com/ns/>\nSELECT DISTINCT ?x\nWHERE {\nFILTER (?x != ns:m.07z1m)\nFILTER (!isLiteral(?x) OR lang(?x) = '' OR langMatches(lang(?x), 'en'))\nns:m.07z1m ns:government.governmental_jurisdiction.governing_officials ?y .\n?y ns:government.government_position_held.office_holder ?x .\n?y ns:government.government_position_held.basic_title ns:m.0fkvn .\nFILTER(NOT EXISTS {?y ns:government.government_position_held.from ?sk0} || \nEXISTS {?y ns:government.government_position_held.from ?sk1 . \nFILTER(xsd:datetime(?sk1) <= \"2011-12-31\"^^xsd:dateTime) })\nFILTER(NOT EXISTS {?y ns:government.government_position_held.to ?sk2} || \nEXISTS {?y ns:government.government_position_held.to ?sk3 . \nFILTER(xsd:datetime(?sk3) >= \"2011-01-01\"^^xsd:dateTime) })\n}\n",
+    "dataset": "webqsp",
+    "inferential_chain": [
+      "government.governmental_jurisdiction.governing_officials",
+      "government.government_position_held.office_holder"
+    ]
+  },
+  {
+    "question": "when did truman become president",
+    "question_entity": "m.09bg4l",
+    "question_entity_name": "Harry S. Truman",
+    "answer_entities": [
+      "1945-04-12"
+    ],
+    "answer_entity_names": [],
+    "hop": 2,
+    "qid": "WebQTest-1695",
+    "sparql": "PREFIX ns: <http://rdf.freebase.com/ns/>\nSELECT DISTINCT ?x\nWHERE {\nFILTER (?x != ns:m.09bg4l)\nFILTER (!isLiteral(?x) OR lang(?x) = '' OR langMatches(lang(?x), 'en'))\nns:m.09bg4l ns:government.politician.government_positions_held ?y .\n?y ns:government.government_position_held.from ?x .\n?y ns:government.government_position_held.basic_title ns:m.060c4 .\n}\n",
+    "dataset": "webqsp",
+    "inferential_chain": [
+      "government.politician.government_positions_held",
+      "government.government_position_held.from"
+    ]
+  },
+  {
+    "question": "who does mila kunis play on family guy",
+    "question_entity": "m.019nnl",
+    "question_entity_name": "Family Guy",
+    "answer_entities": [
+      "m.035szd"
+    ],
+    "answer_entity_names": [
+      "Meg Griffin"
+    ],
+    "hop": 2,
+    "qid": "WebQTest-1050",
+    "sparql": "PREFIX ns: <http://rdf.freebase.com/ns/>\nSELECT DISTINCT ?x\nWHERE {\nFILTER (?x != ns:m.019nnl)\nFILTER (!isLiteral(?x) OR lang(?x) = '' OR langMatches(lang(?x), 'en'))\nns:m.019nnl ns:tv.tv_program.regular_cast ?y .\n?y ns:tv.regular_tv_appearance.character ?x .\n?y ns:tv.regular_tv_appearance.actor ns:m.023v4_ .\n}\n",
+    "dataset": "webqsp",
+    "inferential_chain": [
+      "tv.tv_program.regular_cast",
+      "tv.regular_tv_appearance.character"
+    ]
+  }
+]

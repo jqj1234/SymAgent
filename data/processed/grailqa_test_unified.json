@@ -1,0 +1,2341 @@
+[
+  {
+    "question": "find the fruit source for the wine 2005 lolonis \"tollini vineyard\" redwood valley zinfandel.",
+    "question_entity": "",
+    "answer_entities": [
+      "m.02ws9_1"
+    ],
+    "hop": 1,
+    "qid": "2100023010000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "preferred boutique is owned by which management group?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.0bs3x93"
+    ],
+    "hop": 1,
+    "qid": "2100032000000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "the games funkmaster flex's digital hitz factory are played on what video game platform?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.066kp"
+    ],
+    "hop": 1,
+    "qid": "2100042006000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "what is the conference subject of kiwi pycon 2011?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.05z1_"
+    ],
+    "hop": 1,
+    "qid": "2100052000000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "2008 roflcon have a conference subject of whom?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.025rxrz"
+    ],
+    "hop": 1,
+    "qid": "2100052001000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "seneca falls convention belongs to what conference subject?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.012h0y"
+    ],
+    "hop": 1,
+    "qid": "2100052010000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "what is the conference subject of seneca falls convention?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.012h0y"
+    ],
+    "hop": 1,
+    "qid": "2100052015000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "what unit does the international system of units use to measure the volumetric flow rate?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.0gbw2l"
+    ],
+    "hop": 1,
+    "qid": "2100056005000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "george gwozdecky coaches what?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.03gxy1p"
+    ],
+    "hop": 1,
+    "qid": "2100070005000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "what locomotive builder built the south african class 5e, series 3?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.022pjb"
+    ],
+    "hop": 1,
+    "qid": "2100072005000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "the prr s2 was built by what locomotive builder?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.022p2m"
+    ],
+    "hop": 1,
+    "qid": "2100072013000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "wii-remote supports what video game?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.05h55g0",
+      "m.0d1n09",
+      "m.02q8x4x",
+      "m.06506j",
+      "m.0c036wn"
+    ],
+    "hop": 1,
+    "qid": "2100075000000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "nintendo gamecube controller is compatible with what videos games?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.0136wj",
+      "m.0136w_",
+      "m.06506j",
+      "m.0c036wn"
+    ],
+    "hop": 1,
+    "qid": "2100075005000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "what video game is supported by guitar hero guitar",
+    "question_entity": "",
+    "answer_entities": [
+      "m.025vn5m",
+      "m.027pg4k",
+      "m.0cnjm0",
+      "m.080_2k",
+      "m.0fzn_5"
+    ],
+    "hop": 1,
+    "qid": "2100075006000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "what video game does snes mouse support?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.0348vl"
+    ],
+    "hop": 1,
+    "qid": "2100075016000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "what video game is supported by magnum light phaser",
+    "question_entity": "",
+    "answer_entities": [
+      "m.0cnq_dc"
+    ],
+    "hop": 1,
+    "qid": "2100075018000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "steel battalion controller supports what video game?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.02s4bt"
+    ],
+    "hop": 1,
+    "qid": "2100075019000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "what's the name of the radio episode about the carl sandburg?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.05v1_pf"
+    ],
+    "hop": 1,
+    "qid": "2100081003000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "what was the radio episode that was about the battle of lexington and concord?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.05v0v45"
+    ],
+    "hop": 1,
+    "qid": "2100081009000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "which radio episode was about the childbirth?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.05v0w98"
+    ],
+    "hop": 1,
+    "qid": "2100081017000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "what radio episode was about global financial crisis of 2008–2009?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.04n0nr8"
+    ],
+    "hop": 1,
+    "qid": "2100081018000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "what's the name of the radio episode about the army?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.05v8qvz"
+    ],
+    "hop": 1,
+    "qid": "2100081020000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "exasecond was used as luminace unit for what type of measurement system?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.0c13h"
+    ],
+    "hop": 1,
+    "qid": "2100082000000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "gigasecond was used as a luminance unit in what measurement system?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.0c13h"
+    ],
+    "hop": 1,
+    "qid": "2100082012000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "megasecond is used as a luminance unit by which measurement system?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.0c13h"
+    ],
+    "hop": 1,
+    "qid": "2100082013000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "hectosecond was used as a luminance unit in what measurement system?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.0c13h"
+    ],
+    "hop": 1,
+    "qid": "2100082017000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "luminance units of candela per square meter are found in which measurement system?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.0c13h"
+    ],
+    "hop": 1,
+    "qid": "2100087004000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "mt everest is a subject of which radio programs?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.05v34ch"
+    ],
+    "hop": 1,
+    "qid": "2100089001000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "the subject asian american history is in what radio programs?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.05v8qw2"
+    ],
+    "hop": 1,
+    "qid": "2100089008000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "america is the subject of which radio programs?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.02r9fh"
+    ],
+    "hop": 1,
+    "qid": "2100089011000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "attack on pearl harbor is a subject of which radio programs?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.063t60n"
+    ],
+    "hop": 1,
+    "qid": "2100089013000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "what radio programs are about conservation?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.05snfw2"
+    ],
+    "hop": 1,
+    "qid": "2100089016000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "austin ice bat is the mascot of this sports team.",
+    "question_entity": "",
+    "answer_entities": [
+      "m.029pr3"
+    ],
+    "hop": 1,
+    "qid": "2100092012000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "find albums composed by fettah can",
+    "question_entity": "",
+    "answer_entities": [
+      "m.012d3rw6",
+      "m.0xhgn6g"
+    ],
+    "hop": 1,
+    "qid": "2100112009000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "auto body repair is a type of which organization?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.0hyzwwl"
+    ],
+    "hop": 1,
+    "qid": "2100126010000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "what is the unit of viscosity in the international system of units system?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.02sj4qd"
+    ],
+    "hop": 1,
+    "qid": "2100134002000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "centimetre–gram–second system of units utilizes what unit of speed?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.0y484fc"
+    ],
+    "hop": 1,
+    "qid": "2100168000000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "for international system of units, what is the unit of speed?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.030skj",
+      "m.0hpsm",
+      "g.12hhgrkjc"
+    ],
+    "hop": 1,
+    "qid": "2100168001000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "name the school newspaper from east carolina college.",
+    "question_entity": "",
+    "answer_entities": [
+      "m.0gw62h"
+    ],
+    "hop": 1,
+    "qid": "2100176005000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "name the video game rating system which has a content discriptor use of drugs?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.016s1y"
+    ],
+    "hop": 1,
+    "qid": "2100191001000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "online is a content descriptor of what video game rating system?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.03zv_3"
+    ],
+    "hop": 1,
+    "qid": "2100191003000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "watt per meter per kelvin is the thermal conductivity unit in which measurement system?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.0c13h"
+    ],
+    "hop": 1,
+    "qid": "2100192001000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "what measurement system has the conductance units of millisiemens?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.0c13h"
+    ],
+    "hop": 1,
+    "qid": "2100197000000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "which measurement system has the conductance units of siemens ?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.0c13h"
+    ],
+    "hop": 1,
+    "qid": "2100197001000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "the conductance units of microsiemens is part of which measurement system?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.0c13h"
+    ],
+    "hop": 1,
+    "qid": "2100197003000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "the conductance units of siemens are used in which measurement system?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.0c13h"
+    ],
+    "hop": 1,
+    "qid": "2100197004000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "what video game supports a moegaku?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.0102_bqm"
+    ],
+    "hop": 1,
+    "qid": "2100198001000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "which video games did big sky series support?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.0kynf8r",
+      "m.0rfyyvk",
+      "m.0rfyys3"
+    ],
+    "hop": 1,
+    "qid": "2100198005000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "mysterious adventures series supports what video games?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.0284xw0"
+    ],
+    "hop": 1,
+    "qid": "2100198007000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "which video games did umihara kawase support?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.0102y8_3",
+      "m.0102yf25",
+      "m.07jk30"
+    ],
+    "hop": 1,
+    "qid": "2100198010000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "which video games was supported by prototype?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.02w1slg",
+      "m.0fqqzmj"
+    ],
+    "hop": 1,
+    "qid": "2100198013000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "the measurement system canadian units of measurement uses which unit for volume?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.01x336r",
+      "m.01x3357",
+      "m.01x338z",
+      "m.01x337p"
+    ],
+    "hop": 1,
+    "qid": "2100220000000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "south australian house of assembly is part of what government office?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.051qvy4",
+      "m.04587z7",
+      "m.09ghxdt"
+    ],
+    "hop": 1,
+    "qid": "2100250007000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "in which measurement system becquerels is the radioactivity unit?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.0c13h"
+    ],
+    "hop": 1,
+    "qid": "2100255001000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "becquerels is the radioactivity unit in which measurement system?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.0c13h"
+    ],
+    "hop": 1,
+    "qid": "2100255002000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "who manufactures the camera sensor for the samsung gx10?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.01xrf_0"
+    ],
+    "hop": 1,
+    "qid": "2100259010000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "in the international system of units which is the angular frequency unit used?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.0c90_b"
+    ],
+    "hop": 1,
+    "qid": "2100260000000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "what is the unit of angular frequency in international system of units?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.0c90_b"
+    ],
+    "hop": 1,
+    "qid": "2100260001000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "which unit is angular frequency in international system of units?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.0c90_b"
+    ],
+    "hop": 1,
+    "qid": "2100260002000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "which video game engine family does booot belong to?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.01lb5"
+    ],
+    "hop": 1,
+    "qid": "2100263000000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "which video game engine family contains bugchess2?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.01lb5"
+    ],
+    "hop": 1,
+    "qid": "2100263005000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "rpg maker 95 is a part of what video game engine family?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.0gn0qj"
+    ],
+    "hop": 1,
+    "qid": "2100263011000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "rpg maker 95 is a member of what video game engine family?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.0gn0qj"
+    ],
+    "hop": 1,
+    "qid": "2100263014000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "find tournaments that have women's field hockey",
+    "question_entity": "",
+    "answer_entities": [
+      "m.05b0xcf"
+    ],
+    "hop": 1,
+    "qid": "2100268012000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "nv philips gloeilampenfabrieken is the publisher of what video game?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.0kyv5lz",
+      "m.0kyrtrv",
+      "m.0kynjvd"
+    ],
+    "hop": 1,
+    "qid": "2100278004000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "legacy games is the publisher of what video game?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.0k2kv_k"
+    ],
+    "hop": 1,
+    "qid": "2100278009000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "adrenalin entertainment publishes which video game?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.0fwf1k",
+      "m.0kypv2t"
+    ],
+    "hop": 1,
+    "qid": "2100278011000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "what video game is published by softdisk",
+    "question_entity": "",
+    "answer_entities": [
+      "m.04s_r0",
+      "m.01t7j6",
+      "m.02rrkd4",
+      "m.07s5nwr",
+      "m.02rsx38",
+      "m.04q1wh2",
+      "m.05mxmpl",
+      "m.07s81_v",
+      "m.02py22b",
+      "m.03wdsl5",
+      "m.01t7hv",
+      "m.03c8r3"
+    ],
+    "hop": 1,
+    "qid": "2100278012000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "afreecatv publishes which video game?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.080gm_t",
+      "m.05ymxm"
+    ],
+    "hop": 1,
+    "qid": "2100278013000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "adventure soft published what video game?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.0bj6tht"
+    ],
+    "hop": 1,
+    "qid": "2100278015000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "reggae music is available to listen on which radio station?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.06nkq_",
+      "m.03gf0bn",
+      "m.0113_f5n",
+      "m.02rslt3",
+      "m.03nn7dw",
+      "m.0bmbfv",
+      "m.03g_jg0",
+      "m.03g_znh",
+      "m.03m6dlk",
+      "m.03h06sp",
+      "m.03g_qml",
+      "m.0h3321",
+      "m.080811",
+      "m.08q306",
+      "m.05tr9y",
+      "m.04lhhcw"
+    ],
+    "hop": 1,
+    "qid": "2100282012000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "which radio station does have all-news radio?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.03h2p08",
+      "m.057xq08",
+      "m.0hndxg8"
+    ],
+    "hop": 1,
+    "qid": "2100282017000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "a segment titled robert talks with noted author and paleontologist stephen jay gould was a part of which radio program episode?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.0bj8t51"
+    ],
+    "hop": 1,
+    "qid": "2100283002000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "which radio program episode has the segment named christopher lydon with stephen jay gould?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.0blhhfg"
+    ],
+    "hop": 1,
+    "qid": "2100283004000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "the carrier command: gaea mission video game was designed by who?",
+    "question_entity": "",
+    "answer_entities": [
+      "g.11byb45cgr"
+    ],
+    "hop": 1,
+    "qid": "2100289000000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "word whiz was designed by what designer?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.05jk22"
+    ],
+    "hop": 1,
+    "qid": "2100289004000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "the suveh nux video game was designed by who?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.05kj406"
+    ],
+    "hop": 1,
+    "qid": "2100289012000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "freestyle genre features what musical artists?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.01jfr3y",
+      "m.01wv9p",
+      "m.0306l_",
+      "m.049qx",
+      "m.01s3k3",
+      "m.01w54yd",
+      "m.02qvnx4",
+      "m.02r_wl",
+      "m.0d1kb5",
+      "m.01m1qqz",
+      "m.087m80",
+      "m.04_p83",
+      "m.03yft2",
+      "m.07fj2j",
+      "m.02xscj",
+      "m.03f06ct",
+      "m.01njq6h",
+      "m.05djvb",
+      "m.01lndh1",
+      "m.04vl1j",
+      "m.01nv5gx",
+      "m.01m1gg5",
+      "m.01n_cbv",
+      "m.01njp9z",
+      "m.01nckms",
+      "m.01vj0l_",
+      "m.01j_m49",
+      "m.01lfw68",
+      "m.01nm0v6",
+      "m.01tnrjb",
+      "m.01dx0l",
+      "m.01wb_wx",
+      "m.03f7dfz",
+      "m.09g8wfx",
+      "m.01qn4b",
+      "m.03d_scb",
+      "m.06vwj8",
+      "m.01tczct",
+      "m.0270mr6",
+      "m.03h_bnz",
+      "m.01mj0dg",
+      "m.01n6h1p",
+      "m.01wx_cm",
+      "m.06vjvb",
+      "m.01dx0y",
+      "m.01pjl91",
+      "m.0gmcfhd",
+      "m.03byyxg",
+      "m.01m1gm3",
+      "m.01m1qt3",
+      "m.01mj09t",
+      "m.01nyyf_",
+      "m.01pb92z",
+      "m.01pdm7m",
+      "m.01rnbwx",
+      "m.01tvdsv",
+      "m.01v7_xm",
+      "m.01vdpx8",
+      "m.03j0d9r",
+      "m.0404kdd",
+      "m.047cbg5",
+      "m.063_jy",
+      "m.065v3s",
+      "m.09yky_",
+      "m.0cmddpg",
+      "m.03x1jp",
+      "m.01kfw9y",
+      "m.01njn6r",
+      "m.01txfk_",
+      "m.0622y9",
+      "m.01wp7rh",
+      "m.01lfwx6",
+      "m.0d_hn12",
+      "m.01v_rb7",
+      "m.01nhdwy",
+      "m.01nvhvz",
+      "m.01xybv",
+      "m.03hzkyk",
+      "m.08lq_5",
+      "m.01qyhmj",
+      "m.055nxz7",
+      "m.0119j8z5",
+      "m.0121rszp",
+      "m.01vc_j1"
+    ],
+    "hop": 1,
+    "qid": "2100293004000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "the catalytic concentration unit katal per cubic metre is used by which measurement system?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.0c13h"
+    ],
+    "hop": 1,
+    "qid": "2100299001000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "when measuring catalytic concentration katal per cubic metre, which system of measurement is used?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.0c13h"
+    ],
+    "hop": 1,
+    "qid": "2100299005000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "when a tropical cyclone has a beaufort force 11, what category is it considered to be in?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.02wv9xd",
+      "m.01xsxhn",
+      "m.0256dx2",
+      "m.0256dv_",
+      "m.0256dw9",
+      "m.0256dww"
+    ],
+    "hop": 1,
+    "qid": "2100301002000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "within the measurement system of international system of units, what unit of data transmission rate exists?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.0ct2z_z",
+      "g.121w1grf",
+      "g.121mkm81",
+      "g.1q6jh4dmv",
+      "m.05tk42"
+    ],
+    "hop": 1,
+    "qid": "2100303003000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "what does the international system of units use for its data transmission rate?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.0ct2z_z",
+      "g.121w1grf",
+      "g.121mkm81",
+      "g.1q6jh4dmv",
+      "m.05tk42"
+    ],
+    "hop": 1,
+    "qid": "2100303004000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "chess game uses what video game engines?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.02ltyb",
+      "m.0fq59p1",
+      "m.0brzbx5",
+      "m.0fq59pf",
+      "m.0fq59sf",
+      "m.04lj7w1",
+      "m.0fq59p_",
+      "m.0fq59qc",
+      "m.0fq59nw",
+      "m.0fq59pb",
+      "m.0fq59p4",
+      "m.02p31yb",
+      "m.0fq59qk",
+      "m.0fq59qv",
+      "m.0fq59np",
+      "m.0fq59r0",
+      "m.0fq59qr",
+      "m.0fq59q2",
+      "m.0fq59qy",
+      "m.0fq59r3",
+      "m.0fq59qg",
+      "m.0fq59qn",
+      "m.0fq59q8",
+      "m.0fq59p7",
+      "m.0fq59ns",
+      "m.0fq59q5",
+      "m.0fq59nz",
+      "m.028bld1",
+      "m.09flrt",
+      "m.0fq59pj",
+      "m.07kc6dn",
+      "m.086wkt",
+      "m.0fq59pm",
+      "m.0fq59rz",
+      "m.0fq59sb",
+      "m.0fq59rh",
+      "m.0fq59rs",
+      "m.0fq59sq",
+      "m.0fq59rw",
+      "m.0fq59s7",
+      "m.0fq59sm",
+      "m.0fq59r6",
+      "m.0fq59rp",
+      "m.0fq59s1",
+      "m.0fq59r9",
+      "m.0fq59sj",
+      "m.0fq59s4",
+      "m.0fq59rd",
+      "m.0fq59rl"
+    ],
+    "hop": 1,
+    "qid": "2100308003000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "the proceedings of the fourth international partners in flight conference: tundra to tropic has what conference event?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.06pjxg9"
+    ],
+    "hop": 1,
+    "qid": "2100310002000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "acm sig proceeding is a conference event of what?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.0jz_c34"
+    ],
+    "hop": 1,
+    "qid": "2100310006000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "skin infection is treated with what?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.033glj",
+      "m.06p85n",
+      "m.0hqvfrh",
+      "m.032n3z",
+      "m.03n352",
+      "m.073pzq",
+      "m.019gn6",
+      "m.07kw7j",
+      "m.057xmsn",
+      "m.0fmjgp"
+    ],
+    "hop": 1,
+    "qid": "2100317008000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "cae-y-castell is which sports team's home?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.027rxfx"
+    ],
+    "hop": 1,
+    "qid": "2100327009000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "carnival cruise line tycoon 2005: island hopping is a game under which video game version?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.02hm003"
+    ],
+    "hop": 1,
+    "qid": "2100335005000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "anime friends is a series on which subject?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.0jxy"
+    ],
+    "hop": 1,
+    "qid": "2100336008000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "what is the conference subject for series concarolinas?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.06n90"
+    ],
+    "hop": 1,
+    "qid": "2100336011000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "the meson family includes what subatomic particles?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.07g9lh",
+      "m.093bp94",
+      "m.093bp97",
+      "m.093bp9b",
+      "m.03y05pw",
+      "m.03_9sy",
+      "m.0970y"
+    ],
+    "hop": 1,
+    "qid": "2100340000000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "international system of units utilizes capacitance as its measurement system?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.0l4l0"
+    ],
+    "hop": 1,
+    "qid": "2100343000000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "oersted is the magnetic field strength unit in what measurement system?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.0csh0c"
+    ],
+    "hop": 1,
+    "qid": "2100347000000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "which measurement system has the magnetic field strength units of ampere per metre?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.0c13h"
+    ],
+    "hop": 1,
+    "qid": "2100347003000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "oersted is utilized to categorize which measurement system?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.0csh0c"
+    ],
+    "hop": 1,
+    "qid": "2100347005000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "prince of persia: the sands of time game versions are from which video game publisher?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.02qdyj"
+    ],
+    "hop": 1,
+    "qid": "2100352003000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "what publisher of video games published the willy wombat versions?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.01swdw"
+    ],
+    "hop": 1,
+    "qid": "2100352008000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "what video game company published pixeljunk racer?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.0d53n7"
+    ],
+    "hop": 1,
+    "qid": "2100352012000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "what cuisine is available at la fonda latina?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.01ypv",
+      "m.051zk"
+    ],
+    "hop": 1,
+    "qid": "2100356000000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "which unit of resistivity is under the international system of units measurement system?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.075rt5j",
+      "m.075rt4_"
+    ],
+    "hop": 1,
+    "qid": "2100371004000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "the international system of units uses what unit as its measure of radiant intensity?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.02sj5fc"
+    ],
+    "hop": 1,
+    "qid": "2100372000000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "national semiconductor 32016 is manufactured by which processor fabricator?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.0pm18"
+    ],
+    "hop": 1,
+    "qid": "2100373013000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "the system videogame rating council has which video game rating?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.0j2kpf5",
+      "m.0j2kpfl",
+      "m.0j2kpfd"
+    ],
+    "hop": 1,
+    "qid": "2100376004000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "what are the ratings in the office of film and literature classification video game rating system?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.0j2hf5y",
+      "m.0j2hf91",
+      "m.0j2hf2y",
+      "m.0j2hf32",
+      "m.0j2hf4d",
+      "m.0j2hf4n",
+      "m.0j2hf4v",
+      "m.0j2hf70"
+    ],
+    "hop": 1,
+    "qid": "2100376005000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "what are the ratings in the game rating board video game rating system?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.0j1_t94",
+      "m.0j1_t9_",
+      "m.0j1_t9d",
+      "m.0j1_tbx"
+    ],
+    "hop": 1,
+    "qid": "2100376006000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "the irish film classification office gave what video game rating?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.03q73q5",
+      "m.03q73qh",
+      "m.03q73qr",
+      "m.0j1xtvp",
+      "m.0j1xtw2"
+    ],
+    "hop": 1,
+    "qid": "2100376008000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "the tigrs gave what video game rating?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.0j1_vm9",
+      "m.0j1_vm4",
+      "m.0j1_vl2"
+    ],
+    "hop": 1,
+    "qid": "2100376015000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "what is the video game rating in system kijkwijzer?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.0j2kp7p",
+      "m.0j2kp85",
+      "m.0j2kp8j",
+      "m.0j2kp9h",
+      "m.0j2kp9n"
+    ],
+    "hop": 1,
+    "qid": "2100376021000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "the ios app store gave what video game rating?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.0hh76vc",
+      "m.0hh76vn",
+      "m.0hh76vw",
+      "m.0hh76w7"
+    ],
+    "hop": 1,
+    "qid": "2100376022000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "what are the ratings in the computer entertainment rating organization video game rating system?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.049ybxs",
+      "m.049ybxz",
+      "m.049ybxw",
+      "m.049yby1",
+      "m.049yby4"
+    ],
+    "hop": 1,
+    "qid": "2100376023000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "what is the name of museum director ashmolean museum oxford?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.05wq_92"
+    ],
+    "hop": 1,
+    "qid": "2100388007000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "which human language has the dialects of transylvanian saxon dialect?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.04306rv"
+    ],
+    "hop": 1,
+    "qid": "2100429002000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "international system of units is known to use what unit of heat capacity?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.02sj4xx"
+    ],
+    "hop": 1,
+    "qid": "2100442004000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "what asteroid is part of pallas family?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.03y48bq",
+      "m.0cq9d"
+    ],
+    "hop": 1,
+    "qid": "2100451005000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "which is the school magazine of university?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.055ycp4"
+    ],
+    "hop": 1,
+    "qid": "2100460003000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "blood pressure is measured using what measuring instruments?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.0258mq"
+    ],
+    "hop": 1,
+    "qid": "2100468002000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "avanti monza is the model for what type of bicycle?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.09rgp"
+    ],
+    "hop": 1,
+    "qid": "2100481024000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "which comic book penciler has penciled the comic story of double image?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.06s97s"
+    ],
+    "hop": 1,
+    "qid": "2100484001000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "what kind of engine is general electric tf34?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.0q03_"
+    ],
+    "hop": 1,
+    "qid": "2100496001000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "which locomotives are members of the british rail class 37 class?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.0h0fmy"
+    ],
+    "hop": 1,
+    "qid": "2100497002000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "which locomotives are members of the br standard class 7 class?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.07f_qr"
+    ],
+    "hop": 1,
+    "qid": "2100497005000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "what locomotives have a class of mark vii monorail?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.08zsds1",
+      "m.08zsds7",
+      "m.08zsdsf"
+    ],
+    "hop": 1,
+    "qid": "2100497007000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "find locomotives of class british rail class 332.",
+    "question_entity": "",
+    "answer_entities": [
+      "m.0j_n_nf"
+    ],
+    "hop": 1,
+    "qid": "2100497008000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "which locomotives have a class of sncf class cc 6500?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.0r8mrjt"
+    ],
+    "hop": 1,
+    "qid": "2100497011000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "what is the radio program episode of open circuit?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.05v0w98"
+    ],
+    "hop": 1,
+    "qid": "2100504006000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "what is the radio program episode of soundprint?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.05v34d_"
+    ],
+    "hop": 1,
+    "qid": "2100504013000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "taylor made piano: a jazz history was on which episode of the radio program?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.06vx2cv",
+      "m.06vx2d0",
+      "m.06vx2d6",
+      "m.06vx2dd",
+      "m.06vx2dl",
+      "m.06vx2ds",
+      "m.06vx2dz",
+      "m.06vx2f4",
+      "m.06vx2fb",
+      "m.06vx2fj",
+      "m.06vx2fq",
+      "m.06vx2fx",
+      "m.06vx2g2"
+    ],
+    "hop": 1,
+    "qid": "2100504015000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "toews is the captain of which ice hockey team?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.0jnlm"
+    ],
+    "hop": 1,
+    "qid": "2100509015000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "stardust crusaders continues which comic book series?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.02pl2ht"
+    ],
+    "hop": 1,
+    "qid": "2100520015000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "adults.co.uk started what website?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.010fzrgx",
+      "m.010fzpyz",
+      "m.010fzrk1",
+      "m.010fzrbt"
+    ],
+    "hop": 1,
+    "qid": "2100527000000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "http://hollywire.com initiated which website?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.0k3tbgt"
+    ],
+    "hop": 1,
+    "qid": "2100527003000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "zeitschriftendatenbank started what website?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.0dgf2zy"
+    ],
+    "hop": 1,
+    "qid": "2100527007000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "gnolia initiated which website?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.0513qtr"
+    ],
+    "hop": 1,
+    "qid": "2100527012000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "terrapin gardens started what website?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.04zmjjw"
+    ],
+    "hop": 1,
+    "qid": "2100527016000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "in international system of units, what is the measurement for a unit of area called?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.0jljd",
+      "m.0bshsw"
+    ],
+    "hop": 1,
+    "qid": "2100531000000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "who is the creator of the tv program american idol series?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.01my_c"
+    ],
+    "hop": 1,
+    "qid": "2100537007000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "the music video live it up was choreographed by who?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.0j24dh1",
+      "m.0p10hd4"
+    ],
+    "hop": 1,
+    "qid": "2100542012000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "north dallas rehabilitation hospital has what medical specialties?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.047qnf"
+    ],
+    "hop": 1,
+    "qid": "2100554005000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "which video game has the version of terminator 2: judgment day?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.026c5q6"
+    ],
+    "hop": 1,
+    "qid": "2100564015000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "what magazine features the genre of street press?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.0416575"
+    ],
+    "hop": 1,
+    "qid": "2100579010000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "what tv program has recurring segments of shutterbugs?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.0288pl5"
+    ],
+    "hop": 1,
+    "qid": "2100581009000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "what is the unit of specific volume in international system of units?",
+    "question_entity": "",
+    "answer_entities": [
+      "g.1236560l"
+    ],
+    "hop": 1,
+    "qid": "2100588002000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "which unit of volume is used ininternational system of units?",
+    "question_entity": "",
+    "answer_entities": [
+      "g.1236560l"
+    ],
+    "hop": 1,
+    "qid": "2100588003000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "the international system of units uses which unit for specific volume?",
+    "question_entity": "",
+    "answer_entities": [
+      "g.1236560l"
+    ],
+    "hop": 1,
+    "qid": "2100588004000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "untersuchungen zu methode und herkunft der antiochenischen exegese is cited work for which scholarly works?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.012c3dk8"
+    ],
+    "hop": 1,
+    "qid": "2100591011000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "ger class s56 belongs to which locomotive class?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.026t5t"
+    ],
+    "hop": 1,
+    "qid": "2100592000000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "atsf 3450 class belongs to which locomotive class?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.026y3y"
+    ],
+    "hop": 1,
+    "qid": "2100592021000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "in the international system of units what is the unit of catalytic activity?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.04cph"
+    ],
+    "hop": 1,
+    "qid": "2100593000000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "what is the name of the unit of catalytic activity in measurement system international system of units?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.04cph"
+    ],
+    "hop": 1,
+    "qid": "2100593001000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "what are the sponsors of sigkdd?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.0b_qpts"
+    ],
+    "hop": 1,
+    "qid": "2100600004000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "who is the conference sponsor of the playmakers?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.0l2m9yd"
+    ],
+    "hop": 1,
+    "qid": "2100600006000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "who are the sponsors of the stanford medicine x?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.0c1d2_9",
+      "m.02rkyb4"
+    ],
+    "hop": 1,
+    "qid": "2100600007000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "what are the sponsors of africa singapore business forum?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.02w2yvf"
+    ],
+    "hop": 1,
+    "qid": "2100600014000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "who sponsors electronic entertainment expo?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.02zv50"
+    ],
+    "hop": 1,
+    "qid": "2100600015000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "fujifilm offers what uncompressed format?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.08g1q1"
+    ],
+    "hop": 1,
+    "qid": "2100605002000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "what is the uncompressed format that nikon d1h uses?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.012h7d",
+      "m.08g1q1"
+    ],
+    "hop": 1,
+    "qid": "2100605009000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "the olympus sp-550 uz uses what type of uncompressed format?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.08g1q1"
+    ],
+    "hop": 1,
+    "qid": "2100605011000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "name the camera uncompressed format of the pentax k110d.",
+    "question_entity": "",
+    "answer_entities": [
+      "m.08g1q1"
+    ],
+    "hop": 1,
+    "qid": "2100605014000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "mercedes-benz w168 occurs on what platform?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.0jznx9g"
+    ],
+    "hop": 1,
+    "qid": "2100643008000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "colony in space, episode three are featured in what multipart tv episodes?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.068_fc"
+    ],
+    "hop": 1,
+    "qid": "2100645005000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "which adapted work has point of no return been adopted from?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.04t27j7"
+    ],
+    "hop": 1,
+    "qid": "2100647001000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "what events appear in star trek: first contact?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.039cy2"
+    ],
+    "hop": 1,
+    "qid": "2100652006000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "what rail network does willunga railway line belong to?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.04rydm"
+    ],
+    "hop": 1,
+    "qid": "2100654004000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "gawler central railway line is included in which rail network?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.04rydm"
+    ],
+    "hop": 1,
+    "qid": "2100654010000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "trans-siberian railway is part of what rail network?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.0fpc2"
+    ],
+    "hop": 1,
+    "qid": "2100654018000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "what type of railways are in the renfe operadora?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.0dbycv2",
+      "m.0dbyf7g",
+      "m.047tnqr",
+      "m.03qp7x1"
+    ],
+    "hop": 1,
+    "qid": "2100665002000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "which railways are within the network of the trans-siberian railway network?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.05bl9gs"
+    ],
+    "hop": 1,
+    "qid": "2100665005000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "the species of qilin is the species of which fictional character?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.027ltns"
+    ],
+    "hop": 1,
+    "qid": "2100691001000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "immortalized ancient human is which fictional character's species?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.0bxj80p"
+    ],
+    "hop": 1,
+    "qid": "2100691003000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "which fictional characters are of the bount species?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.05nmt68",
+      "m.05nmt62",
+      "m.05nmt5q",
+      "m.05nmt6g",
+      "m.05nmt4z",
+      "m.05nmt54",
+      "m.05nmt5b",
+      "g.121fx24f",
+      "m.025t5cb",
+      "m.05nmt5j",
+      "m.05nmt4s"
+    ],
+    "hop": 1,
+    "qid": "2100691006000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "the species of xandar is the species of which fictional character?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.02rqck5",
+      "m.02rqclk",
+      "m.0d1_gv"
+    ],
+    "hop": 1,
+    "qid": "2100691010000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "which food has energy per 100g as 802.0?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.0t_9j5x"
+    ],
+    "hop": 1,
+    "qid": "2100708009000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "for second digital cities workshop, what are the conference proceedings?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.0pl2lvr"
+    ],
+    "hop": 1,
+    "qid": "2100716002000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "strata 2011 uses what conference venue?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.0r6cx"
+    ],
+    "hop": 1,
+    "qid": "2100719000000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "where will the thirteenth un crime congress - doha 2015 conference be held?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.0p3jyvd"
+    ],
+    "hop": 1,
+    "qid": "2100719004000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "70th annual nysate technical conference is in what conference venue?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.0bg6h11"
+    ],
+    "hop": 1,
+    "qid": "2100719006000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "name the conference venue for first zionist congress.",
+    "question_entity": "",
+    "answer_entities": [
+      "m.08ngpqd"
+    ],
+    "hop": 1,
+    "qid": "2100719011000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "what is the beaufort wind force for deep depression (imd)?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.01xs1p0"
+    ],
+    "hop": 1,
+    "qid": "2100738007000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "kilograms per cubic meter is used as density units in which measurement system?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.0c13h"
+    ],
+    "hop": 1,
+    "qid": "2100750001000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "kg/m3 is the density units for which system of measurement?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.0c13h"
+    ],
+    "hop": 1,
+    "qid": "2100750003000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "gram per cubic centimetre is the unit of density in which measurement system?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.0csh0c"
+    ],
+    "hop": 1,
+    "qid": "2100750004000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "find electric system whose locomotive class is sbb-cff-ffs re 420.",
+    "question_entity": "",
+    "answer_entities": [
+      "m.05wnb2"
+    ],
+    "hop": 1,
+    "qid": "2100753002000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "fda otc monograph part 354 is part of what drug form?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.0hqjnls",
+      "m.0hqmp6y"
+    ],
+    "hop": 1,
+    "qid": "2100759018000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "tales of symphonia soundtracks are in which video game?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.03kd6v"
+    ],
+    "hop": 1,
+    "qid": "2100777002000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "which video game has the soundtracks of gran turismo 4 kicks?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.053yw9"
+    ],
+    "hop": 1,
+    "qid": "2100777006000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "biohazard sound chronicle best track box are the soundtracks of which video game?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.05sf64",
+      "m.04rvm4",
+      "m.05x1_j",
+      "m.03rt85",
+      "m.05y04s",
+      "m.05k6pl"
+    ],
+    "hop": 1,
+    "qid": "2100777008000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "聖剣伝説２ original sound version is the soundtrack of what video game?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.01km1hd"
+    ],
+    "hop": 1,
+    "qid": "2100777009000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "what video game bear the soundtracks of gran turismo 4 kicks?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.053yw9"
+    ],
+    "hop": 1,
+    "qid": "2100777010000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "聖剣伝説２ original sound version are the soundtracks of which video game?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.01km1hd"
+    ],
+    "hop": 1,
+    "qid": "2100777012000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "sauternes, gironde is the county with which wine?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.049tkdq"
+    ],
+    "hop": 1,
+    "qid": "2100790010000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "what compositions are in the catalan language?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.0_66bzc",
+      "m.0_j4mmn",
+      "g.121lm_qs",
+      "m.0_7s9b3",
+      "m.0zk7603",
+      "m.0qs82q2",
+      "m.0gky5rb",
+      "m.0_f7dw3",
+      "m.0zxn19w",
+      "m.0_6g9wp",
+      "m.09jk85",
+      "m.0126lkrx",
+      "m.0_jt52j",
+      "m.01l2x4",
+      "m.0_dspbw",
+      "m.0zxq873",
+      "m.0_dm1c6",
+      "m.0_dn3ws",
+      "m.0zjsvb4",
+      "m.0zkw7t8",
+      "m.03y8zph",
+      "m.011khx_l",
+      "m.0zlbqd2",
+      "m.0_f2bcn",
+      "m.0_f0tss",
+      "m.0zh2pxp",
+      "m.0zh97wr",
+      "m.0zkfql6",
+      "m.0zj6phk",
+      "m.0zkbw49",
+      "m.0_dkn46",
+      "m.0zhfw35",
+      "m.0zkr1h7",
+      "m.0_d_8l6",
+      "m.0zhrmfv",
+      "m.0zkc0lt",
+      "m.0zm4623",
+      "m.0133jzxt",
+      "m.0_ds38h",
+      "m.0zj667p",
+      "m.0zk95g6",
+      "m.0_drrsj",
+      "m.0_hqtq3",
+      "m.0zhd1h9",
+      "m.0zl8246",
+      "m.0zjclbl"
+    ],
+    "hop": 1,
+    "qid": "2100794015000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "in kohl v. united states, what are the legal subjects?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.0127bq"
+    ],
+    "hop": 1,
+    "qid": "2100796015000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "richard temple has who in it?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.0dxf8z"
+    ],
+    "hop": 1,
+    "qid": "2100800011000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "which team plays the sport of sledge hockey?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.0dj8rn"
+    ],
+    "hop": 1,
+    "qid": "2100804004000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "table tennis is used by what sports teams?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.0cn_jrs",
+      "m.0ytt5sz"
+    ],
+    "hop": 1,
+    "qid": "2100804005000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "name the sports team that plays field lacrosse.",
+    "question_entity": "",
+    "answer_entities": [
+      "m.026yy28",
+      "m.08s8fs",
+      "m.02rj_w",
+      "m.01kkzp",
+      "m.0gfh1bz"
+    ],
+    "hop": 1,
+    "qid": "2100804008000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "in which video games do slime volleyball appear?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.07_53"
+    ],
+    "hop": 1,
+    "qid": "2100814001000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "what video games have the 720° in them?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.06zfw"
+    ],
+    "hop": 1,
+    "qid": "2100814002000",
+    "dataset": "grailqa"
+  },
+  {
+    "question": "what video games have the wec le mans in them?",
+    "question_entity": "",
+    "answer_entities": [
+      "m.04znxs"
+    ],
+    "hop": 1,
+    "qid": "2100814008000",
+    "dataset": "grailqa"
+  }
+]

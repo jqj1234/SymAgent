@@ -1,0 +1,91 @@
+llm:
+  model_name: glm-4.7-flash
+  api_base: https://open.bigmodel.cn/api/paas/v4
+  api_key: ''
+  temperature: 0.1
+  top_p: 0.9
+  top_k: 600
+  max_new_tokens: 512
+  min_request_interval: 1.5
+kg:
+  data_dir: data
+  backend: networkx
+  freebase_to_wikidata_mapping: data/freebase/wikidata_mapping.json
+  wikidata:
+    endpoint: https://query.wikidata.org/sparql
+    api_url: https://www.wikidata.org/w/api.php
+    max_retries: 3
+    timeout: 30
+  datasets:
+    webqsp:
+      train_file: data/processed/webqsp_train_final.json
+      valid_file: ''
+      test_file: data/processed/webqsp_test_multihop.json
+      triple_file: data/freebase/freebase_triples.txt
+      entity2id: data/freebase/entity2id.txt
+      relation2id: data/freebase/relation2id.txt
+      mid2name: data/freebase/mid2name.json
+      name2mid: data/freebase/name2mid.json
+    cwq:
+      train_file: data/processed/cwq_train_final.json
+      valid_file: ''
+      test_file: data/processed/cwq_test_multihop.json
+      triple_file: data/freebase/freebase_triples.txt
+      entity2id: data/freebase/entity2id.txt
+      relation2id: data/freebase/relation2id.txt
+    metaqa:
+      train_file: data/processed/metaqa_train.json
+      valid_file: data/processed/metaqa_dev.json
+      test_file: data/processed/metaqa_test.json
+      triple_file: data/metaqa/kb.txt
+      entity2id: ''
+      relation2id: ''
+planner:
+  num_seed_questions: 3
+  max_bfs_depth: 4
+  max_paths_per_seed: 5
+  max_rules: 10
+  max_rule_length: 4
+  bm25_top_k: 5
+executor:
+  max_infer_steps: 10
+  beam_width: 1
+  max_triples_per_step: 50
+  wiki_search_enabled: true
+  wikidata_search_enabled: true
+self_learning:
+  num_iterations: 2
+  exploration_budget: null
+  reward_threshold: 0.0
+  batch_size: 4
+  learning_rate: 2.0e-05
+  num_train_epochs: 3
+  max_seq_length: 4096
+  warmup_ratio: 0.05
+  gradient_accumulation_steps: 2
+  lr_scheduler_type: cosine
+  eval_sample_size: 50
+  lora_r: 32
+  lora_alpha: 32
+  lora_dropout: 0.05
+  lora_target_modules:
+  - q_proj
+  - k_proj
+  - v_proj
+  - o_proj
+  - down_proj
+  - up_proj
+  - gate_proj
+evaluation:
+  metrics:
+  - hits@1
+  - hits@3
+  - hits@10
+  - f1
+  batch_size: 1
+  max_eval_samples: null
+logging:
+  log_dir: logs
+  checkpoint_dir: checkpoints
+  log_level: INFO
+  save_steps: 500
