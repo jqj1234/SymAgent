@@ -131,7 +131,6 @@ def init_executor(
 ) -> AgentExecutor:
     """Initialize executor from config."""
     executor_cfg = config.get("executor", {})
-    wikidata_cfg = config.get("kg", {}).get("wikidata", {})
     return AgentExecutor(
         kg=kg,
         llm=llm,
@@ -140,9 +139,6 @@ def init_executor(
         reasoning_max_depth=executor_cfg.get("reasoning_max_depth", 4),
         reasoning_max_paths=executor_cfg.get("reasoning_max_paths", 10),
         wiki_max_summary_length=executor_cfg.get("wiki_max_summary_length", 2000),
-        wikidata_endpoint=wikidata_cfg.get("endpoint"),
-        wikidata_max_retries=wikidata_cfg.get("max_retries", 3),
-        wikidata_timeout=wikidata_cfg.get("timeout", 30),
     )
 
 
