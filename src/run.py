@@ -456,6 +456,12 @@ def run_train(args: argparse.Namespace) -> None:
         "max_seq_length": sl_cfg.get("max_seq_length", 4096),
         "warmup_ratio": sl_cfg.get("warmup_ratio", 0.05),
         "gradient_accumulation_steps": sl_cfg.get("gradient_accumulation_steps", 2),
+        "lr_scheduler_type": sl_cfg.get("lr_scheduler_type", "cosine"),
+        "eval_sample_size": sl_cfg.get("eval_sample_size", 50),
+        "load_in_4bit": sl_cfg.get("load_in_4bit", False),
+        "gradient_checkpointing": sl_cfg.get(
+            "gradient_checkpointing", sl_cfg.get("load_in_4bit", False)
+        ),
     }
 
     planner_cfg = config.get("planner", {})

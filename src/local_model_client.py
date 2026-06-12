@@ -186,6 +186,69 @@ class LocalModelClient:
             raw_prompt=prompt,
         )
 
+    def plan_generate(
+        self,
+        system_prompt: str,
+        user_prompt: str,
+        temperature: float = 0.3,
+    ) -> str:
+        """Generate planning output (symbolic rules).
+
+        Mirrors LLMClient.plan_generate so the planner works identically
+        whether the policy is the online API LLM or this local model.
+        Uses the chat-template path (system + user roles), as rule induction
+        is an instruction-style task rather than ReAct completion.
+
+        Args:
+            system_prompt: System-level instruction for planning.
+            user_prompt: User-level prompt with question and demonstrations.
+            temperature: Temperature for generation (higher for creativity).
+
+        Returns:
+            Generated symbolic rules as text.
+        """
+        messages = [
+            {"role": "system", "content": system_prompt},
+            {"role": "user", "content": user_prompt},
+        ]
+        return self.generate(messages, temperature=temperature)
+
+    def extract_triples(
+        self,
+        entity: str,
+        relation: str,
+        document: str,
+        question: str,
+        temperature: float = 0.1,
+    ) -> str:
+        """Extract factual triples from a document.
+
+        Mirrors LLMClient.extract_triples so the executor's wikiSearch path
+        works with the local model. Without this the agent crashes with
+        AttributeError as soon as it falls back to Wikipedia.
+
+        Args:
+            entity: The entity to extract triples about.
+            relation: The target relation.
+            document: The retrieved document text.
+            question: The original question.
+            temperature: Temperature for generation.
+
+        Returns:
+            Extracted triples in list format.
+        """
+        extraction_prompt = (
+            f"Here is the document about the entity {entity}:\n"
+            f"{document}. "
+            f"You should extract relevant factual triples about {entity} "
+            f"under the relation {relation}, which are beneficial to answer "
+            f"the question {question}. "
+            f"You should only output the triples in the form of "
+            f"[[entity, relation, object], ...]"
+        )
+        messages = [{"role": "user", "content": extraction_prompt}]
+        return self.generate(messages, temperature=temperature)
+
     def _format_messages(self, messages: list[dict[str, str]]) -> str:
         """Format chat messages into a single prompt string.
 

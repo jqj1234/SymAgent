@@ -560,15 +560,27 @@ class SelfLearner:
                         f"Iteration {iteration}: fine_tune produced no adapter "
                         f"(no trainable data); keeping current policy."
                     )
-                # Switch to fine-tuned local model for next iteration.
-                # This implements the paper's key loop: pi_theta explores ->
-                # fine-tune -> updated pi_theta explores again.
-                elif iteration < self.num_iterations - 1:
+                # In local mode, switch to the fine-tuned model so the next
+                # round explores with the updated policy (paper's core loop:
+                # π_θ explores -> fine-tune -> updated π_θ explores again).
+                # In online mode the API LLM stays the explorer (distillation),
+                # so we keep exploring with it and just accumulate adapters —
+                # this also avoids reloading 7B onto the GPU mid-exploration.
+                elif (
+                    self.exploration_mode == "local"
+                    and iteration < self.num_iterations - 1
+                ):
                     logger.info(
                         f"Switching to fine-tuned local model ({lora_path}) "
                         f"for iteration {iteration + 1} exploration..."
                     )
                     self._switch_to_local_model(lora_path)
+                elif self.exploration_mode == "online":
+                    logger.info(
+                        f"Iteration {iteration}: saved adapter {lora_path}. "
+                        f"Online mode keeps the API LLM as explorer; not "
+                        f"swapping in the local model."
+                    )
             elif not self.model_name:
                 logger.info(
                     "No base_model configured, skipping LoRA fine-tuning "
@@ -625,15 +637,44 @@ class SelfLearner:
         if tokenizer.pad_token is None:
             tokenizer.pad_token = tokenizer.eos_token
 
-        model = AutoModelForCausalLM.from_pretrained(
-            self.model_name,
-            torch_dtype=torch.bfloat16,
-            device_map="auto",
-            trust_remote_code=True,
+        # 4-bit (QLoRA) loading for single-GPU / limited-VRAM setups. The paper
+        # used 4xA800-80G full bf16; on a 24GB card the bf16 7B weights (~15GB)
+        # plus the long-context logits spike OOM, so default to 4-bit here.
+        load_in_4bit = self.training_config.get("load_in_4bit", False)
+        gradient_checkpointing = self.training_config.get(
+            "gradient_checkpointing", load_in_4bit
         )
+
+        model_kwargs: dict[str, Any] = {
+            "device_map": "auto",
+            "trust_remote_code": True,
+        }
+        if load_in_4bit:
+            from transformers import BitsAndBytesConfig
+
+            model_kwargs["quantization_config"] = BitsAndBytesConfig(
+                load_in_4bit=True,
+                bnb_4bit_quant_type="nf4",
+                bnb_4bit_compute_dtype=torch.bfloat16,
+                bnb_4bit_use_double_quant=True,
+            )
+            logger.info("Loading base model in 4-bit (QLoRA) to fit limited VRAM.")
+        else:
+            model_kwargs["torch_dtype"] = torch.bfloat16
+
+        model = AutoModelForCausalLM.from_pretrained(self.model_name, **model_kwargs)
         # KV cache is incompatible with training; required if gradient
         # checkpointing is later enabled.
         model.config.use_cache = False
+
+        if load_in_4bit:
+            # Casts layer norms to fp32, makes output embedding require grad,
+            # and prepares the quantized model for k-bit training.
+            from peft import prepare_model_for_kbit_training
+
+            model = prepare_model_for_kbit_training(
+                model, use_gradient_checkpointing=gradient_checkpointing
+            )
 
         # Apply LoRA
         lora_cfg = LoraConfig(
@@ -645,8 +686,11 @@ class SelfLearner:
         )
         model = get_peft_model(model, lora_cfg)
         # Ensure inputs to the frozen base require grad so gradients flow into
-        # the LoRA adapters (needed when the embedding layer is frozen).
+        # the LoRA adapters (needed when the embedding layer is frozen, and
+        # when gradient checkpointing is on).
         model.enable_input_require_grads()
+        if gradient_checkpointing:
+            model.gradient_checkpointing_enable()
         model.print_trainable_parameters()
 
         # Prepare training data
@@ -699,6 +743,7 @@ class SelfLearner:
                 "lr_scheduler_type", "cosine"
             ),
             bf16=True,
+            gradient_checkpointing=gradient_checkpointing,
             logging_steps=10,
             save_strategy="epoch",
             report_to="none",
