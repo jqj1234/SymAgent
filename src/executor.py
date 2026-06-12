@@ -234,6 +234,7 @@ class AgentExecutor:
         reasoning_max_depth: int = 4,
         reasoning_max_paths: int = 10,
         wiki_max_summary_length: int = 2000,
+        wiki_search_enabled: bool = True,
     ):
         self.kg = kg
         self.llm = llm
@@ -242,6 +243,10 @@ class AgentExecutor:
         self.reasoning_max_depth = reasoning_max_depth
         self.reasoning_max_paths = reasoning_max_paths
         self.wiki_max_summary_length = wiki_max_summary_length
+        # When False, wikiSearch is disabled (e.g. networks that cannot reach
+        # Wikipedia). The action returns a hint to answer from KG/LLM knowledge
+        # instead of hanging on unreachable HTTP requests.
+        self.wiki_search_enabled = wiki_search_enabled
 
         # Auto-detect system proxy (Windows registry / macOS / Linux env vars)，比如到能直连 Wikipedia 的网络环境），可以把 executor.py:258-262 注释掉
         system_proxies = urllib.request.getproxies()
@@ -585,6 +590,16 @@ class AgentExecutor:
         """
         if len(args) < 2:
             return "Error: wikiSearch requires entity and relation arguments.", False
+
+        if not self.wiki_search_enabled:
+            # Wikipedia disabled (e.g. unreachable network). Steer the agent
+            # back to KG/own-knowledge instead of issuing a doomed HTTP call.
+            return (
+                "wikiSearch is disabled in this environment. Rely on the "
+                "knowledge graph (searchNeighbor) or answer from your own "
+                "knowledge with finish.",
+                False,
+            )
 
         entity = args[0]
         relation = args[1]

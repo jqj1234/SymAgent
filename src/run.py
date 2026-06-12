@@ -139,6 +139,7 @@ def init_executor(
         reasoning_max_depth=executor_cfg.get("reasoning_max_depth", 4),
         reasoning_max_paths=executor_cfg.get("reasoning_max_paths", 10),
         wiki_max_summary_length=executor_cfg.get("wiki_max_summary_length", 2000),
+        wiki_search_enabled=executor_cfg.get("wiki_search_enabled", True),
     )
 
 
@@ -427,6 +428,16 @@ def run_train(args: argparse.Namespace) -> None:
         logger.error("No training data found. Exiting.")
         return
 
+    # Optional cap for quick trials (e.g. --max_samples 5). Applied before
+    # building the seed index so the whole run is consistently scoped.
+    if getattr(args, "max_samples", None):
+        original_n = len(train_data)
+        train_data = train_data[: args.max_samples]
+        logger.info(
+            "Limiting training to %d/%d samples (--max_samples)",
+            len(train_data), original_n,
+        )
+
     valid_data = load_dataset(config, args.dataset, "valid")
     if not valid_data:
         valid_data = None
@@ -628,6 +639,7 @@ def run_full_pipeline(args: argparse.Namespace) -> None:
     train_args = argparse.Namespace(
         config=args.config,
         dataset=args.dataset,
+        max_samples=getattr(args, "max_samples", None),
     )
     run_train(train_args)
 
@@ -693,6 +705,7 @@ def build_parser() -> argparse.ArgumentParser:
     # --- train ---
     train_parser = subparsers.add_parser("train", help="Run self-learning training")
     train_parser.add_argument("--dataset", type=str, default="webqsp", help="Dataset name")
+    train_parser.add_argument("--max_samples", type=int, default=None, help="Max training samples to explore/train on (for quick trials)")
 
     # --- evaluate ---
     eval_parser = subparsers.add_parser("evaluate", help="Evaluate on test set")
