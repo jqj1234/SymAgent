@@ -80,6 +80,12 @@ class LocalModelClient:
         self.model = base_model.eval()
         self.device = next(self.model.parameters()).device
 
+        # Context window from the model config (fall back to 4096) so prompts
+        # aren't needlessly truncated on long-context backbones.
+        self.max_context = int(
+            getattr(self.model.config, "max_position_embeddings", 4096) or 4096
+        )
+
         logger.info(f"Local model ready on {self.device}")
 
     def generate(
@@ -90,6 +96,7 @@ class LocalModelClient:
         top_k: Optional[int] = None,
         max_new_tokens: Optional[int] = None,
         stop: Optional[list[str]] = None,
+        raw_prompt: Optional[str] = None,
     ) -> str:
         """Generate response from chat messages.
 
@@ -102,6 +109,11 @@ class LocalModelClient:
             top_k: Override default top_k.
             max_new_tokens: Override default max_new_tokens.
             stop: Optional stop sequences.
+            raw_prompt: If provided, feed this string verbatim (no chat
+                template). Used so executor inference matches the raw-text
+                completion format the model was fine-tuned on (see
+                prepare_training_data); avoids a train/inference format
+                mismatch that degrades a LoRA-tuned policy.
 
         Returns:
             Generated text string.
@@ -111,14 +123,14 @@ class LocalModelClient:
         gen_top_k = top_k if top_k is not None else self.top_k
         gen_max = max_new_tokens if max_new_tokens is not None else self.max_new_tokens
 
-        # Build prompt from messages
-        prompt = self._format_messages(messages)
+        # Raw completion (training-aligned) vs chat-template path.
+        prompt = raw_prompt if raw_prompt is not None else self._format_messages(messages)
 
         inputs = self.tokenizer(
             prompt,
             return_tensors="pt",
             truncation=True,
-            max_length=4096 - gen_max,
+            max_length=max(self.max_context - gen_max, 1),
         ).to(self.device)
 
         with torch.no_grad():
@@ -154,6 +166,11 @@ class LocalModelClient:
     ) -> str:
         """Single-prompt generate, compatible with LLMClient.execute_generate().
 
+        The executor passes a fully-built ReAct prompt (Question / Thought /
+        Action / Observation). We feed it verbatim as a raw completion so the
+        format matches what the model was fine-tuned on
+        (prepare_training_data), rather than re-wrapping it in a chat template.
+
         Args:
             prompt: Text prompt.
             temperature: Override temperature.
@@ -162,9 +179,11 @@ class LocalModelClient:
         Returns:
             Generated text.
         """
-        messages = [{"role": "user", "content": prompt}]
         return self.generate(
-            messages, temperature=temperature, stop=stop
+            messages=[],
+            temperature=temperature,
+            stop=stop,
+            raw_prompt=prompt,
         )
 
     def _format_messages(self, messages: list[dict[str, str]]) -> str:

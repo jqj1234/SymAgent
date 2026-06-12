@@ -156,6 +156,7 @@ class SelfLearner:
         training_config: Optional[dict[str, Any]] = None,
         model_name: Optional[str] = None,
         refine_temperature: float = 0.3,
+        exploration_mode: str = "local",
     ):
         self.kg = kg
         self.llm = llm
@@ -164,8 +165,38 @@ class SelfLearner:
         self.num_iterations = num_iterations
         self.reward_threshold = reward_threshold
         self.output_dir = output_dir
-        self.model_name = model_name or getattr(llm, "model_name", None)
+        # base_model for LoRA fine-tuning: a HuggingFace repo name or local path.
+        # NOTE: do NOT fall back to llm.model_name — when llm is an API-based
+        # LLMClient, its model_name (e.g. "mimo-v2.5") is an API alias, not a
+        # loadable checkpoint, and AutoModelForCausalLM.from_pretrained would
+        # fail. A local fine-tuned LocalModelClient does expose a loadable
+        # model_name, so accept it only in that case.
+        if model_name:
+            self.model_name = model_name
+        elif isinstance(llm, LocalModelClient):
+            self.model_name = getattr(llm, "model_name", None)
+        else:
+            self.model_name = None
         self.refine_temperature = refine_temperature
+
+        # Exploration policy source (Section 4.3):
+        #   "local"  -> the agent explores with the local base_model itself
+        #               (paper setting: weak policy π_θ self-explores and
+        #               self-trains). Requires model_name to be set.
+        #   "online" -> the agent explores with the online API LLM (self.llm)
+        #               and distills those trajectories into the local model
+        #               via LoRA. A teacher-distillation variant.
+        self.exploration_mode = exploration_mode
+
+        # Capture inference generation params up front so they don't depend on
+        # whichever client self.llm currently points to when we later swap in
+        # a LocalModelClient.
+        self._gen_params = {
+            "temperature": getattr(llm, "temperature", 0.1),
+            "top_p": getattr(llm, "top_p", 0.9),
+            "top_k": getattr(llm, "top_k", 600),
+            "max_new_tokens": getattr(llm, "max_new_tokens", 512),
+        }
 
         self.lora_config = lora_config or {
             "r": 32,
@@ -467,6 +498,29 @@ class SelfLearner:
         all_pools: list[TrajectoryPool] = []
         prev_score = 0.0
 
+        # Exploration policy source. In "local" mode (paper setting) the agent
+        # explores with the local base model itself, so swap it in before the
+        # first round. In "online" mode we keep the API LLM as the explorer and
+        # distill its trajectories into the local model during fine-tuning.
+        if self.exploration_mode == "local":
+            if not self.model_name:
+                raise ValueError(
+                    "exploration_mode='local' requires base_model to be set "
+                    "(the local checkpoint the agent explores and trains with). "
+                    "Set self_learning.base_model, or use "
+                    "exploration_mode='online' to explore with the API LLM."
+                )
+            logger.info(
+                "Exploration mode 'local': loading base model %s for π_θ_0 "
+                "self-exploration.", self.model_name
+            )
+            self._switch_to_local_model(lora_path=None)
+        else:
+            logger.info(
+                "Exploration mode 'online': exploring with the API LLM and "
+                "distilling trajectories into %s.", self.model_name
+            )
+
         for iteration in range(self.num_iterations):
             merged_pool = self.run_iteration(train_data, iteration)
             all_pools.append(merged_pool)
@@ -489,23 +543,36 @@ class SelfLearner:
                 )
                 try:
                     lora_path = self.fine_tune(merged_pool, iteration)
-
-                    # Switch to fine-tuned local model for next iteration.
-                    # This implements the paper's key loop: pi_theta explores ->
-                    # fine-tune -> updated pi_theta explores again.
-                    if iteration < self.num_iterations - 1:
-                        logger.info(
-                            f"Switching to fine-tuned local model ({lora_path}) "
-                            f"for iteration {iteration + 1} exploration..."
-                        )
-                        self._switch_to_local_model(lora_path)
                 except Exception as e:
-                    logger.warning(
-                        f"LoRA fine-tuning failed in iteration {iteration}: {e}"
+                    # A fine-tuning failure breaks the paper's core loop
+                    # (explore -> fine-tune -> updated π_θ explores again).
+                    # Do not swallow it silently: log with traceback and
+                    # re-raise so the run fails loudly instead of silently
+                    # repeating exploration with an unchanged policy.
+                    logger.error(
+                        f"LoRA fine-tuning failed in iteration {iteration}: {e}",
+                        exc_info=True,
                     )
+                    raise
+
+                if not lora_path:
+                    logger.warning(
+                        f"Iteration {iteration}: fine_tune produced no adapter "
+                        f"(no trainable data); keeping current policy."
+                    )
+                # Switch to fine-tuned local model for next iteration.
+                # This implements the paper's key loop: pi_theta explores ->
+                # fine-tune -> updated pi_theta explores again.
+                elif iteration < self.num_iterations - 1:
+                    logger.info(
+                        f"Switching to fine-tuned local model ({lora_path}) "
+                        f"for iteration {iteration + 1} exploration..."
+                    )
+                    self._switch_to_local_model(lora_path)
             elif not self.model_name:
                 logger.info(
-                    "No model_name configured, skipping LoRA fine-tuning."
+                    "No base_model configured, skipping LoRA fine-tuning "
+                    "(exploration/merge only, policy parameters unchanged)."
                 )
 
             # Optional: validate
@@ -529,7 +596,7 @@ class SelfLearner:
         self,
         pool: TrajectoryPool,
         iteration: int = 0,
-    ) -> str:
+    ) -> Optional[str]:
         """Fine-tune the base LLM on merged trajectories using LoRA.
 
         Implements Section 4.3.2 (Offline Iterative Policy Updating):
@@ -547,7 +614,8 @@ class SelfLearner:
             iteration: Current iteration number (for checkpoint naming).
 
         Returns:
-            Path to the saved LoRA adapter directory.
+            Path to the saved LoRA adapter directory, or None if there was
+            no trainable data (caller keeps the current policy in that case).
         """
         from torch.utils.data import Dataset
 
@@ -563,6 +631,9 @@ class SelfLearner:
             device_map="auto",
             trust_remote_code=True,
         )
+        # KV cache is incompatible with training; required if gradient
+        # checkpointing is later enabled.
+        model.config.use_cache = False
 
         # Apply LoRA
         lora_cfg = LoraConfig(
@@ -573,6 +644,9 @@ class SelfLearner:
             target_modules=self.lora_config["target_modules"],
         )
         model = get_peft_model(model, lora_cfg)
+        # Ensure inputs to the frozen base require grad so gradients flow into
+        # the LoRA adapters (needed when the embedding layer is frozen).
+        model.enable_input_require_grads()
         model.print_trainable_parameters()
 
         # Prepare training data
@@ -581,7 +655,7 @@ class SelfLearner:
 
         if not train_examples:
             logger.warning("No training data prepared, skipping fine-tuning.")
-            return
+            return None
 
         class TrajectoryDataset(Dataset):
             def __init__(self, data):
@@ -675,33 +749,37 @@ class SelfLearner:
 
         return total_reward / sample_size
 
-    def _switch_to_local_model(self, lora_path: str) -> None:
-        """Switch planner and executor to use the fine-tuned local model.
+    def _switch_to_local_model(self, lora_path: Optional[str] = None) -> None:
+        """Switch planner and executor to use the local model.
 
-        After LoRA fine-tuning, the updated policy replaces the
-        initial API-based LLM for subsequent exploration iterations.
-        This is the core of the paper's iterative self-learning loop:
-        pi_theta_0 -> explore -> fine-tune -> pi_theta_1 -> explore -> fine-tune -> ...
+        Used in two situations:
+        - Before round-0 exploration when exploration_mode == "local": load the
+          bare base model (lora_path=None) so the agent self-explores with the
+          local policy π_θ_0 rather than the online API LLM (paper setting).
+        - After each LoRA fine-tuning step: load base model + the new adapter so
+          the updated policy π_θ_{k+1} drives the next exploration round.
 
-        The local model is loaded with the LoRA adapter and used as
-        the LLM backend for both Planner (rule induction) and Executor
-        (thought-action-observation loop).
+        This realizes the paper's iterative self-learning loop:
+        π_θ_0 -> explore -> fine-tune -> π_θ_1 -> explore -> fine-tune -> ...
+
+        The local model backs both the Planner (rule induction) and the
+        Executor (thought-action-observation loop).
 
         Args:
-            lora_path: Path to the saved LoRA adapter directory.
+            lora_path: Path to a saved LoRA adapter directory, or None to load
+                the base model without any adapter.
         """
         from .local_model_client import LocalModelClient
 
-        # Extract base model name (LoRA path contains adapter, not base)
         base_model = self.model_name
 
         local_llm = LocalModelClient(
             model_name=base_model,
             lora_path=lora_path,
-            temperature=self.llm.temperature,
-            top_p=self.llm.top_p if hasattr(self.llm, 'top_p') else 0.9,
-            top_k=self.llm.top_k if hasattr(self.llm, 'top_k') else 600,
-            max_new_tokens=self.llm.max_new_tokens if hasattr(self.llm, 'max_new_tokens') else 512,
+            temperature=self._gen_params["temperature"],
+            top_p=self._gen_params["top_p"],
+            top_k=self._gen_params["top_k"],
+            max_new_tokens=self._gen_params["max_new_tokens"],
         )
 
         # Update planner and executor to use local model
@@ -710,7 +788,9 @@ class SelfLearner:
         self.llm = local_llm
 
         logger.info(
-            f"Switched to local model: {base_model} + {lora_path}"
+            "Switched to local model: %s%s",
+            base_model,
+            f" + {lora_path}" if lora_path else " (base, no adapter)",
         )
 
     def _save_trajectories(
@@ -760,6 +840,17 @@ def prepare_training_data(
     (indicator function 1(x_j in A)). Question tokens and observation
     tokens are masked with -100 so they contribute no loss.
 
+    Implementation note: rather than tokenizing the full prompt and then
+    re-tokenizing each segment to *guess* token boundaries (which is
+    unreliable because BPE/SentencePiece tokenization is context-dependent —
+    a segment tokenized in isolation can split differently than the same text
+    inside the full string), we tokenize each segment with
+    add_special_tokens=False and concatenate the ids. This makes input_ids
+    and the trainable/masked label boundaries consistent by construction.
+
+    The end-of-sequence token is appended as a trainable label so the model
+    learns when to stop generating a trajectory.
+
     Args:
         pool: Merged trajectory pool D*.
         tokenizer: HuggingFace tokenizer.
@@ -767,83 +858,69 @@ def prepare_training_data(
 
     Returns:
         List of training examples with input_ids, labels, and attention_mask.
+        Examples whose trainable tokens are entirely truncated away are dropped.
     """
     training_data = []
 
+    # Leading special tokens (e.g. BOS) that the model expects but that are
+    # not part of any segment. These are masked (not trainable).
+    bos_ids: list[int] = []
+    if getattr(tokenizer, "bos_token_id", None) is not None and getattr(
+        tokenizer, "add_bos_token", True
+    ):
+        bos_ids = [tokenizer.bos_token_id]
+
+    eos_id = getattr(tokenizer, "eos_token_id", None)
+
+    def encode(text: str) -> list[int]:
+        return tokenizer(
+            text, add_special_tokens=False, return_tensors=None
+        )["input_ids"]
+
     for trajectory in pool.trajectories:
-        # Build the full prompt with question and trajectory
-        prompt = f"Question: {trajectory.question}\n"
+        input_ids: list[int] = list(bos_ids)
+        labels: list[int] = [-100] * len(bos_ids)
+
+        def append(text: str, trainable: bool) -> None:
+            ids = encode(text)
+            input_ids.extend(ids)
+            if trainable:
+                labels.extend(ids)
+            else:
+                labels.extend([-100] * len(ids))
+
+        # Question prefix - masked (it is the prompt, not agent-generated)
+        append(f"Question: {trajectory.question}\n", trainable=False)
+
         for i, step in enumerate(trajectory.steps):
-            prompt += f"Thought {i+1}: {step['thought']}\n"
-            prompt += f"Action {i+1}: {step['action']}\n"
-            prompt += f"Observation {i+1}: {step['observation']}\n"
+            # Thought + Action are agent-generated => trainable (1(x_j in A)).
+            append(f"Thought {i+1}: {step['thought']}\n", trainable=True)
+            append(f"Action {i+1}: {step['action']}\n", trainable=True)
+            # Observation comes from the environment => masked.
+            append(f"Observation {i+1}: {step['observation']}\n", trainable=False)
 
-        # Tokenize
-        encodings = tokenizer(
-            prompt,
-            max_length=max_length,
-            truncation=True,
-            padding=False,
-            return_tensors=None,
-        )
+        # Trainable EOS so the policy learns to terminate the trajectory.
+        # Only when there is at least one step — otherwise the example would
+        # train "question -> stop" with no reasoning.
+        if eos_id is not None and trajectory.steps:
+            input_ids.append(eos_id)
+            labels.append(eos_id)
 
-        input_ids = encodings["input_ids"]
-        attention_mask = encodings["attention_mask"]
+        # Truncate from the left-aligned start to max_length. Keeping the head
+        # preserves the question + early reasoning steps.
+        input_ids = input_ids[:max_length]
+        labels = labels[:max_length]
+        attention_mask = [1] * len(input_ids)
 
-        # Build labels: start by masking everything, then unmask thought+action tokens
-        labels = [-100] * len(input_ids)
-
-        # Compute offset from special tokens (e.g., BOS) added by the full
-        # tokenization but not by individual segment tokenizations.
-        empty_with_special = tokenizer("", add_special_tokens=True, return_tensors=None)
-        empty_without_special = tokenizer("", add_special_tokens=False, return_tensors=None)
-        special_offset = len(empty_with_special["input_ids"]) - len(empty_without_special["input_ids"])
-
-        # Tokenize each segment to identify which token positions are
-        # thought/action (trainable) vs question/observation (masked).
-        cursor = special_offset
-        # Mask question tokens
-        question_text = f"Question: {trajectory.question}\n"
-        question_enc = tokenizer(
-            question_text, add_special_tokens=False, return_tensors=None,
-        )
-        cursor += len(question_enc["input_ids"])
-
-        # For each step, unmask Thought and Action lines, keep Observation masked
-        for i, step in enumerate(trajectory.steps):
-            # Thought line - trainable
-            thought_text = f"Thought {i+1}: {step['thought']}\n"
-            thought_enc = tokenizer(
-                thought_text, add_special_tokens=False, return_tensors=None,
+        # Drop examples with no trainable tokens left (e.g. everything got
+        # truncated away) — they would yield a NaN loss and corrupt the batch.
+        if not any(lbl != -100 for lbl in labels):
+            logger.warning(
+                "Dropping trajectory with no trainable tokens after "
+                "truncation (question too long?): %.60s",
+                trajectory.question,
             )
-            thought_len = len(thought_enc["input_ids"])
-            for j in range(thought_len):
-                pos = cursor + j
-                if pos < len(labels):
-                    labels[pos] = input_ids[pos]
-            cursor += thought_len
-
-            # Action line - trainable
-            action_text = f"Action {i+1}: {step['action']}\n"
-            action_enc = tokenizer(
-                action_text, add_special_tokens=False, return_tensors=None,
-            )
-            action_len = len(action_enc["input_ids"])
-            for j in range(action_len):
-                pos = cursor + j
-                if pos < len(labels):
-                    labels[pos] = input_ids[pos]
-            cursor += action_len
-
-            # Observation line - masked (environment output, not generated by agent)
-            obs_text = f"Observation {i+1}: {step['observation']}\n"
-            obs_enc = tokenizer(
-                obs_text, add_special_tokens=False, return_tensors=None,
-            )
-            cursor += len(obs_enc["input_ids"])
-
-        # Ensure labels length matches input_ids length
-        labels = labels[:len(input_ids)]
+            continue
 
         training_data.append({
             "input_ids": input_ids,

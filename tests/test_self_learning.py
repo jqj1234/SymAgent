@@ -215,46 +215,39 @@ class TestPrepareTrainingData(unittest.TestCase):
     Only thought and action tokens are trainable (1(x_j in A) = 1).
     Question and observation tokens are masked (1(x_j in A) = 0, label = -100).
 
-    The implementation tokenizes the full prompt first (with special tokens),
-    then tokenizes each segment separately (without special tokens) to compute
-    the cursor position. The first token (BOS/special) is always masked.
+    The implementation tokenizes each segment with add_special_tokens=False and
+    concatenates the ids (so input_ids and label boundaries are consistent by
+    construction), prepends a masked BOS, and appends a trainable EOS when the
+    trajectory has at least one step.
     """
 
-    def _make_mock_tokenizer(self, tokens_per_segment=3, has_bos=True):
-        """Create a mock tokenizer that returns a fixed number of tokens per segment.
+    class _FakeTokenizer:
+        """Context-independent fake tokenizer: fixed token count per segment.
 
-        The full prompt tokenization includes a BOS token if has_bos=True.
-        Individual segment tokenizations (add_special_tokens=False) do not.
-
-        Empty string tokenization:
-        - With special tokens: [BOS] (1 token) if has_bos, else [] (0 tokens)
-        - Without special tokens: [] (0 tokens)
+        Configured with explicit bos/eos ids and add_bos_token, matching the
+        attributes prepare_training_data reads.
         """
-        mock_tokenizer = MagicMock()
 
-        def mock_tokenize(text, **kwargs):
-            add_special = kwargs.get("add_special_tokens", True)
-            n = tokens_per_segment
+        def __init__(self, tokens_per_segment=3, bos_token_id=101,
+                     eos_token_id=99, add_bos_token=True):
+            self.tokens_per_segment = tokens_per_segment
+            self.bos_token_id = bos_token_id
+            self.eos_token_id = eos_token_id
+            self.add_bos_token = add_bos_token
 
-            if not text and not text.strip():
-                # Empty string tokenization for offset computation
-                if add_special and has_bos:
-                    return {"input_ids": [0], "attention_mask": [1]}  # BOS
-                else:
-                    return {"input_ids": [], "attention_mask": []}
+        def __call__(self, text, add_special_tokens=True, return_tensors=None, **kwargs):
+            # New implementation always calls per-segment with
+            # add_special_tokens=False. Return fixed non-(-100) ids.
+            n = self.tokens_per_segment
+            ids = list(range(1, n + 1))
+            return {"input_ids": ids, "attention_mask": [1] * n}
 
-            if add_special and has_bos:
-                # Full tokenization: count segments, return BOS + segments * n
-                lines = text.strip().split("\n")
-                num_segments = len(lines)
-                total = 1 + num_segments * n  # 1 BOS + segments
-                return {"input_ids": list(range(total)), "attention_mask": [1] * total}
-            else:
-                # Individual segment: just N tokens
-                return {"input_ids": list(range(n)), "attention_mask": [1] * n}
-
-        mock_tokenizer.side_effect = mock_tokenize
-        return mock_tokenizer
+    def _make_mock_tokenizer(self, tokens_per_segment=3, has_bos=True):
+        return self._FakeTokenizer(
+            tokens_per_segment=tokens_per_segment,
+            bos_token_id=101 if has_bos else None,
+            add_bos_token=has_bos,
+        )
 
     def test_labels_mask_question_tokens(self):
         """Test that question tokens are masked with -100 in labels."""
@@ -287,9 +280,7 @@ class TestPrepareTrainingData(unittest.TestCase):
         data = prepare_training_data(pool, mock_tokenizer, max_length=4096)
         labels = data[0]["labels"]
 
-        # Full prompt: 4 segments (question, thought, action, obs) -> 1+4*3=13 tokens
-        # BOS: token 0 (masked)
-        # Question: tokens 1-3 (masked)
+        # BOS: token 0 (masked); Question: tokens 1-3 (masked)
         # Thought: tokens 4-6 (unmasked)
         for i in range(4, 7):
             self.assertNotEqual(labels[i], -100, f"Thought token at position {i} should be unmasked")
@@ -324,6 +315,23 @@ class TestPrepareTrainingData(unittest.TestCase):
         for i in range(10, 13):
             self.assertEqual(labels[i], -100, f"Observation token at position {i} should be masked")
 
+    def test_labels_trainable_eos(self):
+        """Test that a trainable EOS is appended at the end."""
+        pool = TrajectoryPool()
+        traj = Trajectory("Test Q")
+        traj.add_step("think", "finish(A)", "obs")
+        pool.add(traj)
+
+        mock_tokenizer = self._make_mock_tokenizer(tokens_per_segment=3)
+        data = prepare_training_data(pool, mock_tokenizer, max_length=4096)
+        input_ids = data[0]["input_ids"]
+        labels = data[0]["labels"]
+
+        # Layout: BOS(0) Q(1-3) T(4-6) A(7-9) O(10-12) EOS(13) = 14 tokens
+        self.assertEqual(len(input_ids), 14)
+        self.assertEqual(input_ids[-1], 99)  # eos_token_id
+        self.assertEqual(labels[-1], 99)     # trainable
+
     def test_multiple_trajectories(self):
         """Test prepare_training_data with multiple trajectories."""
         pool = TrajectoryPool()
@@ -336,27 +344,38 @@ class TestPrepareTrainingData(unittest.TestCase):
         data = prepare_training_data(pool, mock_tokenizer, max_length=4096)
         self.assertEqual(len(data), 3)
 
-    def test_empty_trajectory(self):
-        """Test prepare_training_data with trajectory that has no steps."""
+    def test_empty_trajectory_dropped(self):
+        """A trajectory with no steps has only masked tokens and is dropped."""
         pool = TrajectoryPool()
         traj = Trajectory("Empty question")
         pool.add(traj)
 
         mock_tokenizer = self._make_mock_tokenizer(tokens_per_segment=3)
         data = prepare_training_data(pool, mock_tokenizer, max_length=4096)
-        self.assertEqual(len(data), 1)
-        # All tokens should be masked (only question + BOS, no steps)
-        labels = data[0]["labels"]
-        self.assertTrue(all(l == -100 for l in labels))
+        # No trainable tokens -> dropped to avoid NaN loss.
+        self.assertEqual(len(data), 0)
+
+    def test_truncation_drops_all_masked_example(self):
+        """If truncation removes every trainable token, the example is dropped."""
+        pool = TrajectoryPool()
+        traj = Trajectory("Q")
+        traj.add_step("thought", "action", "obs")
+        pool.add(traj)
+
+        mock_tokenizer = self._make_mock_tokenizer(tokens_per_segment=3)
+        # BOS(1) + Question(3) = 4 tokens, all masked. Thought starts at 4.
+        data = prepare_training_data(pool, mock_tokenizer, max_length=4)
+        self.assertEqual(len(data), 0)
 
     def test_multiple_steps_per_trajectory(self):
         """Test prepare_training_data with trajectory having multiple steps.
 
-        3 steps -> full prompt has 10 segments (1 question + 3*(thought+action+obs))
-        BOS + 10*3 = 31 tokens
-        Masked: BOS(0), Question(1-3), Obs1(7-9), Obs2(13-15), Obs3(19-21)
-        Unmasked: Thought1(4-6), Action1(10-12), Thought2(16-18), Action2(22-24),
-                  Thought3(28-30), Action3(25-27)
+        Layout for 3 steps with 3 tokens/segment and BOS+EOS:
+        BOS(0) Q(1-3)
+        T1(4-6) A1(7-9) O1(10-12)
+        T2(13-15) A2(16-18) O2(19-21)
+        T3(22-24) A3(25-27) O3(28-30)
+        EOS(31)
         """
         pool = TrajectoryPool()
         traj = Trajectory("Multi-step Q")
@@ -370,8 +389,8 @@ class TestPrepareTrainingData(unittest.TestCase):
         self.assertEqual(len(data), 1)
         labels = data[0]["labels"]
 
-        # Total: 1 BOS + 10 segments * 3 tokens = 31 tokens
-        self.assertEqual(len(labels), 31)
+        # Total: 1 BOS + 10 segments * 3 tokens + 1 EOS = 32 tokens
+        self.assertEqual(len(labels), 32)
 
         # BOS (0) and Question (1-3): masked
         for pos in [0, 1, 2, 3]:
@@ -413,6 +432,9 @@ class TestPrepareTrainingData(unittest.TestCase):
         for pos in range(28, 31):
             self.assertEqual(labels[pos], -100, f"Position {pos} should be masked")
 
+        # EOS (31): unmasked
+        self.assertNotEqual(labels[31], -100, "EOS should be trainable")
+
 
 class TestSelfLearner(unittest.TestCase):
     """Test cases for SelfLearner class."""
@@ -435,6 +457,7 @@ class TestSelfLearner(unittest.TestCase):
             num_iterations=1,
             reward_threshold=0.0,
             model_name=None,  # Skip LoRA
+            exploration_mode="online",  # no local model in these unit tests
         )
 
     def test_online_explore(self):
@@ -597,6 +620,52 @@ class TestSelfLearner(unittest.TestCase):
             self.assertEqual(loaded[0].planned_paths, [["r1"]])
         finally:
             os.unlink(filepath)
+
+
+class TestExplorationMode(unittest.TestCase):
+    """Test exploration_mode wiring (local self-training vs online distillation)."""
+
+    def _make_learner(self, exploration_mode, model_name):
+        kg = KGEnvironment()
+        return SelfLearner(
+            kg=kg,
+            llm=MagicMock(),
+            planner=MagicMock(),
+            executor=MagicMock(),
+            num_iterations=1,
+            model_name=model_name,
+            exploration_mode=exploration_mode,
+        )
+
+    def test_local_mode_loads_base_model_before_round0(self):
+        """In local mode, run_full_loop loads the base model (no adapter) first."""
+        learner = self._make_learner("local", model_name="/fake/Qwen")
+        # Stub out the heavy bits.
+        learner._switch_to_local_model = MagicMock()
+        learner.run_iteration = MagicMock(return_value=TrajectoryPool())
+        learner._save_trajectories = MagicMock()
+
+        learner.run_full_loop([{"question": "q", "answer_entities": []}])
+
+        # Round-0 local policy load: called with no adapter.
+        learner._switch_to_local_model.assert_called_once_with(lora_path=None)
+
+    def test_local_mode_requires_base_model(self):
+        """local mode without base_model raises a clear error."""
+        learner = self._make_learner("local", model_name=None)
+        with self.assertRaises(ValueError):
+            learner.run_full_loop([{"question": "q", "answer_entities": []}])
+
+    def test_online_mode_does_not_preload_local_model(self):
+        """In online mode, the API LLM stays the explorer (no round-0 swap)."""
+        learner = self._make_learner("online", model_name="/fake/Qwen")
+        learner._switch_to_local_model = MagicMock()
+        learner.run_iteration = MagicMock(return_value=TrajectoryPool())
+        learner._save_trajectories = MagicMock()
+        # Empty merged pool -> no fine-tuning, so no switch at all.
+        learner.run_full_loop([{"question": "q", "answer_entities": []}])
+
+        learner._switch_to_local_model.assert_not_called()
 
 
 if __name__ == "__main__":

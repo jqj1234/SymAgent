@@ -469,8 +469,28 @@ def run_train(args: argparse.Namespace) -> None:
         output_dir=os.path.join(checkpoint_dir, args.dataset),
         lora_config=lora_config,
         training_config=training_config,
+        model_name=sl_cfg.get("base_model"),
         refine_temperature=planner_cfg.get("refine_temperature", 0.3),
+        exploration_mode=sl_cfg.get("exploration_mode", "local"),
     )
+
+    if not sl_cfg.get("base_model"):
+        mode = sl_cfg.get("exploration_mode", "local")
+        if mode == "local":
+            # run_full_loop will raise; warn early with the actionable message.
+            logger.error(
+                "self_learning.exploration_mode is 'local' but base_model is "
+                "not set. Local self-exploration needs a loadable checkpoint. "
+                "Set self_learning.base_model (e.g. a local Qwen path), or set "
+                "exploration_mode: online to explore with the API LLM."
+            )
+        else:
+            logger.warning(
+                "self_learning.base_model is not set. The loop will explore "
+                "and merge trajectories but SKIP LoRA fine-tuning, so the "
+                "policy parameters will not be updated. Set base_model to a "
+                "HuggingFace repo or local path to enable training."
+            )
 
     # Run training
     logger.info("Starting self-learning with %d training samples", len(train_data))
