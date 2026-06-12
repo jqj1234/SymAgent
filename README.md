@@ -35,9 +35,10 @@
 ## 项目结构
 
 ```
-symagent/
+SymAgent/
 ├── src/                    # 核心源码
-│   ├── kg_environment.py   # KG 动态环境 (POMDP 建模)
+│   ├── run.py              # 启动入口
+│   ├── kg_environment.py   # KG 动态环境
 │   ├── planner.py          # Agent-Planner (符号规则诱导, Eq.1/3)
 │   ├── executor.py         # Agent-Executor (Thought-Action-Observation, Eq.4-6)
 │   ├── self_learning.py    # 自学习框架 (Eq.7-8, LoRA 微调)
