@@ -105,6 +105,42 @@ def init_llm(config: dict[str, Any]) -> LLMClient:
     return LLMClient.from_config(config)
 
 
+def init_local_llm(config: dict[str, Any], lora_path: Optional[str] = None):
+    """Initialize a local model client (base_model [+ LoRA adapter]).
+
+    Used for evaluating the fine-tuned policy instead of the online API LLM.
+    Reuses the self_learning.base_model as the backbone and inference params
+    from the llm section, plus the load_in_4bit flag (recommended on a single
+    24GB GPU to avoid the long-context logits OOM).
+
+    Args:
+        config: Loaded config dict.
+        lora_path: Optional path to a trained LoRA adapter directory.
+
+    Returns:
+        A LocalModelClient instance.
+    """
+    from .local_model_client import LocalModelClient
+
+    sl_cfg = config.get("self_learning", {})
+    llm_cfg = config.get("llm", {})
+    base_model = sl_cfg.get("base_model")
+    if not base_model:
+        raise ValueError(
+            "Local evaluation requires self_learning.base_model to be set "
+            "(the checkpoint to load the LoRA adapter on top of)."
+        )
+    return LocalModelClient(
+        model_name=base_model,
+        lora_path=lora_path,
+        temperature=llm_cfg.get("temperature", 0.1),
+        top_p=llm_cfg.get("top_p", 0.9),
+        top_k=llm_cfg.get("top_k", 600),
+        max_new_tokens=llm_cfg.get("max_new_tokens", 512),
+        load_in_4bit=sl_cfg.get("load_in_4bit", False),
+    )
+
+
 def init_planner(
     config: dict[str, Any],
     kg: KGEnvironment,
@@ -524,6 +560,10 @@ def run_train(args: argparse.Namespace) -> None:
         self_learner._save_trajectories(all_pools[-1], final_path)
         logger.info("Final trajectories saved to %s", final_path)
 
+    # Return the latest trained adapter path (None if no fine-tuning happened),
+    # so full_pipeline can evaluate the trained policy automatically.
+    return self_learner.last_lora_path
+
 
 def run_evaluate(args: argparse.Namespace) -> None:
     """Run evaluation on a test dataset."""
@@ -535,7 +575,15 @@ def run_evaluate(args: argparse.Namespace) -> None:
         return
 
     kg = init_kg(config, args.dataset)
-    llm = init_llm(config)
+    # Use the fine-tuned local model when --lora_path is given; otherwise the
+    # online API LLM. The local path loads base_model + adapter so evaluation
+    # reflects the trained policy rather than the API teacher.
+    lora_path = getattr(args, "lora_path", None)
+    if lora_path:
+        logger.info("Evaluating with local model + LoRA adapter: %s", lora_path)
+        llm = init_local_llm(config, lora_path=lora_path)
+    else:
+        llm = init_llm(config)
     planner = init_planner(config, kg, llm)
     executor = init_executor(config, kg, llm, planner)
 
@@ -641,14 +689,24 @@ def run_full_pipeline(args: argparse.Namespace) -> None:
         dataset=args.dataset,
         max_samples=getattr(args, "max_samples", None),
     )
-    run_train(train_args)
+    trained_lora_path = run_train(train_args)
 
-    # Phase 2: Evaluate
-    logger.info("Phase 2: Evaluation")
+    # Phase 2: Evaluate the trained policy. Default to the latest adapter from
+    # Phase 1 so the user doesn't have to know the iteration-specific path; if
+    # training produced no adapter, fall back to the online API LLM.
+    if trained_lora_path:
+        logger.info(
+            "Phase 2: Evaluation with trained adapter: %s", trained_lora_path
+        )
+    else:
+        logger.info(
+            "Phase 2: Evaluation (no trained adapter found; using online LLM)"
+        )
     eval_args = argparse.Namespace(
         config=args.config,
         dataset=args.dataset,
         max_samples=args.max_samples,
+        lora_path=trained_lora_path,
         by_hop=args.by_hop,
         output=None,
         start_index=0,
@@ -711,6 +769,7 @@ def build_parser() -> argparse.ArgumentParser:
     eval_parser = subparsers.add_parser("evaluate", help="Evaluate on test set")
     eval_parser.add_argument("--dataset", type=str, default="webqsp", help="Dataset name")
     eval_parser.add_argument("--max_samples", type=int, default=None, help="Max test samples")
+    eval_parser.add_argument("--lora_path", type=str, default=None, help="Path to a trained LoRA adapter dir; if set, evaluate with the local base_model + adapter instead of the online API LLM")
     eval_parser.add_argument("--by_hop", action="store_true", help="Group results by hop")
     eval_parser.add_argument("--output", type=str, default=None, help="Output file path")
     eval_parser.add_argument("--start_index", type=int, default=0, help="Start dataset index (inclusive)")

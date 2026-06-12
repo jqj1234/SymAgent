@@ -179,7 +179,10 @@ class SelfLearner:
             self.model_name = None
         self.refine_temperature = refine_temperature
 
-        # Exploration policy source (Section 4.3):
+        # Path to the most recent successfully-trained LoRA adapter, so the
+        # caller (e.g. full_pipeline) can evaluate the trained policy without
+        # having to guess the iteration-specific directory name.
+        self.last_lora_path: Optional[str] = None
         #   "local"  -> the agent explores with the local base_model itself
         #               (paper setting: weak policy π_θ self-explores and
         #               self-trains). Requires model_name to be set.
@@ -570,17 +573,24 @@ class SelfLearner:
                     self.exploration_mode == "local"
                     and iteration < self.num_iterations - 1
                 ):
+                    # Remember the latest adapter for downstream evaluation.
+                    self.last_lora_path = lora_path
                     logger.info(
                         f"Switching to fine-tuned local model ({lora_path}) "
                         f"for iteration {iteration + 1} exploration..."
                     )
                     self._switch_to_local_model(lora_path)
-                elif self.exploration_mode == "online":
-                    logger.info(
-                        f"Iteration {iteration}: saved adapter {lora_path}. "
-                        f"Online mode keeps the API LLM as explorer; not "
-                        f"swapping in the local model."
-                    )
+                else:
+                    # Adapter trained and kept (online mode, or the final local
+                    # iteration). Record it; in online mode the API LLM stays
+                    # the explorer (distillation), so don't swap in 7B.
+                    self.last_lora_path = lora_path
+                    if self.exploration_mode == "online":
+                        logger.info(
+                            f"Iteration {iteration}: saved adapter {lora_path}. "
+                            f"Online mode keeps the API LLM as explorer; not "
+                            f"swapping in the local model."
+                        )
             elif not self.model_name:
                 logger.info(
                     "No base_model configured, skipping LoRA fine-tuning "

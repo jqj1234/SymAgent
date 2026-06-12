@@ -36,6 +36,7 @@ class LocalModelClient:
         top_k: int = 600,
         max_new_tokens: int = 512,
         device_map: str = "auto",
+        load_in_4bit: bool = False,
     ):
         """Initialize local model client.
 
@@ -48,6 +49,9 @@ class LocalModelClient:
             top_k: Top-K sampling threshold.
             max_new_tokens: Maximum tokens to generate.
             device_map: Device placement strategy.
+            load_in_4bit: Load the base model in 4-bit (NF4) to fit limited
+                VRAM. Recommended on single 24GB GPUs where bf16 7B weights
+                plus the long-context logits spike would OOM.
         """
         self.model_name = model_name
         self.temperature = temperature
@@ -58,6 +62,7 @@ class LocalModelClient:
         logger.info(
             f"Loading local model: {model_name}"
             + (f" + LoRA: {lora_path}" if lora_path else "")
+            + (" [4-bit]" if load_in_4bit else "")
         )
 
         self.tokenizer = AutoTokenizer.from_pretrained(
@@ -66,12 +71,23 @@ class LocalModelClient:
         if self.tokenizer.pad_token is None:
             self.tokenizer.pad_token = self.tokenizer.eos_token
 
-        base_model = AutoModelForCausalLM.from_pretrained(
-            model_name,
-            torch_dtype=torch.bfloat16,
-            device_map=device_map,
-            trust_remote_code=True,
-        )
+        model_kwargs: dict = {
+            "device_map": device_map,
+            "trust_remote_code": True,
+        }
+        if load_in_4bit:
+            from transformers import BitsAndBytesConfig
+
+            model_kwargs["quantization_config"] = BitsAndBytesConfig(
+                load_in_4bit=True,
+                bnb_4bit_quant_type="nf4",
+                bnb_4bit_compute_dtype=torch.bfloat16,
+                bnb_4bit_use_double_quant=True,
+            )
+        else:
+            model_kwargs["torch_dtype"] = torch.bfloat16
+
+        base_model = AutoModelForCausalLM.from_pretrained(model_name, **model_kwargs)
 
         if lora_path:
             base_model = PeftModel.from_pretrained(base_model, lora_path)
